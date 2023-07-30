@@ -1,4 +1,4 @@
-import { parseCookies, setCookie } from "nookies";
+import { parseCookies } from "nookies";
 import { Eye, EyeSlash, X } from "phosphor-react";
 import { useState, useEffect } from "react";
 import { ButtonIcon } from "../../../../components/ButtonIcon";
@@ -8,7 +8,6 @@ import { findUser } from "../../../users-view/users-view.service";
 import {
   markAsReadNotifications,
   deleteNotifications,
-  getNotificationsUnRead,
 } from "../../notifications-view.service";
 
 export function NotificationsComponent({

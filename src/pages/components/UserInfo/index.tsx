@@ -1,13 +1,11 @@
 import { destroyCookie } from "nookies";
 import { SignOut } from "phosphor-react";
 import { useContext, useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 
 export default function UserInfo() {
   const { user } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
-  const router = useNavigate();
 
   function handleOpen() {
     setOpen(!open);
