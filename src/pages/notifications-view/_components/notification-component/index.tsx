@@ -81,7 +81,7 @@ export function NotificationsComponent({
         </div>
         <div
           className={`${
-            isGlobal ? "bg-green-600" : "bg-gray-500"
+            isGlobal ? "bg-green-600" : "bg-gray-100 text-neutral-800"
           } flex-1 w-full h-full`}
         >
           <div className=" px-8 py-8 flex flex-col justify-between w-full h-full">
@@ -108,7 +108,7 @@ export function NotificationsComponent({
           </div>
         </div>
         <div
-          className={`flex items-center justify-center h-full bg-green-600 rounded-r-md`}
+          className={`flex items-center justify-center h-full bg-white rounded-r-md`}
         >
           <div className="px-8 py-8 gap-2 flex items-center">
             <ButtonIcon size="md" variant="primary" onClick={handleOpen}>

@@ -9,6 +9,8 @@ import { Template } from "../components/Template";
 import { getUsers } from "../users-view/users-view.service";
 import { createNotifications } from "./notifications-register.service";
 import { Input } from "../../components/Input";
+import { toast } from "react-hot-toast";
+import { Spinner } from "../../components/Spinner";
 
 export default function NotificationsRegister() {
   const { user } = useAuth();
@@ -17,18 +19,28 @@ export default function NotificationsRegister() {
   const [isUsersListOpen, setUsersListOpen] = useState(false);
   const [isAllUsersSelected, setAllUsersSelected] = useState(false);
   const [users, setUsers] = useState<UserProps[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [message, setMessage] = useState("");
   const [title, setTitle] = useState("");
 
   async function fetchCreateNotifications() {
-    await createNotifications({
-      isGlobal: isAllUsersSelected,
-      message: message,
-      receivedBy: isAllUsersSelected ? selectedUsers : [user?.id as string],
-      sentBy: user?.id as string,
-      title: title,
-    });
+    try {
+      setIsLoading(true);
+      const response = await createNotifications({
+        isGlobal: isAllUsersSelected,
+        message: message,
+        receivedBy: isAllUsersSelected ? selectedUsers : [user?.id as string],
+        sentBy: user?.id as string,
+        title: title,
+      });
+      toast.success(response.message);
+      window.location.href = "/notifications-view";
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   function handleOpenSelection() {
@@ -193,8 +205,12 @@ export default function NotificationsRegister() {
       </Row>
       <Row className="mt-4 justify-end">
         <Button variant="outline-secondary">Cancelar</Button>
-        <Button variant="success" onClick={fetchCreateNotifications}>
-          Enviar
+        <Button
+          variant="success"
+          onClick={fetchCreateNotifications}
+          disabled={isLoading}
+        >
+          {isLoading ? <Spinner /> : "Enviar"}
         </Button>
       </Row>
     </Template>

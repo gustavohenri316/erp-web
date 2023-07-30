@@ -3,6 +3,7 @@ import { lazy, Suspense } from "react";
 
 import { useAuth } from "../context/AuthContext";
 import { Spinner } from "../components/Spinner";
+import { parseCookies } from "nookies";
 
 const LayoutDashboard = lazy(() => import("../layout"));
 const ForgotStep1 = lazy(() => import("../pages/forgot/step-one/[slug]"));
@@ -32,9 +33,9 @@ const Users = lazy(() => import("../pages/users-view"));
 const SignIn = lazy(() => import("../pages/signIn"));
 
 export function Routers() {
-  const { user } = useAuth();
+  const { "Dashboard.UserToken": Token } = parseCookies();
 
-  if (!user) {
+  if (!Token) {
     return (
       <Suspense
         fallback={
