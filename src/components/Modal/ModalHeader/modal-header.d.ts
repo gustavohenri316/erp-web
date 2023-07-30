@@ -1,0 +1,3 @@
+interface ModalHeaderProps {
+  title?: string;
+}
