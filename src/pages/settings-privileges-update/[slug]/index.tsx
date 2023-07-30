@@ -169,8 +169,8 @@ export default function SettingsPrivilegesUpdate() {
           <Label>Incluir permissões</Label>
           <Row className="h-full">
             <Col>
-              <div className="w-full border h-full rounded-md">
-                <table className="first-table flex-1 w-full overflow-auto  rounded-md shadow-lg text-neutral-700">
+              <div className="w-full border h-full rounded-sm">
+                <table className="first-table flex-1 w-full overflow-auto  rounded-sm shadow-lg text-neutral-700">
                   <thead className="border-b">
                     <tr>
                       <th className="py-4 px-4 text-center">Name</th>
@@ -220,7 +220,7 @@ export default function SettingsPrivilegesUpdate() {
             </div>
             <Col>
               <div className="w-full border h-full">
-                <table className="second-table flex-1 w-full overflow-auto  rounded-md shadow-lg text-neutral-700">
+                <table className="second-table flex-1 w-full overflow-auto  rounded-sm shadow-lg text-neutral-700">
                   <thead className="border-b">
                     <tr>
                       <th className="py-4 px-4 text-center">Name</th>

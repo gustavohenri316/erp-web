@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { Skeleton } from "../Skeleton";
 
-export function Select({ required = false, children, loading, ...rest }: SelectProps) {
+export function Select({
+  required = false,
+  children,
+  loading,
+  ...rest
+}: SelectProps) {
   const [isTouchedAndEmpty] = useState<boolean>(false);
 
   let SelectClasses =
-    "flex-1 p-2 border rounded-md  outline-none placeholder:text-lg w-full ";
+    "flex-1 p-2 border rounded-sm  outline-none placeholder:text-lg w-full ";
 
   if (required && isTouchedAndEmpty) {
     SelectClasses += "focus:ring-2 ring-red-500";
@@ -14,7 +19,9 @@ export function Select({ required = false, children, loading, ...rest }: SelectP
   return (
     <div className="flex-1">
       <Skeleton loading={loading as boolean}>
-        <select {...rest} className={SelectClasses} onChange={rest.onChange}>{children}</select>
+        <select {...rest} className={SelectClasses} onChange={rest.onChange}>
+          {children}
+        </select>
       </Skeleton>
     </div>
   );

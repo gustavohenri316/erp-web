@@ -25,7 +25,7 @@ export function Skeleton({ children, loading, isRoudendFull }: SkeletonProps) {
             ${
               isRoudendFull
                 ? "rounded-full w-16 h-16"
-                : "w-full h-full rounded-md"
+                : "w-full h-full rounded-sm"
             }
             `}
           ></div>

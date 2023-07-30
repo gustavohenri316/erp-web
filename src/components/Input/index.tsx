@@ -5,7 +5,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const [isTouchedAndEmpty] = useState<boolean>(false);
 
     let inputClasses =
-      "flex-1 p-2 border rounded-md  outline-none placeholder:text-lg w-full disabled:bg-gray-100 disabled:text-gray-500 ";
+      "flex-1 p-2 border rounded-sm  outline-none placeholder:text-lg w-full disabled:bg-gray-100 disabled:text-gray-500 ";
 
     if (required && isTouchedAndEmpty) {
       inputClasses += "focus:ring-2 ring-red-500";

@@ -11,11 +11,11 @@ export const ButtonIcon: React.FC<ButtonIconProps> = ({
       case "primary":
         return "border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-neutral-100";
       case "secondary":
-        return "border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-neutral-100";
+        return "border-gray-600 text-gray-600 hover:bg-gray-500 hover:text-neutral-100";
       case "danger":
         return "border-red-600 text-red-600 hover:bg-red-600 hover:text-neutral-100";
       case "success":
-        return "border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-neutral-100";
+        return "border-green-600 text-gray-600 hover:bg-green-500 hover:text-neutral-100";
       default:
         return "border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-neutral-100";
     }

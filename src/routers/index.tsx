@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
 import { useAuth } from "../context/AuthContext";
+import { Spinner } from "../components/Spinner";
 
 const LayoutDashboard = lazy(() => import("../layout"));
 const ForgotStep1 = lazy(() => import("../pages/forgot/step-one/[slug]"));
@@ -13,15 +14,15 @@ const NotificationsRegister = lazy(
 );
 const NotificationsView = lazy(() => import("../pages/notifications-view"));
 const ProductsView = lazy(() => import("../pages/products-view"));
-const SettingsPermissions = lazy(() => import("../pages/settings-permission"));
-const SettingsPermissionRegister = lazy(
+const Permissions = lazy(() => import("../pages/settings-permission"));
+const PermissionRegister = lazy(
   () => import("../pages/settings-permission-register")
 );
-const SettingsPrivileges = lazy(() => import("../pages/settings-privileges"));
-const SettingsPrivilegesRegister = lazy(
+const Privileges = lazy(() => import("../pages/settings-privileges"));
+const PrivilegesRegister = lazy(
   () => import("../pages/settings-privileges-register")
 );
-const SettingsPrivilegesUpdate = lazy(
+const PrivilegesUpdate = lazy(
   () => import("../pages/settings-privileges-update/[slug]")
 );
 const UserRegister = lazy(() => import("../pages/user-register"));
@@ -35,7 +36,13 @@ export function Routers() {
 
   if (!user) {
     return (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={
+          <div className="w-screen h-screen flex items-center justify-center">
+            <Spinner />
+          </div>
+        }
+      >
         <Routes>
           <Route path="/signIn" element={<SignIn />} />
           <Route path="/forgot/step-one/:id" element={<ForgotStep1 />} />
@@ -48,7 +55,13 @@ export function Routers() {
   }
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense
+      fallback={
+        <div className="w-screen h-screen flex items-center justify-center bg-green-600">
+          <Spinner />
+        </div>
+      }
+    >
       <Routes>
         <Route path="/signIn" element={<SignIn />} />
         <Route path="/" element={<LayoutDashboard />}>
@@ -59,22 +72,19 @@ export function Routers() {
           />
           <Route path="/notifications-view" element={<NotificationsView />} />
           <Route path="/products-view" element={<ProductsView />} />
-          <Route
-            path="/settings-permission"
-            element={<SettingsPermissions />}
-          />
+          <Route path="/settings-permission" element={<Permissions />} />
           <Route
             path="/settings-permission-register"
-            element={<SettingsPermissionRegister />}
+            element={<PermissionRegister />}
           />
-          <Route path="/settings-privileges" element={<SettingsPrivileges />} />
+          <Route path="/settings-privileges" element={<Privileges />} />
           <Route
             path="/settings-privileges-register"
-            element={<SettingsPrivilegesRegister />}
+            element={<PrivilegesRegister />}
           />
           <Route
             path="/settings-privileges-update/:id"
-            element={<SettingsPrivilegesUpdate />}
+            element={<PrivilegesUpdate />}
           />
           <Route path="/user-register" element={<UserRegister />} />
           <Route path="/user-update/:id" element={<UserUpdate />} />

@@ -38,7 +38,7 @@ export function SettingsPrivilegesModalDelete({
       <Modal.Root isOpen={open}>
         <Modal.Header title="Excluir Privilégios" />
         <Modal.Body>
-          <div className="mb-4 rounded-md bg-gray-200 px-1 font-medium">
+          <div className="mb-4 rounded-sm bg-gray-200 px-1 font-medium">
             Aviso: Se prosseguir com a exclusão todos os usuários que tiverem
             esse privilégio deixara de ter.
           </div>

@@ -39,7 +39,7 @@ export function SettingsPermissionsTable({
   return (
     <div className="w-full flex-1">
       <div className="relative overflow-x-auto  w-full">
-        <table className="w-full  text-left bg-neutral-100 rounded-md shadow-lg my-4">
+        <table className="w-full  text-left bg-neutral-100 rounded-sm shadow-lg my-4">
           <thead className="border-b">
             <tr>
               <th scope="col" className="px-6 whitespace-nowrap py-3">
@@ -68,13 +68,13 @@ export function SettingsPermissionsTable({
                   <td className="py-4 px-4 text-start whitespace-nowrap">
                     <div className="flex items-center gap-2 w-full whitespace-nowrap">
                       <input
-                        className="cursor-pointer  hover:text-black whitespace-nowrap  overflow-auto border p-2 rounded-md"
+                        className="cursor-pointer  hover:text-black whitespace-nowrap  overflow-auto border p-2 rounded-sm"
                         title={item.key}
                         defaultValue={item.key}
                       />
 
                       <div
-                        className="border rounded-md p-2 cursor-pointer whitespace-nowrap hover:border-black "
+                        className="border rounded-sm p-2 cursor-pointer whitespace-nowrap hover:border-black "
                         onClick={() => copyItem(item.key)}
                       >
                         {isCopied && copiedItem === item.key

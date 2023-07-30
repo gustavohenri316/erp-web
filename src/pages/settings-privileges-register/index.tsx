@@ -162,7 +162,7 @@ export default function SettingsPrivilegesRegister() {
             <Col>
               <div className="w-full flex-1 border border-dashed">
                 <div className="relative overflow-x-auto  w-full">
-                  <table className="second-table flex-1 w-full overflow-auto  rounded-md shadow-lg text-neutral-700">
+                  <table className="second-table flex-1 w-full overflow-auto  rounded-sm shadow-lg text-neutral-700">
                     <thead className="border-b border-dashed">
                       <tr>
                         <th className="py-4 px-4 text-center">Name</th>
@@ -212,7 +212,7 @@ export default function SettingsPrivilegesRegister() {
             <Col>
               <div className="w-full flex-1 border border-dashed">
                 <div className="relative overflow-x-auto  w-full">
-                  <table className="second-table flex-1 w-full overflow-auto  rounded-md shadow-lg text-neutral-700">
+                  <table className="second-table flex-1 w-full overflow-auto  rounded-sm shadow-lg text-neutral-700">
                     <thead className="border-b border-dashed">
                       <tr>
                         <th className="py-4 px-4 text-center">Name</th>

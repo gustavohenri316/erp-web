@@ -76,21 +76,21 @@ export default function NotificationsRegister() {
           <Label>Destinatário</Label>
           <div className="flex gap-2">
             <div
-              className="whitespace-nowrap flex rounded-md bg-gray-800 h-12 px-2 cursor-pointer items-center justify-center text-neutral-100 text-center"
+              className="whitespace-nowrap flex rounded-sm bg-green-600 h-12 px-2 cursor-pointer items-center justify-center text-neutral-100 text-center"
               onClick={handleOpenSelection}
             >
               Selecionar usuário
             </div>
             <Col>
               {!isAllUsersSelected && (
-                <div className="border rounded-md border-dashed min-h-[48px] flex items-end p-2 gap-2 cursor-pointer hover:shadow-md">
+                <div className="border rounded-sm border-dashed min-h-[48px] flex items-end p-2 gap-2 cursor-pointer hover:shadow-md">
                   {selectedUsers.map((userId) => {
                     const user = users.find((u) => u._id === userId);
                     if (user) {
                       return (
                         <div
                           key={user._id}
-                          className="flex items-center gap-2 p-2 bg-gray-100 rounded-md"
+                          className="flex items-center gap-2 p-2 bg-gray-100 rounded-sm"
                         >
                           <img
                             src={user.photo}
@@ -112,9 +112,9 @@ export default function NotificationsRegister() {
                 </div>
               )}
               {isSelectionOpen && (
-                <div className="h-45 gap-2 rounded-md overflow-x-auto border p-2 ">
+                <div className="h-45 gap-2 rounded-sm overflow-x-auto border p-2 ">
                   <div
-                    className={`border rounded-md cursor-pointer hover:shadow-md flex items-center p-2 ${
+                    className={`border rounded-sm cursor-pointer hover:shadow-md flex items-center p-2 ${
                       selectedUsers.includes("") ? "bg-blue-100" : ""
                     }`}
                   >
@@ -145,7 +145,7 @@ export default function NotificationsRegister() {
                           <div
                             key={item._id}
                             onClick={() => handleUserClick(item._id)}
-                            className={`border gap-4 rounded-md mt-2 cursor-pointer hover:shadow-md flex items-center p-2 ${
+                            className={`border gap-4 rounded-sm mt-2 cursor-pointer hover:shadow-md flex items-center p-2 ${
                               selectedUsers.includes(item._id)
                                 ? "bg-blue-100"
                                 : ""
@@ -185,7 +185,7 @@ export default function NotificationsRegister() {
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="border border-dashed rounded-md p-4 "
+            className="border border-dashed rounded-sm p-4 "
             rows={12}
             placeholder="Escreva a mensagem "
           ></textarea>

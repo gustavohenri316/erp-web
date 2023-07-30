@@ -59,7 +59,7 @@ export default function NotificationsView() {
       <Row className="py-2">
         <Col>
           <div
-            className="rounded-md border py-4 px-4 cursor-pointer hover:shadow-md flex items-center justify-between gap-4"
+            className="rounded-sm border py-4 px-4 cursor-pointer hover:shadow-md flex items-center justify-between gap-4"
             onClick={handleNotificationDirect}
           >
             <div className="flex items-center gap-4">
@@ -97,7 +97,7 @@ export default function NotificationsView() {
       <Row className="py-2">
         <Col>
           <div
-            className="rounded-md border py-4 px-4 cursor-pointer hover:shadow-md flex items-center justify-between gap-4"
+            className="rounded-sm border py-4 px-4 cursor-pointer hover:shadow-md flex items-center justify-between gap-4"
             onClick={handleNotificationGlobal}
           >
             <div className="flex items-center gap-4">

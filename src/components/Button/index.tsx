@@ -6,7 +6,7 @@ export function Button({
   ...rest
 }: ButtonProps) {
   let buttonClasses =
-    "p-2 px-4 border rounded-md hover:brightness-90  disabled:cursor-not-allowed disabled:brightness-80 flex items-center justify-center gap-4 ";
+    "p-2 px-4 border rounded-sm hover:brightness-90  disabled:cursor-not-allowed disabled:brightness-80 flex items-center justify-center gap-4 ";
 
   if (variant) {
     const validVariants: ButtonProps["variant"][] = [
@@ -37,10 +37,10 @@ export function Button({
       buttonClasses += "bg-blue-600 text-neutral-100";
       break;
     case "success":
-      buttonClasses += "bg-gray-800 text-neutral-100";
+      buttonClasses += "bg-green-600 text-neutral-100";
       break;
     case "secondary":
-      buttonClasses += "bg-gray-600 text-neutral-100";
+      buttonClasses += "bg-green-600 text-neutral-100";
       break;
     case "danger":
       buttonClasses += "bg-red-600 text-neutral-100";
@@ -52,7 +52,7 @@ export function Button({
       buttonClasses += "border-blue-600 text-blue-600";
       break;
     case "outline-success":
-      buttonClasses += "border-gray-800 text-gray-800";
+      buttonClasses += "border-green-600 text-gray-800";
       break;
     case "outline-secondary":
       buttonClasses += "border-gray-600 text-gray-600";

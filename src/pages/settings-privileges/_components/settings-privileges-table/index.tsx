@@ -42,7 +42,7 @@ export function SettingsPrivilegesTable({
   return (
     <div className="w-full flex-1">
       <div className="relative overflow-x-auto  w-full">
-        <table className="flex-1 w-full overflow-auto bg-neutral-100 rounded-md shadow-lg my-3 text-neutral-700">
+        <table className="flex-1 w-full overflow-auto bg-neutral-100 rounded-sm shadow-lg my-3 text-neutral-700">
           <thead className="border-b">
             <tr>
               <th className="py-4 px-4 text-center whitespace-nowrap">Nome</th>
@@ -64,13 +64,13 @@ export function SettingsPrivilegesTable({
                     <td className="py-4 px-4 text-center whitespace-nowrap">
                       <div className="flex items-center gap-2 whitespace-nowrap  w-full">
                         <input
-                          className="cursor-pointer w-full hover:text-black min-w-[200px] overflow-auto border p-2 rounded-md"
+                          className="cursor-pointer w-full hover:text-black min-w-[200px] overflow-auto border p-2 rounded-sm"
                           title={item.key}
                           defaultValue={item.key}
                         />
 
                         <div
-                          className="border rounded-md p-2  cursor-pointer hover:border-black"
+                          className="border rounded-sm p-2  cursor-pointer hover:border-black"
                           onClick={() => copyItem(item.key)}
                         >
                           {isCopied && copiedItem === item.key

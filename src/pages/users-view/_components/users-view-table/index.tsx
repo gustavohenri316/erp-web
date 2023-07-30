@@ -53,7 +53,7 @@ export function UserTable({ users, handleLoading }: UserTableProps) {
       />
       <div className="w-full flex-1">
         <div className="relative overflow-x-auto  w-full">
-          <table className="w-full  text-left bg-neutral-100 rounded-md shadow-lg my-4">
+          <table className="w-full  text-left bg-neutral-100 rounded-sm shadow-lg my-4">
             <thead className="border-b">
               <tr>
                 <th className="py-4 px-4 text-start">

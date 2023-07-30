@@ -20,7 +20,7 @@ export function NotificationsComponent({
   message,
   title,
 }: NotificationsProps) {
-  const { user } = useAuth();
+  const { user, findNotifications } = useAuth();
   const [userSentBy, setUserSentBy] = useState<UserProps>();
   const [open, setOpen] = useState(false);
   const [localIsRead, setLocalIsRead] = useState(isRead);
@@ -59,26 +59,13 @@ export function NotificationsComponent({
     }
   }, [_id]);
 
-  async function fetchAllNotificationsUnRead() {
-    const response = await getNotificationsUnRead(Token);
-    setCookie(
-      undefined,
-      "Dashboard.UserToken-notifications-unread-count",
-      response.count,
-      {
-        maxAge: 60 * 60 * 24 * 30,
-      }
-    );
-  }
   useEffect(() => {
-    if (Token) {
-      fetchAllNotificationsUnRead();
-    }
+    findNotifications(Token);
   }, [localIsRead]);
 
   return (
     <div className="flex flex-col w-full">
-      <div className="w-full border rounded-md  cursor-pointer hover:shadow-xl text-neutral-100 shadow-md flex justify-between items-center ">
+      <div className="w-full border rounded-sm  cursor-pointer hover:shadow-xl text-neutral-100 shadow-md flex justify-between items-center ">
         <div className="flex items-start gap-4 flex-col justify-start bg-white  rounded-l-md px-8 py-8 text-black">
           <div className="flex items-center justify-center gap-4 bg-white w-[200px] ">
             <img
@@ -95,7 +82,7 @@ export function NotificationsComponent({
         </div>
         <div
           className={`${
-            isGlobal ? "bg-gray-800" : "bg-gray-500"
+            isGlobal ? "bg-green-600" : "bg-gray-500"
           } flex-1 w-full h-full`}
         >
           <div className=" px-8 py-8 flex flex-col justify-between w-full h-full">
@@ -122,7 +109,7 @@ export function NotificationsComponent({
           </div>
         </div>
         <div
-          className={`flex items-center justify-center h-full bg-gray-800 rounded-r-md`}
+          className={`flex items-center justify-center h-full bg-green-600 rounded-r-md`}
         >
           <div className="px-8 py-8 gap-2 flex items-center">
             <ButtonIcon size="md" variant="primary" onClick={handleOpen}>
@@ -135,7 +122,7 @@ export function NotificationsComponent({
         </div>
       </div>
       {open && (
-        <div className="w-full p-8 my-2 rounded-md bg-white border">
+        <div className="w-full p-8 my-2 rounded-sm bg-white border">
           {<p className="text-base">{message}</p>}
         </div>
       )}
