@@ -9,6 +9,10 @@ import {
   markAsReadNotifications,
   deleteNotifications,
 } from "../../notifications-view.service";
+import { defaultAvatarUrl } from "../../../../assets/data";
+import { Spinner } from "../../../../components/Spinner";
+import { toast } from "react-hot-toast";
+import PermissionGate from "../../../../components/PermissionGate";
 
 export function NotificationsComponent({
   _id,
@@ -17,11 +21,13 @@ export function NotificationsComponent({
   sentBy,
   isRead,
   message,
+  handleLoading,
   title,
 }: NotificationsProps) {
   const { user, findNotifications } = useAuth();
   const [userSentBy, setUserSentBy] = useState<UserProps>();
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [localIsRead, setLocalIsRead] = useState(isRead);
 
   const { "Dashboard.UserToken": Token } = parseCookies();
@@ -46,10 +52,20 @@ export function NotificationsComponent({
     setUserSentBy(response);
   }
   async function fetchDeleteNotifications() {
-    await deleteNotifications({
-      id: _id,
-      userId: user?.id as string,
-    });
+    try {
+      handleLoading(true);
+      setLoading(true);
+      const response = await deleteNotifications({
+        id: _id,
+        userId: user?.id as string,
+      });
+      toast.success(response.message);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+      handleLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -60,7 +76,7 @@ export function NotificationsComponent({
 
   useEffect(() => {
     findNotifications(Token);
-  }, [localIsRead]);
+  }, [localIsRead, loading]);
 
   return (
     <div className="flex flex-col w-full">
@@ -68,7 +84,7 @@ export function NotificationsComponent({
         <div className="flex items-start gap-4 flex-col justify-start bg-white  rounded-l-md px-8 py-8 text-black">
           <div className="flex items-center justify-center gap-4 bg-white w-[200px] ">
             <img
-              src={userSentBy?.photo}
+              src={userSentBy?.photo || defaultAvatarUrl}
               alt=""
               className="w-16 h-16 rounded-full object-cover"
             />
@@ -114,9 +130,15 @@ export function NotificationsComponent({
             <ButtonIcon size="md" variant="primary" onClick={handleOpen}>
               {!open ? <Eye /> : <EyeSlash />}
             </ButtonIcon>
-            <ButtonIcon size="md" variant="danger">
-              <X onClick={fetchDeleteNotifications} />
-            </ButtonIcon>
+            <PermissionGate permission="delete-notifications">
+              <ButtonIcon size="md" variant="danger" disabled={loading}>
+                {loading ? (
+                  <Spinner size={18} />
+                ) : (
+                  <X onClick={fetchDeleteNotifications} />
+                )}
+              </ButtonIcon>
+            </PermissionGate>
           </div>
         </div>
       </div>

@@ -137,7 +137,10 @@ export default function SettingsPrivilegesUpdate() {
   };
 
   return (
-    <Template title="" documentTitle="">
+    <Template
+      title="Atualizar Privilégios"
+      documentTitle="Atualizar Privilégios"
+    >
       <Row className="flex-col ">
         <Row className="my-4">
           <Col>
@@ -169,7 +172,7 @@ export default function SettingsPrivilegesUpdate() {
           <Label>Incluir permissões</Label>
           <Row className="h-full">
             <Col>
-              <div className="w-full border h-full rounded-sm">
+              <div className="w-full border h-full max-h-[500px] overflow-auto">
                 <table className="first-table flex-1 w-full overflow-auto  rounded-sm shadow-lg text-neutral-700">
                   <thead className="border-b">
                     <tr>
@@ -219,7 +222,7 @@ export default function SettingsPrivilegesUpdate() {
               </Button>
             </div>
             <Col>
-              <div className="w-full border h-full">
+              <div className="w-full border h-full max-h-[500px] overflow-auto">
                 <table className="second-table flex-1 w-full overflow-auto  rounded-sm shadow-lg text-neutral-700">
                   <thead className="border-b">
                     <tr>
@@ -254,7 +257,7 @@ export default function SettingsPrivilegesUpdate() {
               Cancelar
             </Button>
             <Button variant="success" onClick={handleSubmit} disabled={loading}>
-              {loading ? <Spinner /> : "Cadastrar"}
+              {loading ? <Spinner /> : "Atualizar"}
             </Button>
           </Row>
         </Row>

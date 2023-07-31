@@ -3,4 +3,5 @@ interface TemplateProps {
   title: string;
   documentTitle: string;
   permissionPage?: string;
+  isBack?: boolean;
 }

@@ -6,4 +6,5 @@ interface ButtonIconProps {
   variant: ButtonIconVariant;
   children: ReactNode;
   onClick?: () => void;
+  disabled?: boolean;
 }

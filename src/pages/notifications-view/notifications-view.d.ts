@@ -7,5 +7,6 @@ interface NotificationsProps {
   createdAt: string;
   title: string;
   sentBy: string;
+  handleLoading: (value: boolean) => void;
   timestamp: string;
 }

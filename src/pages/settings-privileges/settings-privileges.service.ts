@@ -11,3 +11,7 @@ export async function deletePrivileges({ id }: DeletePrivilegesServices) {
   const response = await axios.delete(`${baseURL}/privileges/${id}`);
   return response.data;
 }
+export async function getUserPrivileges({ id }: DeletePrivilegesServices) {
+  const response = await axios.get(`${baseURL}/user/${id}/privilege`);
+  return response.data;
+}

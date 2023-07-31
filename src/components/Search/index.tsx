@@ -1,26 +1,24 @@
-import { useState } from "react";
-import { Button } from "../Button";
-import { Input } from "../Input";
-import { MagnifyingGlass } from "phosphor-react";
-export function Search({ handleSearch, loading, placeholder }: SearchProps) {
-  const [value, setValue] = useState("");
+import { useEffect, useState } from "react";
 
-  function handleClick() {
+import { MagnifyingGlass } from "phosphor-react";
+
+export function Search({ handleSearch, placeholder }: SearchProps) {
+  const [value, setValue] = useState("");
+  useEffect(() => {
     handleSearch && handleSearch(value);
-  }
+  }, [value]);
 
   return (
-    <div className="flex-1 flex gap-4">
-      <Input
-        value={value}
-        placeholder={placeholder}
-        onChange={(event) => setValue(event.target.value)}
-        loading={loading}
-      />
-
-      <Button variant="outline-primary" onClick={handleClick} loading={loading}>
-        <MagnifyingGlass size={22} />
-      </Button>
+    <div className="flex-1">
+      <div className=" border border-1  rounded-sm w-full flex items-center ">
+        <input
+          className="w-full  bg-transparent py-2 outline-none px-2 text-base"
+          value={value}
+          placeholder={placeholder}
+          onChange={(event) => setValue(event.target.value)}
+        />
+        <MagnifyingGlass size={22} className="mr-4 text-neutral-500" />
+      </div>
     </div>
   );
 }

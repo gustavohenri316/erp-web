@@ -42,7 +42,7 @@ export default function SignIn() {
 
   useEffect(() => {
     if (Token && Permissions) {
-      router("/home");
+      router("/");
     } else {
       setTimeout(() => {
         setIsLoading(false);

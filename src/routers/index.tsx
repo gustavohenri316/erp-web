@@ -66,7 +66,7 @@ export function Routers() {
       <Routes>
         <Route path="/signIn" element={<SignIn />} />
         <Route path="/" element={<LayoutDashboard />}>
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/" element={<HomePage />} />
           <Route
             path="/notifications-register"
             element={<NotificationsRegister />}

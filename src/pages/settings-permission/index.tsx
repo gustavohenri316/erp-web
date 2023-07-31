@@ -66,15 +66,17 @@ export default function SettingsPermissions() {
           handleLoading={handleLoading}
         />
       </Row>
-      {!isNotViewPagination && (
-        <Pagination
-          firstItemPage={firstPageIndex}
-          totalItems={totalItems}
-          lastItemPage={lastPageIndex}
-          itemsPerPage={pageSize}
-          onPageChange={onPageChange}
-        />
-      )}
+      <Row className="justify-end">
+        {!isNotViewPagination && (
+          <Pagination
+            firstItemPage={firstPageIndex}
+            totalItems={totalItems}
+            lastItemPage={lastPageIndex}
+            itemsPerPage={pageSize}
+            onPageChange={onPageChange}
+          />
+        )}
+      </Row>
     </Template>
   );
 }

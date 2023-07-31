@@ -10,6 +10,12 @@ export async function sigInRequest({ email, password }: SigInProps) {
     email: email,
     password: password,
   };
-  const response = await axios.post(`${baseURL}/user/login`, payload);
-  return response.data;
+
+  try {
+    const response: any = await axios.post(`${baseURL}/user/login`, payload);
+
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
 }

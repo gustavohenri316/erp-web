@@ -1,9 +1,16 @@
-import { Users, Wrench, UserGear, CirclesFour, House, PaperPlaneTilt } from "phosphor-react";
+import {
+  Users,
+  Wrench,
+  UserGear,
+  CirclesFour,
+  House,
+  PaperPlaneTilt,
+} from "phosphor-react";
 
 export const routers = [
   {
     name: "Home",
-    path: "/home",
+    path: "/",
     permission: "view-page-home",
     icon: <House size={32} weight="thin" />,
   },

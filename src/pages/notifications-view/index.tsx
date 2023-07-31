@@ -9,6 +9,7 @@ import { Template } from "../components/Template";
 import { NotificationsComponent } from "./_components/notification-component";
 import { getAllNotifications } from "./notifications-view.service";
 import { Search } from "../../components/Search";
+import PermissionGate from "../../components/PermissionGate";
 
 type INotification = {
   directNotifications: NotificationsProps[];
@@ -21,6 +22,7 @@ export default function NotificationsView() {
   const [notifications, setNotifications] = useState<INotification>();
   const [openNotificationsGlobal, setOpenNotificationsGlobal] = useState(false);
   const [openNotificationsDirect, setOpenNotificationsDirect] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   function handleNotificationGlobal() {
     setOpenNotificationsGlobal(!openNotificationsGlobal);
@@ -37,23 +39,29 @@ export default function NotificationsView() {
     if (user) {
       fetchListAllNotifications();
     }
-  }, [user]);
+  }, [user, loading]);
+
+  function handleLoading(value: boolean) {
+    setLoading(value);
+  }
 
   return (
     <Template
       title="Notificações"
       documentTitle="Notificações"
-      permissionPage="register-new-user"
+      permissionPage="view-notifications"
     >
       <Row className="h-16 my-4">
         <Search />
-        <Button
-          variant="success"
-          onClick={() => router("/notifications-register")}
-        >
-          <PaperPlaneTilt />
-          Enviar Notificação
-        </Button>
+        <PermissionGate permission="create-notifications">
+          <Button
+            variant="success"
+            onClick={() => router("/notifications-register")}
+          >
+            <PaperPlaneTilt />
+            Enviar Notificação
+          </Button>
+        </PermissionGate>
       </Row>
 
       <Row className="py-2">
@@ -77,6 +85,7 @@ export default function NotificationsView() {
                   (item: NotificationsProps) => (
                     <Row key={item._id} className="my-2">
                       <NotificationsComponent
+                        handleLoading={handleLoading}
                         _id={item._id}
                         createdAt={item.createdAt}
                         isGlobal={item.isGlobal}
@@ -90,6 +99,12 @@ export default function NotificationsView() {
                     </Row>
                   )
                 )}
+              <Row className="justify-center">
+                {notifications &&
+                  notifications?.directNotifications.length > 5 && (
+                    <Button variant="success">Carregar mais</Button>
+                  )}
+              </Row>
             </div>
           )}
         </Col>
@@ -116,6 +131,7 @@ export default function NotificationsView() {
                     <Row key={item._id} className="my-2">
                       <NotificationsComponent
                         _id={item._id}
+                        handleLoading={handleLoading}
                         createdAt={item.createdAt}
                         isGlobal={item.isGlobal}
                         isRead={item.isRead}
