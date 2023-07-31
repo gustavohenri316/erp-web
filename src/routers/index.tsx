@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
-import { useAuth } from "../context/AuthContext";
 import { Spinner } from "../components/Spinner";
 import { parseCookies } from "nookies";
 
