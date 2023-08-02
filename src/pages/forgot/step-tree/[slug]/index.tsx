@@ -23,7 +23,7 @@ export default function ForgotStep3() {
         toast.success(response.message);
         router("/");
       } catch (err: any) {
-        console.log(err);
+        console.error(err);
         toast.error(err.response.data.error);
       } finally {
         setLoading(false);

@@ -5,6 +5,7 @@ import { ButtonIcon } from "../../../../components/ButtonIcon";
 import { useAuth } from "../../../../context/AuthContext";
 import DateDisplay from "../../../../utils/format-date-notifications";
 import { findUser } from "../../../users-view/users-view.service";
+
 import {
   markAsReadNotifications,
   deleteNotifications,
@@ -12,6 +13,7 @@ import {
 import { defaultAvatarUrl } from "../../../../assets/data";
 import { Spinner } from "../../../../components/Spinner";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export function NotificationsComponent({
   _id,
@@ -29,6 +31,7 @@ export function NotificationsComponent({
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [localIsRead, setLocalIsRead] = useState(isRead);
+  const router = useNavigate();
 
   const { "Dashboard.UserToken": Token } = parseCookies();
 
@@ -40,10 +43,9 @@ export function NotificationsComponent({
   }
 
   const handleOpen = async () => {
-    if (!localIsRead) {
-      await fetchMarkAsReadNotifications();
-      setLocalIsRead(true);
-    }
+    await fetchMarkAsReadNotifications();
+    setLocalIsRead(true);
+
     setOpen(!open);
   };
 
@@ -61,10 +63,12 @@ export function NotificationsComponent({
       });
       toast.success(response.message);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     } finally {
       setLoading(false);
       handleLoading(false);
+
+      router("/notifications-view");
     }
   }
 
@@ -76,24 +80,21 @@ export function NotificationsComponent({
 
   useEffect(() => {
     findNotifications(Token);
-  }, [localIsRead, loading]);
+  }, [localIsRead]);
 
   return (
     <div className="flex flex-col w-full">
       <div className="w-full border rounded-sm  cursor-pointer hover:shadow-xl text-neutral-100 shadow-md flex justify-between items-center ">
         <div className="flex items-start gap-4  text-start flex-col justify-start bg-white  rounded-l-md px-2 py-2 text-black">
-          <div className="flex items-center justify-start gap-4 bg-white w-[220px] ">
+          <div className="flex items-center justify-start gap-4 bg-white w-[180px] ">
             <img
               src={userSentBy?.photo || defaultAvatarUrl}
               alt=""
               className="w-10 h-10 rounded-full object-cover"
             />
             <div>
-              <h3 className="text-sm font-bold">
-                {userSentBy?.firstName} {userSentBy?.lastName}
-              </h3>
+              <h3 className="text-sm font-bold">{userSentBy?.firstName}</h3>
               <span className="text-sm">{userSentBy?.team}</span>
-              <p className="text-sm">{userSentBy?.corporateEmail}</p>
             </div>
           </div>
         </div>
@@ -102,26 +103,26 @@ export function NotificationsComponent({
             isGlobal ? "bg-green-600" : "bg-gray-100 text-neutral-800"
           } flex-1 w-full h-full`}
         >
-          <div className=" px-8 py-2 flex flex-col justify-between w-full h-full">
-            <p className="text-2xl">{title}</p>
-
-            <span className="text-end text-base">
-              <DateDisplay date={createdAt} />
-            </span>
-            <div className="justify-between flex items-center ">
-              <span className="text-base">
-                Enviado para: {isGlobal ? "Todos" : "Somente você"}
-              </span>
-              {!isGlobal && (
-                <div className="justify-end flex items-center gap-2">
-                  <div
-                    className={`w-2 h-2 rounded-full  ${
-                      localIsRead ? "bg-blue-500" : "bg-green-500"
-                    }`}
-                  ></div>
-                  <span>{localIsRead ? "Visualizado" : "Não lida"}</span>
-                </div>
-              )}
+          <div className=" px-8 py-2 flex items-center justify-between w-full h-full">
+            <div className="text-xl">{title}</div>
+            <div className="flex flex-col gap-1 text-sm">
+              <div>{isGlobal ? "Todos" : "Somente você"}</div>
+              <div>
+                <DateDisplay date={createdAt} />
+              </div>
+              <div>
+                {!localIsRead ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-red-600"></div>
+                    <span>Não visualizado</span>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-blue-600"></div>
+                    <span>Visualizado</span>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -146,7 +147,10 @@ export function NotificationsComponent({
       </div>
       {open && (
         <div className="w-full p-8 my-2 rounded-sm bg-white border">
-          {<p className="text-base">{message}</p>}
+          <div
+            className="text-base"
+            dangerouslySetInnerHTML={{ __html: message }}
+          />
         </div>
       )}
     </div>

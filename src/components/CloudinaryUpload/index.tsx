@@ -22,7 +22,6 @@ export async function handleCloudinaryUpload(
       `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
       formData
     );
-    console.log(response.data.secure_url);
     handleValue(response.data.secure_url);
   } catch (err) {
     console.error(err);

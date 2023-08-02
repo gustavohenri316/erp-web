@@ -45,7 +45,7 @@ export default function SettingsPermissionRegister() {
       }
     } catch (err: any) {
       toast.error(err.response.data.message);
-      console.log(err);
+      console.error(err);
     } finally {
       setLoading(false);
       gePrivileges(user?.id as string);

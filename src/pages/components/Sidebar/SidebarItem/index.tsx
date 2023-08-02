@@ -8,7 +8,6 @@ export function SidebarItem({ item, open, openItems, onToggleOpen }: any) {
   const router = useNavigate();
   const { countNotifications } = useAuth();
   const pathname = window.location.pathname;
-  console.log(pathname);
 
   const handleClick = () => {
     if (item.isOpen) {

@@ -14,6 +14,8 @@ import { UserCirclePlus } from "phosphor-react";
 import SelectedUsersList from "./_components/SelectedUserList";
 import UsersList from "./_components/UserList";
 import { useNavigate } from "react-router-dom";
+import "react-quill/dist/quill.snow.css";
+import NotificationsEditor from "./_components/NotificationsEditor";
 
 function NotificationsRegister() {
   const { user } = useAuth();
@@ -41,7 +43,7 @@ function NotificationsRegister() {
       toast.success(response.message);
       window.location.href = "/notifications-view";
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
@@ -133,13 +135,9 @@ function NotificationsRegister() {
       <Row className="my-4">
         <Col>
           <Label>Mensagem</Label>
-          <textarea
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className="border border-dashed rounded-sm p-4 "
-            rows={12}
-            placeholder="Escreva a mensagem "
-          ></textarea>
+          <div className="w-full h-full">
+            <NotificationsEditor value={message} onChange={setMessage} />
+          </div>
         </Col>
       </Row>
       <Row className="mt-4 justify-end">

@@ -39,7 +39,6 @@ export function AuthProvider({ children }: AuthProviderType) {
   }
 
   async function gePrivileges(id: string) {
-    console.log("Passou");
     try {
       const response = await getUserPrivileges({ id });
       const keysArray = response.map((item: any) => item.key);

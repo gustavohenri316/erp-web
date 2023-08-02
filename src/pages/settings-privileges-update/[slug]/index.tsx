@@ -132,7 +132,7 @@ export default function SettingsPrivilegesUpdate() {
       description: formState.describe,
       permissions: selectedItems,
     };
-    console.log(payload);
+
     fetchUpdatePrivileges(payload);
   };
 

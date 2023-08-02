@@ -1,10 +1,9 @@
-import  { useState, useEffect, useRef, ChangeEvent } from "react";
+import { useState, useEffect, useRef, ChangeEvent } from "react";
 import { Spinner } from "../../../../components/Spinner";
 import toast from "react-hot-toast";
 import { Counter } from "../../../../components/Counter";
 import { verifyCodeService } from "../../../../service/forgot.service";
 import { useNavigate, useParams } from "react-router-dom";
-
 
 export default function ForgotStep2() {
   const { id } = useParams<{ id: string }>();
@@ -29,7 +28,7 @@ export default function ForgotStep2() {
       const encodedUserId = encodeURIComponent(response.userId);
       router(`/forgot/step-tree/${encodedUserId}`);
     } catch (error: any) {
-      console.log(error);
+      console.error(error);
       toast.error(error.response.data.message);
       setCodeInvalid(true);
     } finally {

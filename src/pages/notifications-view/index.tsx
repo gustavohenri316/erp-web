@@ -27,16 +27,19 @@ export default function NotificationsView() {
   const [pageDirect, setPageDirect] = useState(1);
   const [pageGlobal, setPageGlobal] = useState(1);
   const containerRefDirect = useRef<HTMLDivElement>(null);
+  const [initialLoad, setInitialLoad] = useState(false);
   const containerRefGlobal = useRef<HTMLDivElement>(null);
   const [permissionDeleteNotifications, setPermissionDeleteNotifications] =
     useState(false);
 
   function handleNotificationGlobal() {
     setOpenNotificationsGlobal(!openNotificationsGlobal);
+    setInitialLoad(false);
   }
 
   function handleNotificationDirect() {
     setOpenNotificationsDirect(!openNotificationsDirect);
+    setInitialLoad(false);
   }
 
   async function fetchListAllNotifications() {
@@ -133,8 +136,11 @@ export default function NotificationsView() {
     }
   }, [handleScrollGlobal, loadingGlobal, hasMoreGlobal]);
 
-  function handleLoading(value: boolean) {
+  function handleLoadingDirect(value: boolean) {
     setLoadingDirect(value);
+  }
+
+  function handleLoadingGlobal(value: boolean) {
     setLoadingGlobal(value);
   }
 
@@ -184,7 +190,7 @@ export default function NotificationsView() {
                       permissionDeleteNotifications={
                         permissionDeleteNotifications
                       }
-                      handleLoading={handleLoading}
+                      handleLoading={handleLoadingDirect}
                       _id={item._id}
                       createdAt={item.createdAt}
                       isGlobal={item.isGlobal}
@@ -199,16 +205,13 @@ export default function NotificationsView() {
                 )
               )}
               <Row className="justify-center">
-                {loadingDirect ? (
-                  <div>Carregando...</div>
-                ) : (
-                  !loadingDirect &&
-                  hasMoreDirect && (
+                {!initialLoad &&
+                  hasMoreDirect &&
+                  notifications.directNotifications.length > 5 && (
                     <Button variant="success" onClick={handleLoadMoreDirect}>
                       Carregar mais
                     </Button>
-                  )
-                )}
+                  )}
               </Row>
             </div>
           )}
@@ -238,7 +241,7 @@ export default function NotificationsView() {
                         permissionDeleteNotifications
                       }
                       _id={item._id}
-                      handleLoading={handleLoading}
+                      handleLoading={handleLoadingGlobal}
                       createdAt={item.createdAt}
                       isGlobal={item.isGlobal}
                       isRead={item.isRead}
@@ -252,16 +255,13 @@ export default function NotificationsView() {
                 )
               )}
               <Row className="justify-center">
-                {loadingGlobal ? (
-                  <div>Carregando...</div>
-                ) : (
-                  !loadingGlobal &&
-                  hasMoreGlobal && (
-                    <Button variant="success" onClick={handleLoadMoreGlobal}>
+                {!initialLoad &&
+                  hasMoreDirect &&
+                  notifications.directNotifications.length > 5 && (
+                    <Button variant="success" onClick={handleLoadMoreDirect}>
                       Carregar mais
                     </Button>
-                  )
-                )}
+                  )}
               </Row>
             </div>
           )}

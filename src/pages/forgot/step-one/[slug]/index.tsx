@@ -24,7 +24,7 @@ export default function ForgotStep1() {
       const encodedEmail = encodeURIComponent(email);
       router(`/forgot/step-two/${encodedEmail}`);
     } catch (err: any) {
-      console.log(err);
+      console.error(err);
       toast.error(err.response.data.error);
       setNotEmail(true);
     } finally {

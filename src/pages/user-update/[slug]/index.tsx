@@ -59,7 +59,6 @@ export default function UserUpdate() {
 
   async function fetchFindUser() {
     const data = await findUser({ id: id as string });
-    console.log(data);
 
     if (data) {
       setFormValues({

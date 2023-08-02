@@ -1,6 +1,6 @@
 import { X } from "phosphor-react";
 import React from "react";
-import PermissionGate from "../../../components/PermissionGate";
+import PermissionGate from "../../../../components/PermissionGate";
 
 interface UsersListProps {
   users: UserProps[];
