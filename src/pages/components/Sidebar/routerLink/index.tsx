@@ -1,7 +1,6 @@
 import {
   Users,
   Wrench,
-  UserGear,
   CirclesFour,
   House,
   PaperPlaneTilt,
