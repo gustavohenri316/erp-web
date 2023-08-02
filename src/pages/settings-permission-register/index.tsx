@@ -72,9 +72,10 @@ export default function SettingsPermissionRegister() {
     if (Object.values(errors).some((error) => error !== "")) {
       return;
     }
+
     const payload = {
       name: name,
-      createdByUser: user?.email,
+      createdByUser: user?.name,
       description: describe,
       key: key,
     };

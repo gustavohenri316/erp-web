@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useState } from "react";
 import { TextAlignLeft } from "phosphor-react";
 import { routers } from "./routerLink";
@@ -21,7 +21,7 @@ export default function Sidebar() {
   }
 
   return (
-    <div className={` ${open ? "w-96" : "w-28"} p-6  h-full `}>
+    <div className={` ${open ? "w-72" : "w-28"} p-6  h-full `}>
       <div onClick={handleOpen}>
         <TextAlignLeft
           size={32}
