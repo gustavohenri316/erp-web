@@ -58,7 +58,7 @@ const NotificationsEditor: React.FC<NotificationsEditorProps> = ({
   ];
 
   return (
-    <div className="editor-container">
+    <div className="border-0">
       <ReactQuill
         ref={(ref) => (quillRef.current = ref)}
         theme="snow"
@@ -66,8 +66,10 @@ const NotificationsEditor: React.FC<NotificationsEditorProps> = ({
         style={{
           height: "40vh",
           marginBottom: "50px",
+          border: "none",
         }}
         onChange={handleChange}
+        className="dark:border-neutral-800 "
         modules={modules}
         formats={formats}
       />

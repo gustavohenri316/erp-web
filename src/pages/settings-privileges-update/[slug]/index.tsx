@@ -172,30 +172,78 @@ export default function SettingsPrivilegesUpdate() {
           <Label>Incluir permissões</Label>
           <Row className="h-full">
             <Col>
-              <div className="w-full border h-full max-h-[500px] overflow-auto">
-                <table className="first-table flex-1 w-full overflow-auto  rounded-sm shadow-lg text-neutral-700">
-                  <thead className="border-b">
-                    <tr>
-                      <th className="py-4 px-4 text-center">Name</th>
-                      <th className="py-4 px-4 text-center">Descrição</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {permissions
-                      .filter(
-                        (item) =>
-                          !selectedItems.includes(item._id) &&
-                          !privilegePermissions.some((p) => p._id === item._id) // Filter out permissions already in the second table
-                      )
-                      .map((item: Permission) => (
+              <div className="w-full border h-full max-h-[500px] overflow-auto ">
+                <div className="relative overflow-x-auto  w-full">
+                  <table className="second-table flex-1 w-full overflow-auto   rounded-md shadow text-neutral-700 dark:border-neutral-900">
+                    <thead className="border-b border-dashed dark:border-neutral-900">
+                      <tr className="dark:text-neutral-100">
+                        <th className="py-4 px-4 text-center">Name</th>
+                        <th className="py-4 px-4 text-center">Descrição</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {permissions
+                        .filter(
+                          (item) =>
+                            !selectedItems.includes(item._id) &&
+                            !privilegePermissions.some(
+                              (p) => p._id === item._id
+                            ) // Filter out permissions already in the second table
+                        )
+                        .map((item: Permission) => (
+                          <tr
+                            className={
+                              selectedItem === item._id
+                                ? "border-b border-dashed bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-900 text-neutral-100 dark:text-neutral-100 cursor-pointer"
+                                : "border-b border-dashed dark:text-neutral-100 dark:border-neutral-900 hover:bg-neutral-400 dark:hover:bg-neutral-700 cursor-pointer"
+                            }
+                            key={item._id}
+                            onClick={() => setSelectedItem(item._id)}
+                          >
+                            <td className="py-4 px-4 text-center">
+                              {item.name}
+                            </td>
+                            <td className="py-4 px-4 text-center">
+                              {item.description}
+                            </td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </Col>
+            <div className="h-full flex justify-center items-center flex-col gap-2">
+              <Button variant="success" onClick={handleAddItemToSecondTable}>
+                Adicionar
+              </Button>
+              <Button
+                variant="danger"
+                onClick={handleRemoveItemFromSecondTable}
+              >
+                Remover
+              </Button>
+            </div>
+            <Col>
+              <div className="w-full border h-full max-h-[500px] overflow-auto ">
+                <div className="relative overflow-x-auto  w-full">
+                  <table className="second-table flex-1 w-full overflow-auto   rounded-md shadow text-neutral-700 dark:border-neutral-900">
+                    <thead className="border-b border-dashed dark:border-neutral-900">
+                      <tr className="dark:text-neutral-100">
+                        <th className="py-4 px-4 text-center">Name</th>
+                        <th className="py-4 px-4 text-center">Descrição</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {privilegePermissions.map((item: Permission) => (
                         <tr
-                          className={
-                            selectedItem === item._id
-                              ? "border-b bg-neutral-500 text-white cursor-pointer"
-                              : "border-b hover:bg-neutral-400 cursor-pointer"
-                          }
+                          className={`cursor-pointer ${
+                            selectedItemSecondTable === item._id
+                              ? "border-b border-dashed bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-900 text-neutral-100 dark:text-neutral-100 cursor-pointer"
+                              : "border-b border-dashed dark:text-neutral-100 dark:border-neutral-900 hover:bg-neutral-400 dark:hover:bg-neutral-700 cursor-pointer"
+                          }`}
                           key={item._id}
-                          onClick={() => setSelectedItem(item._id)}
+                          onClick={() => setSelectedItemSecondTable(item._id)}
                         >
                           <td className="py-4 px-4 text-center">{item.name}</td>
                           <td className="py-4 px-4 text-center">
@@ -203,52 +251,9 @@ export default function SettingsPrivilegesUpdate() {
                           </td>
                         </tr>
                       ))}
-                  </tbody>
-                </table>
-              </div>
-            </Col>
-            <div className="h-full flex justify-center items-center flex-col gap-2">
-              <Button
-                variant="outline-success"
-                onClick={handleAddItemToSecondTable}
-              >
-                Adicionar
-              </Button>
-              <Button
-                variant="outline-danger"
-                onClick={handleRemoveItemFromSecondTable}
-              >
-                Remover
-              </Button>
-            </div>
-            <Col>
-              <div className="w-full border h-full max-h-[500px] overflow-auto">
-                <table className="second-table flex-1 w-full overflow-auto  rounded-sm shadow-lg text-neutral-700">
-                  <thead className="border-b">
-                    <tr>
-                      <th className="py-4 px-4 text-center">Name</th>
-                      <th className="py-4 px-4 text-center">Descrição</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {privilegePermissions.map((item: Permission) => (
-                      <tr
-                        className={`cursor-pointer ${
-                          selectedItemSecondTable === item._id
-                            ? "border-b bg-neutral-500 text-white"
-                            : "border-b hover:bg-neutral-400"
-                        }`}
-                        key={item._id}
-                        onClick={() => setSelectedItemSecondTable(item._id)}
-                      >
-                        <td className="py-4 px-4 text-center">{item.name}</td>
-                        <td className="py-4 px-4 text-center">
-                          {item.description}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </Col>
           </Row>

@@ -99,7 +99,7 @@ function NotificationsRegister() {
           <Label>Destinatário</Label>
           <div className="flex gap-2">
             <div
-              className="whitespace-nowrap flex rounded-sm bg-green-600 h-12 px-2 cursor-pointer items-center justify-center text-neutral-100 text-center"
+              className="whitespace-nowrap flex rounded-md bg-green-600 dark:bg-green-950 h-12 px-2 cursor-pointer items-center justify-center text-neutral-100 text-center"
               onClick={handleOpenSelection}
             >
               <UserCirclePlus size={32} />
@@ -135,9 +135,7 @@ function NotificationsRegister() {
       <Row className="my-4">
         <Col>
           <Label>Mensagem</Label>
-          <div className="w-full h-full">
-            <NotificationsEditor value={message} onChange={setMessage} />
-          </div>
+          <NotificationsEditor value={message} onChange={setMessage} />
         </Col>
       </Row>
       <Row className="mt-4 justify-end">

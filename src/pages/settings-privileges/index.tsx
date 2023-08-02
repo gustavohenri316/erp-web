@@ -32,8 +32,8 @@ export default function SettingsPrivileges() {
 
   return (
     <Template
-      title="Privilégios de usuário"
-      documentTitle="Privilégios de usuário"
+      title="Privilégios do sistema"
+      documentTitle="Privilégios do sistema"
     >
       <Row>
         <Search />

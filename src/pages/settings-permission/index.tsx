@@ -47,8 +47,8 @@ export default function SettingsPermissions() {
   }
   return (
     <Template
-      title="Permissões de usuário"
-      documentTitle="Permissões de usuário"
+      title="Permissões do sistema"
+      documentTitle="Permissões do Sistema"
       permissionPage="view-permissions"
     >
       <Row>

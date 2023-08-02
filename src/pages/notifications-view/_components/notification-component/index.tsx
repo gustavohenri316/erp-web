@@ -84,9 +84,9 @@ export function NotificationsComponent({
 
   return (
     <div className="flex flex-col w-full">
-      <div className="w-full border rounded-sm  cursor-pointer hover:shadow-xl text-neutral-100 shadow-md flex justify-between items-center ">
-        <div className="flex items-start gap-4  text-start flex-col justify-start bg-white  rounded-l-md px-2 py-2 text-black">
-          <div className="flex items-center justify-start gap-4 bg-white w-[180px] ">
+      <div className="w-full border dark:border-neutral-900 rounded-md  dark:bg-neutral-700 cursor-pointer hover:shadow text-neutral-100 dark:text-neutral-800  flex justify-between items-center ">
+        <div className="flex items-start gap-4  text-start flex-col justify-start   dark:bg-neutral-700 rounded-l-md px-2 py-2 text-black dark:text-neutral-100">
+          <div className="flex items-center justify-start gap-4  dark:bg-neutral-700 w-[180px] ">
             <img
               src={userSentBy?.photo || defaultAvatarUrl}
               alt=""
@@ -100,10 +100,12 @@ export function NotificationsComponent({
         </div>
         <div
           className={`${
-            isGlobal ? "bg-green-600" : "bg-gray-100 text-neutral-800"
+            isGlobal
+              ? "bg-green-600 dark:bg-green-950 dark:text-neutral-100"
+              : "bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100"
           } flex-1 w-full h-full`}
         >
-          <div className=" px-8 py-2 flex items-center justify-between w-full h-full">
+          <div className=" px-8 py-2 flex items-center justify-between text-end w-full h-full">
             <div className="text-xl">{title}</div>
             <div className="flex flex-col gap-1 text-sm">
               <div>{isGlobal ? "Todos" : "Somente você"}</div>
@@ -127,7 +129,7 @@ export function NotificationsComponent({
           </div>
         </div>
         <div
-          className={`flex items-center justify-center h-full bg-white rounded-r-md`}
+          className={`flex items-center justify-center h-full bg-neutral-100 dark:bg-neutral-700 rounded-r-md`}
         >
           <div className="px-8 py-2 gap-2 flex items-center">
             <ButtonIcon size="md" variant="primary" onClick={handleOpen}>
@@ -146,7 +148,7 @@ export function NotificationsComponent({
         </div>
       </div>
       {open && (
-        <div className="w-full p-8 my-2 rounded-sm bg-white border">
+        <div className="w-full p-8 my-2 rounded-md bg-neutral-100 border">
           <div
             className="text-base"
             dangerouslySetInnerHTML={{ __html: message }}

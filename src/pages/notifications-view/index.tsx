@@ -170,11 +170,11 @@ export default function NotificationsView() {
       <Row className="py-2">
         <Col>
           <div
-            className="rounded-sm border py-4 px-4 cursor-pointer hover:shadow-md flex items-center justify-between gap-4"
+            className="rounded-md border dark:border-neutral-900  py-4 px-4 cursor-pointer hover:shadow-md flex items-center justify-between gap-4"
             onClick={handleNotificationDirect}
           >
             <div className="flex items-center gap-4">
-              <div className="h-6 w-6 text-white flex items-center justify-center rounded-full bg-gray-500">
+              <div className="h-6 w-6 text-neutral-100 flex items-center justify-center rounded-full bg-gray-500 dark:bg-neutral-700">
                 {notifications.directNotificationsCount || 0}
               </div>
               Notificações Diretas
@@ -220,11 +220,11 @@ export default function NotificationsView() {
       <Row className="py-2">
         <Col>
           <div
-            className="rounded-sm border py-4 px-4 cursor-pointer hover:shadow-md flex items-center justify-between gap-4"
+            className="rounded-md border dark:border-neutral-900 py-4 px-4 cursor-pointer hover:shadow-md flex items-center justify-between gap-4"
             onClick={handleNotificationGlobal}
           >
             <div className="flex items-center gap-4">
-              <div className="h-6 w-6 text-white flex items-center justify-center rounded-full bg-gray-500">
+              <div className="h-6 w-6 text-neutral-100 flex items-center justify-center rounded-full bg-gray-500 dark:bg-neutral-700">
                 {notifications.globalNotificationsCount || 0}
               </div>
               Notificações Globais

@@ -3,7 +3,7 @@ import Sidebar from "../pages/components/Sidebar";
 
 export default function LayoutDashboard() {
   return (
-    <div className="w-screen h-screen flex bg-green-600 ">
+    <div className="w-screen h-screen flex bg-green-600 dark:bg-green-950 dark:bg-green-950 ">
       <Sidebar />
       <div className="h-full w-full flex-1 overflow-hidden">
         <Outlet />

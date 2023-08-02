@@ -21,39 +21,15 @@ export function Pagination({
   );
 
   return (
-    <div className="flex items-center justify-between  bg-white py-3">
-      <div className="flex flex-1 justify-between sm:hidden">
-        <button
-          className={`relative inline-flex items-center rounded-sm border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 ${
-            currentPage === 1
-              ? "opacity-50 cursor-not-allowed"
-              : "hover:bg-gray-50"
-          }`}
-          disabled={currentPage === 1}
-          onClick={() => setCurrentPage((prev) => prev - 1)}
-        >
-          Anterior
-        </button>
-        <button
-          className={`relative ml-3 inline-flex items-center rounded-sm border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 ${
-            currentPage === totalPages
-              ? "opacity-50 cursor-not-allowed"
-              : "hover:bg-gray-50"
-          }`}
-          disabled={currentPage === totalPages}
-          onClick={() => setCurrentPage((prev) => prev + 1)}
-        >
-          Próximo
-        </button>
-      </div>
-      <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+    <div className="flex items-center justify-between dark:border-neutral-900 bg-neutral-100 dark:bg-neutral-800 py-3">
+      <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between dark:border-neutral-900">
         <div>
           <nav
-            className="isolate inline-flex -space-x-px rounded-sm shadow-sm"
+            className="isolate inline-flex -space-x-px rounded-md shadow-sm dark:border-neutral-900"
             aria-label="Pagination"
           >
             <button
-              className={`relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 ${
+              className={`relative inline-flex items-center rounded-l-md dark:border-neutral-900 px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 dark:ring-neutral-900 dark:ring-neutral-900 ${
                 currentPage === 1
                   ? "opacity-50 cursor-not-allowed"
                   : "hover:bg-gray-50"
@@ -67,10 +43,10 @@ export function Pagination({
             {pageNumbers.map((pageNumber, index) => (
               <button
                 key={index}
-                className={`relative inline-flex items-center  text-sm font-semibold px-4 py-2 ring-1 ring-inset ring-gray-300 ${
+                className={`relative inline-flex items-center  dark:border-neutral-900 text-sm font-semibold px-4 py-2 ring-1 ring-inset ring-gray-300 dark:ring-neutral-900 ${
                   pageNumber === currentPage
-                    ? "z-10 bg-gray-900 text-white focus-visible:outline focus-visible:outline-2  focus-visible:outline-offset-2 focus-visible:outline-gray-900"
-                    : "text-gray-900 hover:bg-gray-50 focus:outline-offset-0"
+                    ? "z-10 bg-neutral-800 dark:bg-neutral-700 text-neutral-100 dark:border-neutral-900 dark:text-neutral-100 focus-visible:outline focus-visible:outline-2   focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+                    : "text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-offset-0"
                 }`}
                 disabled={pageNumber === currentPage}
                 onClick={() => setCurrentPage(pageNumber)}
@@ -79,7 +55,7 @@ export function Pagination({
               </button>
             ))}
             <button
-              className={`relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 ${
+              className={`relative inline-flex items-center rounded-r-md dark:border-neutral-900 px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 dark:ring-neutral-900 ${
                 currentPage === totalPages
                   ? "opacity-50 cursor-not-allowed"
                   : "hover:bg-gray-50"

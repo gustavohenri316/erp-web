@@ -39,8 +39,8 @@ export function SettingsPermissionsTable({
   return (
     <div className="w-full flex-1">
       <div className="relative overflow-x-auto  w-full">
-        <table className="w-full  text-left bg-neutral-100 rounded-sm shadow-lg my-4">
-          <thead className="border-b">
+        <table className="w-full  text-left bg-neutral-50 dark:text-neutral-100 dark:bg-neutral-800 rounded-md shadow my-4">
+          <thead className="border-b dark:border-neutral-900">
             <tr>
               <th scope="col" className="px-6 whitespace-nowrap py-3">
                 Nome
@@ -61,20 +61,23 @@ export function SettingsPermissionsTable({
           <tbody>
             {permissions &&
               permissions.map((item: Rule) => (
-                <tr key={item._id} className="border-b hover:bg-neutral-400">
+                <tr
+                  key={item._id}
+                  className="border-b hover:bg-neutral-400 dark:hover:bg-neutral-900 dark:border-neutral-900 dark:text-neutral-100"
+                >
                   <td className="py-4 px-4 text-start whitespace-nowrap">
                     {item.name}
                   </td>
                   <td className="py-4 px-4 text-start whitespace-nowrap">
                     <div className="flex items-center gap-2 w-full whitespace-nowrap">
                       <input
-                        className="cursor-pointer  hover:text-black whitespace-nowrap  overflow-auto border p-2 rounded-sm"
+                        className="cursor-pointer dark:border-neutral-900 hover:text-black  dark:bg-neutral-800 whitespace-nowrap dark:hover:text-neutral-100 overflow-auto border p-2 rounded-md"
                         title={item.key}
                         defaultValue={item.key}
                       />
 
                       <div
-                        className="border rounded-sm p-2 cursor-pointer whitespace-nowrap hover:border-black "
+                        className="border rounded-md p-2 cursor-pointer whitespace-nowrap dark:border-neutral-900  hover:border-black "
                         onClick={() => copyItem(item.key)}
                       >
                         {isCopied && copiedItem === item.key

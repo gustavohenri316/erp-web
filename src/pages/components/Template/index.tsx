@@ -4,6 +4,7 @@ import UserInfo from "../UserInfo";
 import { Fragment, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
+import { SelectTheme } from "../../../components/SelectTheme";
 
 export function Template(props: TemplateProps) {
   const { findNotifications, user } = useAuth();
@@ -40,9 +41,12 @@ export function Template(props: TemplateProps) {
             )}
             {title}
           </span>
-          <UserInfo />
+          <div className="flex items-center gap-4 ">
+            <SelectTheme />
+            <UserInfo />
+          </div>
         </div>
-        <div className="h-full flex-1 bg-white rounded-tl-md p-6 w-full overflow-auto">
+        <div className="h-full flex-1 bg-white dark:text-neutral-100 dark:bg-neutral-800 rounded-tl-md p-6 w-full overflow-auto">
           <PermissionGate isPage permission={permissionPage}>
             {children}
           </PermissionGate>

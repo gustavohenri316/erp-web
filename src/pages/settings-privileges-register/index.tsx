@@ -112,7 +112,10 @@ export default function SettingsPrivilegesRegister() {
   };
 
   return (
-    <Template title="" documentTitle="">
+    <Template
+      title="Cadastrar novo privilegio"
+      documentTitle="Cadastro de Privilegio"
+    >
       <Row className="flex-col">
         <Row>
           <Col>
@@ -161,11 +164,11 @@ export default function SettingsPrivilegesRegister() {
           <Label>Incluir permissões</Label>
           <Row className="h-full">
             <Col>
-              <div className="w-full flex-1 border border-dashed">
+              <div className="w-full border h-full max-h-[500px] overflow-auto ">
                 <div className="relative overflow-x-auto  w-full">
-                  <table className="second-table flex-1 w-full overflow-auto  rounded-sm shadow-lg text-neutral-700">
-                    <thead className="border-b border-dashed">
-                      <tr>
+                  <table className="second-table flex-1 w-full overflow-auto   rounded-md shadow text-neutral-700 dark:border-neutral-900">
+                    <thead className="border-b border-dashed dark:border-neutral-900">
+                      <tr className="dark:text-neutral-100">
                         <th className="py-4 px-4 text-center">Name</th>
                         <th className="py-4 px-4 text-center">Descrição</th>
                       </tr>
@@ -177,8 +180,8 @@ export default function SettingsPrivilegesRegister() {
                           <tr
                             className={
                               selectedItem === item._id
-                                ? "border-b border-dashed bg-neutral-500 text-white cursor-pointer"
-                                : "border-b border-dashed hover:bg-neutral-400 cursor-pointer"
+                                ? "border-b border-dashed bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-900 text-neutral-100 dark:text-neutral-100 cursor-pointer"
+                                : "border-b border-dashed dark:text-neutral-100 dark:border-neutral-900 hover:bg-neutral-400 dark:hover:bg-neutral-700 cursor-pointer"
                             }
                             key={item._id}
                             onClick={() => setSelectedItem(item._id)}
@@ -197,25 +200,22 @@ export default function SettingsPrivilegesRegister() {
               </div>
             </Col>
             <div className="h-full flex justify-center items-center flex-col gap-2">
-              <Button
-                variant="outline-success"
-                onClick={handleAddItemToSecondTable}
-              >
+              <Button variant="success" onClick={handleAddItemToSecondTable}>
                 Adicionar
               </Button>
               <Button
-                variant="outline-danger"
+                variant="danger"
                 onClick={handleRemoveItemFromSecondTable}
               >
                 Remover
               </Button>
             </div>
             <Col>
-              <div className="w-full flex-1 border border-dashed">
+              <div className="w-full border h-full max-h-[500px] overflow-auto ">
                 <div className="relative overflow-x-auto  w-full">
-                  <table className="second-table flex-1 w-full overflow-auto  rounded-sm shadow-lg text-neutral-700">
-                    <thead className="border-b border-dashed">
-                      <tr>
+                  <table className="second-table flex-1 w-full overflow-auto   rounded-md shadow text-neutral-700 dark:border-neutral-900">
+                    <thead className="border-b border-dashed dark:border-neutral-900">
+                      <tr className="dark:text-neutral-100">
                         <th className="py-4 px-4 text-center">Name</th>
                         <th className="py-4 px-4 text-center">Descrição</th>
                       </tr>
@@ -229,8 +229,8 @@ export default function SettingsPrivilegesRegister() {
                           <tr
                             className={`cursor-pointer ${
                               selectedItemSecondTable === itemId
-                                ? "border-b border-dashed bg-neutral-500 text-white"
-                                : "border-b border-dashed hover:bg-neutral-400"
+                                ? "border-b border-dashed bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-900 text-neutral-100 dark:text-neutral-100 cursor-pointer"
+                                : "border-b border-dashed dark:text-neutral-100 dark:border-neutral-900 hover:bg-neutral-400 dark:hover:bg-neutral-700 cursor-pointer"
                             }`}
                             key={item?._id}
                             onClick={() => setSelectedItemSecondTable(itemId)}

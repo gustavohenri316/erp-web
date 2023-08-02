@@ -5,6 +5,8 @@ import {
   CirclesFour,
   House,
   PaperPlaneTilt,
+  ToggleRight,
+  Crown,
 } from "phosphor-react";
 
 export const routers = [
@@ -37,13 +39,13 @@ export const routers = [
         name: "Privilégios do sistema",
         path: "/settings-privileges",
 
-        icon: <UserGear size={32} weight="thin" />,
+        icon: <Crown size={32} weight="thin" />,
       },
       {
-        name: "Permissões",
+        name: "Permissões do sistema",
         path: "/settings-permission",
 
-        icon: <UserGear size={32} weight="thin" />,
+        icon: <ToggleRight size={32} weight="thin" />,
       },
     ],
   },

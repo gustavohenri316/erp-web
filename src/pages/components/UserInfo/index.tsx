@@ -40,10 +40,10 @@ export default function UserInfo() {
         alt="user"
       />
       {open && (
-        <div className="flex flex-col bg-neutral-100 mt-4 border-neutral-800 border rounded-sm absolute right-0  z-50 min-w-[200px] min-h-[40px]">
+        <div className="flex flex-col bg-neutral-100 mt-4 border-neutral-800 border rounded-md absolute right-0  z-50 min-w-[200px] min-h-[40px]">
           <span
             onClick={sigOut}
-            className="w-full p-2 text-neutral-900 cursor-pointer hover:bg-gray-200 rounded-sm flex items-center gap-4"
+            className="w-full p-2 text-neutral-900 cursor-pointer hover:bg-gray-200 rounded-md flex items-center gap-4"
           >
             <SignOut size={32} weight="thin" />
             Sair

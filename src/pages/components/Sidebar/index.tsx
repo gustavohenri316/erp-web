@@ -21,7 +21,7 @@ export default function Sidebar() {
   }
 
   return (
-    <div className={` ${open ? "w-72" : "w-28"} p-6  h-full `}>
+    <div className={` ${open ? "w-72" : "w-24"} p-6  h-full `}>
       <div onClick={handleOpen}>
         <TextAlignLeft
           size={32}

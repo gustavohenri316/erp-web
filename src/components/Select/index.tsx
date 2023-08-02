@@ -10,7 +10,7 @@ export function Select({
   const [isTouchedAndEmpty] = useState<boolean>(false);
 
   let SelectClasses =
-    "flex-1 p-2 border rounded-sm  outline-none placeholder:text-lg w-full ";
+    "flex-1 p-2 border rounded-md  outline-none placeholder:text-lg w-full dark:bg-neutral-700 dark:border-neutral-800 ";
 
   if (required && isTouchedAndEmpty) {
     SelectClasses += "focus:ring-2 ring-red-500";

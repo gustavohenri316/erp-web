@@ -20,10 +20,10 @@ const UsersList: React.FC<UsersListProps> = ({
   handleDeselectAllUsers,
 }) => {
   return (
-    <div className="max-h-[400px] gap-2 rounded-sm overflow-x-auto border p-2 ">
+    <div className="max-h-[400px] gap-2 rounded-md overflow-x-auto border dark:border-neutral-900  p-2 ">
       <div
-        className={`border rounded-sm cursor-pointer hover:shadow-md flex items-center p-2 ${
-          selectedUsers.includes("") ? "bg-blue-100" : ""
+        className={`border dark:border-neutral-900 rounded-md cursor-pointer hover:shadow-md flex items-center p-2 ${
+          selectedUsers.includes("") ? "bg-blue-100 dark:bg-neutral-700" : ""
         }`}
       >
         <div
@@ -51,8 +51,10 @@ const UsersList: React.FC<UsersListProps> = ({
               <div
                 key={item._id}
                 onClick={() => handleUserClick(item._id)}
-                className={`border gap-4 rounded-sm mt-2 cursor-pointer hover:shadow-md flex items-center p-2 ${
-                  selectedUsers.includes(item._id) ? "bg-blue-100" : ""
+                className={`border dark:border-neutral-900 gap-4 rounded-md mt-2 cursor-pointer hover:shadow-md flex items-center p-2 ${
+                  selectedUsers.includes(item._id)
+                    ? "bg-blue-100 dark:bg-neutral-700"
+                    : ""
                 }`}
               >
                 <img

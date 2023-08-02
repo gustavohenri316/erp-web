@@ -57,7 +57,7 @@ export function Routers() {
   return (
     <Suspense
       fallback={
-        <div className="w-screen h-screen flex items-center justify-center bg-green-600">
+        <div className="w-screen h-screen flex items-center justify-center bg-green-600 dark:bg-green-950">
           <Spinner />
         </div>
       }

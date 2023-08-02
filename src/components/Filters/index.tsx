@@ -69,7 +69,7 @@ export function Filter(props: FilterProps) {
         </Button>
 
         {open && (
-          <div className="flex flex-col border border-gray-300 bg-white mt-2 rounded-sm absolute right-0  z-50 ">
+          <div className="flex flex-col border border-gray-300 bg-neutral-100 mt-2 rounded-md absolute right-0  z-50 ">
             {isDefault && (
               <FilterItem onClick={() => handleValue && handleValue("")}>
                 Todos

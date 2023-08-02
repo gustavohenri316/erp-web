@@ -42,8 +42,8 @@ export function SettingsPrivilegesTable({
   return (
     <div className="w-full flex-1">
       <div className="relative overflow-x-auto  w-full">
-        <table className="flex-1 w-full overflow-auto bg-neutral-100 rounded-sm shadow-lg my-3 text-neutral-700">
-          <thead className="border-b">
+        <table className="w-full  text-left bg-neutral-50 dark:text-neutral-100 dark:bg-neutral-800 rounded-md shadow my-4">
+          <thead className="border-b dark:border-neutral-900">
             <tr>
               <th className="py-4 px-4 text-center whitespace-nowrap">Nome</th>
               <th className="py-4 px-4 text-center whitespace-nowrap">Chave</th>
@@ -57,20 +57,23 @@ export function SettingsPrivilegesTable({
             {privileges &&
               privileges.map((item: Privilege) => {
                 return (
-                  <tr key={item._id}>
+                  <tr
+                    key={item._id}
+                    className="border-b hover:bg-neutral-400 dark:hover:bg-neutral-900 dark:border-neutral-900 dark:text-neutral-100"
+                  >
                     <td className="py-4 px-4 text-center whitespace-nowrap">
                       {item.name}
                     </td>
                     <td className="py-4 px-4 text-center whitespace-nowrap">
                       <div className="flex items-center gap-2 whitespace-nowrap  w-full">
                         <input
-                          className="cursor-pointer w-full hover:text-black min-w-[200px] overflow-auto border p-2 rounded-sm"
+                          className="cursor-pointer w-full dark:border-neutral-900 hover:text-black  dark:bg-neutral-800 whitespace-nowrap dark:hover:text-neutral-100 overflow-auto border p-2 rounded-md"
                           title={item.key}
                           defaultValue={item.key}
                         />
 
                         <div
-                          className="border rounded-sm p-2  cursor-pointer hover:border-black"
+                          className="border rounded-md p-2 cursor-pointer whitespace-nowrap dark:border-neutral-900  hover:border-black "
                           onClick={() => copyItem(item.key)}
                         >
                           {isCopied && copiedItem === item.key
