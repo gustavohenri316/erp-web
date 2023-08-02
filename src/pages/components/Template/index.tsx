@@ -3,8 +3,10 @@ import PermissionGate from "../../../components/PermissionGate";
 import UserInfo from "../UserInfo";
 import { Fragment, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
 
 export function Template(props: TemplateProps) {
+  const { findNotifications, user } = useAuth();
   const router = useNavigate();
   const {
     children,
@@ -17,6 +19,12 @@ export function Template(props: TemplateProps) {
   useEffect(() => {
     document.title = documentTitle;
   }, []);
+  useEffect(() => {
+    document.title = documentTitle;
+    if (user) {
+      findNotifications(user?.id);
+    }
+  }, [user]);
 
   return (
     <Fragment>

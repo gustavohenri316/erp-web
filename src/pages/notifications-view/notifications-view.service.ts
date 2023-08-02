@@ -1,8 +1,10 @@
 import axios from "axios";
 import { baseURL } from "../../assets/data";
 
-export async function getAllNotifications(id: string) {
-  const response = await axios.get(`${baseURL}/notifications/${id}`);
+export async function getAllNotifications(id: string, page: number) {
+  const response = await axios.get(`${baseURL}/notifications/${id}`, {
+    params: { page },
+  });
   return response.data;
 }
 

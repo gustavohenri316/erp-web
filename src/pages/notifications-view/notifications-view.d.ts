@@ -9,4 +9,12 @@ interface NotificationsProps {
   sentBy: string;
   handleLoading: (value: boolean) => void;
   timestamp: string;
+  permissionDeleteNotifications: boolean;
 }
+
+type INotification = {
+  directNotifications: NotificationsProps[];
+  globalNotifications: NotificationsProps[];
+  directNotificationsCount?: number;
+  globalNotificationsCount?: number;
+};

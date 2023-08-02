@@ -12,7 +12,6 @@ import {
 import { defaultAvatarUrl } from "../../../../assets/data";
 import { Spinner } from "../../../../components/Spinner";
 import { toast } from "react-hot-toast";
-import PermissionGate from "../../../../components/PermissionGate";
 
 export function NotificationsComponent({
   _id,
@@ -22,6 +21,7 @@ export function NotificationsComponent({
   isRead,
   message,
   handleLoading,
+  permissionDeleteNotifications,
   title,
 }: NotificationsProps) {
   const { user, findNotifications } = useAuth();
@@ -81,26 +81,28 @@ export function NotificationsComponent({
   return (
     <div className="flex flex-col w-full">
       <div className="w-full border rounded-sm  cursor-pointer hover:shadow-xl text-neutral-100 shadow-md flex justify-between items-center ">
-        <div className="flex items-start gap-4 flex-col justify-start bg-white  rounded-l-md px-8 py-8 text-black">
-          <div className="flex items-center justify-center gap-4 bg-white w-[200px] ">
+        <div className="flex items-start gap-4  text-start flex-col justify-start bg-white  rounded-l-md px-2 py-2 text-black">
+          <div className="flex items-center justify-start gap-4 bg-white w-[220px] ">
             <img
               src={userSentBy?.photo || defaultAvatarUrl}
               alt=""
-              className="w-16 h-16 rounded-full object-cover"
+              className="w-10 h-10 rounded-full object-cover"
             />
             <div>
-              <h3 className="text-lg font-bold">{userSentBy?.firstName}</h3>
-              <span className="text-sm">{userSentBy?.phoneNumber}</span>
+              <h3 className="text-sm font-bold">
+                {userSentBy?.firstName} {userSentBy?.lastName}
+              </h3>
+              <span className="text-sm">{userSentBy?.team}</span>
+              <p className="text-sm">{userSentBy?.corporateEmail}</p>
             </div>
           </div>
-          <p className="text-sm">{userSentBy?.email}</p>
         </div>
         <div
           className={`${
             isGlobal ? "bg-green-600" : "bg-gray-100 text-neutral-800"
           } flex-1 w-full h-full`}
         >
-          <div className=" px-8 py-8 flex flex-col justify-between w-full h-full">
+          <div className=" px-8 py-2 flex flex-col justify-between w-full h-full">
             <p className="text-2xl">{title}</p>
 
             <span className="text-end text-base">
@@ -126,11 +128,11 @@ export function NotificationsComponent({
         <div
           className={`flex items-center justify-center h-full bg-white rounded-r-md`}
         >
-          <div className="px-8 py-8 gap-2 flex items-center">
+          <div className="px-8 py-2 gap-2 flex items-center">
             <ButtonIcon size="md" variant="primary" onClick={handleOpen}>
               {!open ? <Eye /> : <EyeSlash />}
             </ButtonIcon>
-            <PermissionGate permission="delete-notifications">
+            {permissionDeleteNotifications && (
               <ButtonIcon size="md" variant="danger" disabled={loading}>
                 {loading ? (
                   <Spinner size={18} />
@@ -138,7 +140,7 @@ export function NotificationsComponent({
                   <X onClick={fetchDeleteNotifications} />
                 )}
               </ButtonIcon>
-            </PermissionGate>
+            )}
           </div>
         </div>
       </div>

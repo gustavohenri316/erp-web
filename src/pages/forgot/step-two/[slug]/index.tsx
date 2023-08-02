@@ -1,19 +1,17 @@
+import  { useState, useEffect, useRef, ChangeEvent } from "react";
 import { Spinner } from "../../../../components/Spinner";
-import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { Counter } from "../../../../components/Counter";
 import { verifyCodeService } from "../../../../service/forgot.service";
 import { useNavigate, useParams } from "react-router-dom";
 
+
 export default function ForgotStep2() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const [codeInvalid, setCodeInvalid] = useState<boolean>(false);
   const [timeExpired, setTimeExpired] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
-  const [code1, setCode1] = useState<string>("");
-  const [code2, setCode2] = useState<string>("");
-  const [code3, setCode3] = useState<string>("");
-  const [code4, setCode4] = useState<string>("");
+  const [code, setCode] = useState<string[]>(["", "", "", ""]);
   const router = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -25,14 +23,14 @@ export default function ForgotStep2() {
     try {
       setCodeInvalid(false);
       setLoading(true);
-      const code = `${code1}${code2}${code3}${code4}`;
-      const response = await verifyCodeService({ email, code });
+      const joinedCode = code.join("");
+      const response = await verifyCodeService({ email, code: joinedCode });
       toast.success(response.message);
-      const id = encodeURIComponent(response.userId);
-      router(`/forgot/step-tree/${id}`);
-    } catch (err: any) {
-      console.log(err);
-      toast.error(err.response.data.message);
+      const encodedUserId = encodeURIComponent(response.userId);
+      router(`/forgot/step-tree/${encodedUserId}`);
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.response.data.message);
       setCodeInvalid(true);
     } finally {
       setLoading(false);
@@ -42,11 +40,31 @@ export default function ForgotStep2() {
   useEffect(() => {
     if (timeExpired) {
       router(-1);
-      toast("Codígo expirado!", {
+      toast("Código expirado!", {
         icon: "👏",
       });
     }
   }, [timeExpired]);
+
+  const inputRefs = useRef<HTMLInputElement[]>([]);
+
+  useEffect(() => {
+    inputRefs.current[0]?.focus();
+  }, []);
+
+  const handleInputChange = (index: number, value: string) => {
+    if (value.length <= 1) {
+      const newCode = [...code];
+      newCode[index] = value;
+      setCode(newCode);
+
+      if (value.length === 0 && index > 0) {
+        inputRefs.current[index - 1]?.focus();
+      } else if (index < 3 && value.length === 1) {
+        inputRefs.current[index + 1]?.focus();
+      }
+    }
+  };
 
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-green-600">
@@ -59,44 +77,23 @@ export default function ForgotStep2() {
             </span>
           </div>
           <div className="flex justify-between w-full">
-            <input
-              type="text"
-              className={`
-              ${codeInvalid ? "border-red-500" : ""}
-              border rounded-sm p-3 w-20 placeholder:text-center placeholder:text-xl text-center`}
-              placeholder="0"
-              value={code1}
-              onChange={(e) => setCode1(e.target.value)}
-            />
-            <input
-              type="text"
-              className={`
-              ${codeInvalid ? "border-red-500" : ""}
-              border rounded-sm p-3 w-20 placeholder:text-center placeholder:text-xl text-center`}
-              placeholder="0"
-              value={code2}
-              onChange={(e) => setCode2(e.target.value)}
-            />
-            <input
-              type="text"
-              className={`
-              ${codeInvalid ? "border-red-500" : ""}
-              border rounded-sm p-3 w-20 placeholder:text-center placeholder:text-xl text-center`}
-              placeholder="0"
-              value={code3}
-              onChange={(e) => setCode3(e.target.value)}
-            />
-            <input
-              type="text"
-              className={`
-              ${codeInvalid ? "border-red-500" : ""}
-              border rounded-sm p-3 w-20 placeholder:text-center placeholder:text-xl text-center`}
-              placeholder="0"
-              value={code4}
-              onChange={(e) => setCode4(e.target.value)}
-            />
+            {code.map((value, index) => (
+              <input
+                key={index}
+                type="text"
+                className={`${
+                  codeInvalid ? "border-red-500" : ""
+                } border rounded-sm p-3 w-20 placeholder:text-center placeholder:text-xl text-center`}
+                placeholder="0"
+                value={value}
+                maxLength={1}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  handleInputChange(index, e.target.value)
+                }
+                ref={(input: any) => (inputRefs.current[index] = input)}
+              />
+            ))}
           </div>
-
           <button
             disabled={loading}
             className="p-3 border bg-green-600 rounded-sm text-white w-96 disabled:cursor-not-allowed disabled:opacity-80"
@@ -105,7 +102,7 @@ export default function ForgotStep2() {
             {loading ? <Spinner /> : "CONFIRMAR "}
           </button>
           <span>
-            Codigo expira em{" "}
+            Código expira em{" "}
             <Counter
               onCountdownEnd={() => setTimeExpired(true)}
               initialSeconds={120}

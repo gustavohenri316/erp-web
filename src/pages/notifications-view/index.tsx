@@ -1,5 +1,5 @@
 import { PaperPlaneTilt, CaretUp, CaretDown } from "phosphor-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { Col } from "../../components/Col";
@@ -11,38 +11,131 @@ import { getAllNotifications } from "./notifications-view.service";
 import { Search } from "../../components/Search";
 import PermissionGate from "../../components/PermissionGate";
 
-type INotification = {
-  directNotifications: NotificationsProps[];
-  globalNotifications: NotificationsProps[];
-};
-
 export default function NotificationsView() {
   const { user } = useAuth();
   const router = useNavigate();
-  const [notifications, setNotifications] = useState<INotification>();
+  const [notifications, setNotifications] = useState<INotification>({
+    directNotifications: [],
+    globalNotifications: [],
+  });
   const [openNotificationsGlobal, setOpenNotificationsGlobal] = useState(false);
   const [openNotificationsDirect, setOpenNotificationsDirect] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loadingDirect, setLoadingDirect] = useState(false);
+  const [loadingGlobal, setLoadingGlobal] = useState(false);
+  const [hasMoreDirect, setHasMoreDirect] = useState(true);
+  const [hasMoreGlobal, setHasMoreGlobal] = useState(true);
+  const [pageDirect, setPageDirect] = useState(1);
+  const [pageGlobal, setPageGlobal] = useState(1);
+  const containerRefDirect = useRef<HTMLDivElement>(null);
+  const containerRefGlobal = useRef<HTMLDivElement>(null);
+  const [permissionDeleteNotifications, setPermissionDeleteNotifications] =
+    useState(false);
 
   function handleNotificationGlobal() {
     setOpenNotificationsGlobal(!openNotificationsGlobal);
   }
+
   function handleNotificationDirect() {
     setOpenNotificationsDirect(!openNotificationsDirect);
   }
+
   async function fetchListAllNotifications() {
-    const response = await getAllNotifications(user?.id as string);
-    setNotifications(response);
+    if (user) {
+      const response = await getAllNotifications(user.id, pageDirect);
+
+      setNotifications((prevNotifications) => ({
+        directNotifications: [
+          ...prevNotifications.directNotifications,
+          ...response.directNotifications,
+        ],
+        globalNotifications: [
+          ...prevNotifications.globalNotifications,
+          ...response.globalNotifications,
+        ],
+        directNotificationsCount: response.directNotificationsCount,
+        globalNotificationsCount: response.globalNotificationsCount,
+      }));
+
+      setLoadingDirect(false);
+      setLoadingGlobal(false);
+      setHasMoreDirect(response.directNotifications.length > 0);
+      setHasMoreGlobal(response.globalNotifications.length > 0);
+    }
   }
 
   useEffect(() => {
-    if (user) {
-      fetchListAllNotifications();
+    fetchListAllNotifications();
+  }, [user, pageDirect, pageGlobal]);
+
+  async function handleLoadMoreDirect() {
+    if (!loadingDirect && hasMoreDirect) {
+      setLoadingDirect(true);
+      setPageDirect((prevPage) => prevPage + 1);
     }
-  }, [user, loading]);
+  }
+
+  async function handleLoadMoreGlobal() {
+    if (!loadingGlobal && hasMoreGlobal) {
+      setLoadingGlobal(true);
+      setPageGlobal((prevPage) => prevPage + 1);
+    }
+  }
+
+  function handleScrollDirect() {
+    if (
+      containerRefDirect.current &&
+      containerRefDirect.current.scrollHeight -
+        containerRefDirect.current.scrollTop -
+        containerRefDirect.current.clientHeight <
+        100
+    ) {
+      if (!loadingDirect) {
+        handleLoadMoreDirect();
+      }
+    }
+  }
+
+  function handleScrollGlobal() {
+    if (
+      containerRefGlobal.current &&
+      containerRefGlobal.current.scrollHeight -
+        containerRefGlobal.current.scrollTop -
+        containerRefGlobal.current.clientHeight <
+        100
+    ) {
+      if (!loadingGlobal) {
+        handleLoadMoreGlobal();
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (containerRefDirect.current) {
+      containerRefDirect.current.addEventListener("scroll", handleScrollDirect);
+      return () => {
+        containerRefDirect.current?.removeEventListener(
+          "scroll",
+          handleScrollDirect
+        );
+      };
+    }
+  }, [handleScrollDirect, loadingDirect, hasMoreDirect]);
+
+  useEffect(() => {
+    if (containerRefGlobal.current) {
+      containerRefGlobal.current.addEventListener("scroll", handleScrollGlobal);
+      return () => {
+        containerRefGlobal.current?.removeEventListener(
+          "scroll",
+          handleScrollGlobal
+        );
+      };
+    }
+  }, [handleScrollGlobal, loadingGlobal, hasMoreGlobal]);
 
   function handleLoading(value: boolean) {
-    setLoading(value);
+    setLoadingDirect(value);
+    setLoadingGlobal(value);
   }
 
   return (
@@ -51,6 +144,10 @@ export default function NotificationsView() {
       documentTitle="Notificações"
       permissionPage="view-notifications"
     >
+      <PermissionGate
+        permission="delete-notifications"
+        onLoading={setPermissionDeleteNotifications}
+      />
       <Row className="h-16 my-4">
         <Search />
         <PermissionGate permission="create-notifications">
@@ -72,38 +169,46 @@ export default function NotificationsView() {
           >
             <div className="flex items-center gap-4">
               <div className="h-6 w-6 text-white flex items-center justify-center rounded-full bg-gray-500">
-                {notifications?.directNotifications.length}
+                {notifications.directNotificationsCount || 0}
               </div>
               Notificações Diretas
             </div>
             <div>{openNotificationsDirect ? <CaretUp /> : <CaretDown />}</div>
           </div>
           {openNotificationsDirect && (
-            <div className="flex-1 overflow-auto">
-              {notifications &&
-                notifications?.directNotifications.map(
-                  (item: NotificationsProps) => (
-                    <Row key={item._id} className="my-2">
-                      <NotificationsComponent
-                        handleLoading={handleLoading}
-                        _id={item._id}
-                        createdAt={item.createdAt}
-                        isGlobal={item.isGlobal}
-                        isRead={item.isRead}
-                        sentBy={item.sentBy}
-                        message={item.message}
-                        receivedBy={item.receivedBy}
-                        title={item.title}
-                        timestamp={item.timestamp}
-                      />
-                    </Row>
+            <div className="flex-1 overflow-auto" ref={containerRefDirect}>
+              {notifications.directNotifications.map(
+                (item: NotificationsProps) => (
+                  <Row key={item._id} className="my-2">
+                    <NotificationsComponent
+                      permissionDeleteNotifications={
+                        permissionDeleteNotifications
+                      }
+                      handleLoading={handleLoading}
+                      _id={item._id}
+                      createdAt={item.createdAt}
+                      isGlobal={item.isGlobal}
+                      isRead={item.isRead}
+                      sentBy={item.sentBy}
+                      message={item.message}
+                      receivedBy={item.receivedBy}
+                      title={item.title}
+                      timestamp={item.timestamp}
+                    />
+                  </Row>
+                )
+              )}
+              <Row className="justify-center">
+                {loadingDirect ? (
+                  <div>Carregando...</div>
+                ) : (
+                  !loadingDirect &&
+                  hasMoreDirect && (
+                    <Button variant="success" onClick={handleLoadMoreDirect}>
+                      Carregar mais
+                    </Button>
                   )
                 )}
-              <Row className="justify-center">
-                {notifications &&
-                  notifications?.directNotifications.length > 5 && (
-                    <Button variant="success">Carregar mais</Button>
-                  )}
               </Row>
             </div>
           )}
@@ -117,33 +222,47 @@ export default function NotificationsView() {
           >
             <div className="flex items-center gap-4">
               <div className="h-6 w-6 text-white flex items-center justify-center rounded-full bg-gray-500">
-                {notifications?.globalNotifications.length}
+                {notifications.globalNotificationsCount || 0}
               </div>
               Notificações Globais
             </div>
             <div>{openNotificationsGlobal ? <CaretUp /> : <CaretDown />}</div>
           </div>
           {openNotificationsGlobal && (
-            <div className="flex-1 overflow-auto">
-              {notifications &&
-                notifications?.globalNotifications.map(
-                  (item: NotificationsProps) => (
-                    <Row key={item._id} className="my-2">
-                      <NotificationsComponent
-                        _id={item._id}
-                        handleLoading={handleLoading}
-                        createdAt={item.createdAt}
-                        isGlobal={item.isGlobal}
-                        isRead={item.isRead}
-                        sentBy={item.sentBy}
-                        message={item.message}
-                        receivedBy={item.receivedBy}
-                        title={item.title}
-                        timestamp={item.timestamp}
-                      />
-                    </Row>
+            <div className="flex-1 overflow-auto" ref={containerRefGlobal}>
+              {notifications.globalNotifications.map(
+                (item: NotificationsProps) => (
+                  <Row key={item._id} className="my-2">
+                    <NotificationsComponent
+                      permissionDeleteNotifications={
+                        permissionDeleteNotifications
+                      }
+                      _id={item._id}
+                      handleLoading={handleLoading}
+                      createdAt={item.createdAt}
+                      isGlobal={item.isGlobal}
+                      isRead={item.isRead}
+                      sentBy={item.sentBy}
+                      message={item.message}
+                      receivedBy={item.receivedBy}
+                      title={item.title}
+                      timestamp={item.timestamp}
+                    />
+                  </Row>
+                )
+              )}
+              <Row className="justify-center">
+                {loadingGlobal ? (
+                  <div>Carregando...</div>
+                ) : (
+                  !loadingGlobal &&
+                  hasMoreGlobal && (
+                    <Button variant="success" onClick={handleLoadMoreGlobal}>
+                      Carregar mais
+                    </Button>
                   )
                 )}
+              </Row>
             </div>
           )}
         </Col>

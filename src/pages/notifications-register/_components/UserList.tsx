@@ -44,28 +44,33 @@ const UsersList: React.FC<UsersListProps> = ({
         </div>
       </div>
 
-      {users.map((item: UserProps) => {
-        if (item._id !== "") {
-          return (
-            <div
-              key={item._id}
-              onClick={() => handleUserClick(item._id)}
-              className={`border gap-4 rounded-sm mt-2 cursor-pointer hover:shadow-md flex items-center p-2 ${
-                selectedUsers.includes(item._id) ? "bg-blue-100" : ""
-              }`}
-            >
-              <img src={item.photo} className="h-12 w-12 rounded-full" alt="" />
-              <div>
-                <h3 className="text-sm font-bold">
-                  {item.firstName} {item.lastName}
-                </h3>
-                <p className="text-sm">{item.email}</p>
+      {!isAllUsersSelected &&
+        users.map((item: UserProps) => {
+          if (item._id !== "") {
+            return (
+              <div
+                key={item._id}
+                onClick={() => handleUserClick(item._id)}
+                className={`border gap-4 rounded-sm mt-2 cursor-pointer hover:shadow-md flex items-center p-2 ${
+                  selectedUsers.includes(item._id) ? "bg-blue-100" : ""
+                }`}
+              >
+                <img
+                  src={item.photo}
+                  className="h-12 w-12 rounded-full"
+                  alt=""
+                />
+                <div>
+                  <h3 className="text-sm font-bold">
+                    {item.firstName} {item.lastName}
+                  </h3>
+                  <p className="text-sm">{item.email}</p>
+                </div>
               </div>
-            </div>
-          );
-        }
-        return null;
-      })}
+            );
+          }
+          return null;
+        })}
     </div>
   );
 };
