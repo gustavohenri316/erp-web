@@ -1,6 +1,6 @@
 import { ArrowLeft } from "phosphor-react";
 import PermissionGate from "../../../components/PermissionGate";
-import UserInfo from "../UserInfo";
+
 import { Fragment, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
