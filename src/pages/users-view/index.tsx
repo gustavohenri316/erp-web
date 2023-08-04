@@ -53,7 +53,7 @@ export default function UsersView() {
       permissionPage="view-users"
     >
       <div className="w-full">
-        <Row>
+        <Row className="max-sm:flex-col">
           <Search placeholder="Faça uma busca pela descrição" />
           <PermissionGate permission="register-new-user">
             <Button variant="success" onClick={() => router("/user-register")}>

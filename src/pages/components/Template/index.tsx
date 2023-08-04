@@ -29,9 +29,9 @@ export function Template(props: TemplateProps) {
 
   return (
     <Fragment>
-      <div className="w-full h-full flex flex-col">
-        <div className="py-4 px-6 justify-between flex items-center">
-          <span className="text-xl text-neutral-100 flex gap-2 items-center justify-center">
+      <div className="w-full h-full flex flex-col text-neutral-800 dark:text-neutral-100">
+        <div className="py-4 px-6 justify-between flex items-center border-b dark:border-neutral-900">
+          <span className="text-xl  flex gap-2 items-center justify">
             {isBack && (
               <ArrowLeft
                 size={26}
@@ -43,13 +43,14 @@ export function Template(props: TemplateProps) {
           </span>
           <div className="flex items-center gap-4 ">
             <SelectTheme />
-            <UserInfo />
           </div>
         </div>
-        <div className="h-full flex-1 bg-white dark:text-neutral-100 dark:bg-neutral-800 rounded-tl-md p-6 w-full overflow-auto">
-          <PermissionGate isPage permission={permissionPage}>
-            {children}
-          </PermissionGate>
+        <div className="h-full flex-1 p-4 dark:bg-neutral-800  w-full overflow-auto ">
+          <div className="bg-neutral-100 dark:bg-neutral-800 p-3 flex-1 w-full h-full rounded-md">
+            <PermissionGate isPage permission={permissionPage}>
+              {children}
+            </PermissionGate>
+          </div>
         </div>
       </div>
     </Fragment>

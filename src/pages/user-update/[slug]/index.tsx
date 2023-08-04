@@ -220,9 +220,9 @@ export default function UserUpdate() {
         <Row className="pb-4">
           <span className="text-xl font-semibold">Informações pessoais</span>
         </Row>
-        <Row>
+        <Row className="max-sm:flex-col">
           <Col>
-            <Row>
+            <Row className="max-sm:flex-col">
               <Col className="mr-8">
                 <Label>Nome</Label>
                 <Input
@@ -251,7 +251,7 @@ export default function UserUpdate() {
                 />
               </Col>
             </Row>
-            <Row className="mt-2">
+            <Row className="mt-2 max-sm:flex-col">
               <Col className="mr-8">
                 <Label>Email</Label>
                 <Input
@@ -281,7 +281,7 @@ export default function UserUpdate() {
               </Col>
             </Row>
 
-            <Row className="mt-2">
+            <Row className="mt-2 max-sm:flex-col">
               <Col className="mr-8">
                 <Label>CPF</Label>
                 <Input
@@ -344,10 +344,10 @@ export default function UserUpdate() {
             </Row>
           </Col>
         </Row>
-        <Row className="my-4">
+        <Row className="my-4 max-sm:flex-col">
           <span className="text-xl font-semibold">Informações de endereço</span>
         </Row>
-        <Row>
+        <Row className="max-sm:flex-col">
           <Col className="mr-8">
             <Label>Rua</Label>
             <Input
@@ -357,7 +357,7 @@ export default function UserUpdate() {
             />
           </Col>
           <Col>
-            <Row>
+            <Row className="max-sm:flex-col">
               <Col>
                 <Label>Número</Label>
                 <Input
@@ -377,9 +377,9 @@ export default function UserUpdate() {
             </Row>
           </Col>
         </Row>
-        <Row className="mt-2">
+        <Row className="mt-2 max-sm:flex-col">
           <Col className="mr-8">
-            <Row>
+            <Row className="max-sm:flex-col">
               <Col>
                 <Label>Bairro</Label>
                 <Input
@@ -407,7 +407,7 @@ export default function UserUpdate() {
             </Row>
           </Col>
           <Col>
-            <Row>
+            <Row className="max-sm:flex-col">
               <Col>
                 <Label>País/região</Label>
                 <Input
@@ -427,14 +427,14 @@ export default function UserUpdate() {
             </Row>
           </Col>
         </Row>
-        <Row className="my-4">
+        <Row className="my-4 max-sm:flex-col">
           <span className="text-xl font-semibold">
             Informações profissionais
           </span>
         </Row>
-        <Row className="mt-2">
+        <Row className="mt-2 max-sm:flex-col">
           <Col className="mr-8">
-            <Row>
+            <Row className="max-sm:flex-col">
               <Col>
                 <Label>Cargo</Label>
                 <Input
@@ -463,7 +463,7 @@ export default function UserUpdate() {
             </Row>
           </Col>
           <Col>
-            <Row>
+            <Row className="max-sm:flex-col">
               <Col>
                 <Label>Salário</Label>
                 <Input
@@ -494,12 +494,12 @@ export default function UserUpdate() {
             </Row>
           </Col>
         </Row>
-        <Row className="my-4">
+        <Row className="my-4 max-sm:flex-col">
           <span className="text-xl font-semibold">Informações de acesso</span>
         </Row>
-        <Row className="mt-2">
+        <Row className="mt-2 max-sm:flex-col">
           <Col>
-            <Row>
+            <Row className="max-sm:flex-col">
               <Col>
                 <Label>Username</Label>
                 <Input
@@ -528,12 +528,12 @@ export default function UserUpdate() {
             </Row>
           </Col>
         </Row>
-        <Row className="my-4">
+        <Row className="my-4 max-sm:flex-col">
           <span className="text-xl font-semibold">Informações de usuário</span>
         </Row>
-        <Row className="mt-2">
+        <Row className="mt-2 max-sm:flex-col">
           <Col>
-            <Row>
+            <Row className="max-sm:flex-col">
               <Col>
                 <Label>Equipe</Label>
                 <Select

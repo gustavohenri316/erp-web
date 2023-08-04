@@ -69,7 +69,7 @@ export function SidebarItem({ item, open, openItems, onToggleOpen }: any) {
               key={subItem.name}
               title={subItem.name}
               onClick={() => router(subItem.path)}
-              className={`w-full flex mt-1 text-start gap-4 rounded-md p-2 text-neutral-100 hover:bg-green-500 dark:hover:bg-green-950 transition
+              className={`w-full flex mt-1 text-start gap-4 rounded-md p-2  text-neutral-100 hover:bg-green-500 dark:hover:bg-green-950 transition
                 ${!open ? " justify-center" : "justify-between items-center"}
                 ${
                   pathname === subItem.path

@@ -21,7 +21,7 @@ export function Pagination({
   );
 
   return (
-    <div className="flex items-center justify-between dark:border-neutral-900 bg-neutral-100 dark:bg-neutral-800 py-3">
+    <div className="flex items-center justify-between  bg-transparent  py-3">
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between dark:border-neutral-900">
         <div>
           <nav
@@ -45,7 +45,7 @@ export function Pagination({
                 key={index}
                 className={`relative inline-flex items-center  dark:border-neutral-900 text-sm font-semibold px-4 py-2 ring-1 ring-inset ring-gray-300 dark:ring-neutral-900 ${
                   pageNumber === currentPage
-                    ? "z-10 bg-neutral-800 dark:bg-neutral-700 text-neutral-100 dark:border-neutral-900 dark:text-neutral-100 focus-visible:outline focus-visible:outline-2   focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+                    ? "z-10 bg-neutral-800 dark:bg-neutral-800 text-neutral-100 dark:border-neutral-900 dark:text-neutral-100 focus-visible:outline focus-visible:outline-2   focus-visible:outline-offset-2 focus-visible:outline-gray-900"
                     : "text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-offset-0"
                 }`}
                 disabled={pageNumber === currentPage}

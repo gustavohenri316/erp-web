@@ -92,9 +92,9 @@ export default function UserViewDetails() {
           Informações pessoais
         </span>
       </Row>
-      <Row className="my-4">
+      <Row className="my-4 max-sm:flex-col">
         <Col>
-          <Row>
+          <Row className="max-sm:flex-col">
             <Col className="mr-8">
               <Label>Nome</Label>
               <b className="text-neutral-500 text-xl">{formValues.firstName}</b>
@@ -104,7 +104,7 @@ export default function UserViewDetails() {
               <b className="text-neutral-500 text-xl">{formValues.lastName}</b>
             </Col>
           </Row>
-          <Row className="my-4">
+          <Row className="my-4 max-sm:flex-col">
             <Col className="mr-8">
               <Label>Email</Label>
               <b className="text-neutral-500 text-xl">{formValues.email}</b>
@@ -117,7 +117,7 @@ export default function UserViewDetails() {
             </Col>
           </Row>
 
-          <Row className="my-4">
+          <Row className="my-4 max-sm:flex-col">
             <Col className="mr-8">
               <Label>CPF</Label>
               <b className="text-neutral-500 text-xl">{formValues.cpf}</b>
@@ -152,18 +152,18 @@ export default function UserViewDetails() {
           </Row>
         </Col>
       </Row>
-      <Row className="my-4">
+      <Row className="my-4 max-sm:flex-col">
         <span className="text-2xl my-4 font-semibold">
           Informações de endereço
         </span>
       </Row>
-      <Row>
+      <Row className="max-sm:flex-col">
         <Col className="mr-8">
           <Label>Rua</Label>
           <b className="text-neutral-500 text-xl">{formValues.street}</b>
         </Col>
         <Col>
-          <Row>
+          <Row className="max-sm:flex-col">
             <Col>
               <Label>Número</Label>
               <b className="text-neutral-500 text-xl">{formValues.number}</b>
@@ -177,9 +177,9 @@ export default function UserViewDetails() {
           </Row>
         </Col>
       </Row>
-      <Row className="my-4">
+      <Row className="my-4 max-sm:flex-col">
         <Col className="mr-8">
-          <Row>
+          <Row className="max-sm:flex-col">
             <Col>
               <Label>Bairro</Label>
               <b className="text-neutral-500 text-xl">
@@ -197,7 +197,7 @@ export default function UserViewDetails() {
           </Row>
         </Col>
         <Col>
-          <Row>
+          <Row className="max-sm:flex-col">
             <Col>
               <Label>País/região</Label>
               <b className="text-neutral-500 text-xl">
@@ -211,14 +211,14 @@ export default function UserViewDetails() {
           </Row>
         </Col>
       </Row>
-      <Row className="my-4">
+      <Row className="my-4 max-sm:flex-col">
         <span className="text-2xl my-4 font-semibold">
           Informações profissionais
         </span>
       </Row>
-      <Row className="my-4">
+      <Row className="my-4 max-sm:flex-col">
         <Col className="mr-8">
-          <Row>
+          <Row className="max-sm:flex-col">
             <Col>
               <Label>Cargo</Label>
               <b className="text-neutral-500 text-xl">{formValues.position}</b>
@@ -234,7 +234,7 @@ export default function UserViewDetails() {
           </Row>
         </Col>
         <Col>
-          <Row>
+          <Row className="max-sm:flex-col">
             <Col>
               <Label>Salário</Label>
               <b className="text-neutral-500 text-xl">{formValues.salary}</b>
@@ -248,14 +248,14 @@ export default function UserViewDetails() {
           </Row>
         </Col>
       </Row>
-      <Row className="my-4">
+      <Row className="my-4 max-sm:flex-col">
         <span className="text-2xl my-4 font-semibold">
           Informações de acesso
         </span>
       </Row>
-      <Row className="my-4">
+      <Row className="my-4 max-sm:flex-col">
         <Col>
-          <Row>
+          <Row className="max-sm:flex-col">
             <Col>
               <Label>Username</Label>
               <b className="text-neutral-500 text-xl">{formValues.username}</b>
@@ -270,14 +270,14 @@ export default function UserViewDetails() {
           </Row>
         </Col>
       </Row>
-      <Row className="my-4">
+      <Row className="my-4 max-sm:flex-col">
         <span className="text-2xl my-4 font-semibold">
           Informações de usuário
         </span>
       </Row>
-      <Row className="my-4">
+      <Row className="my-4 max-sm:flex-col">
         <Col>
-          <Row>
+          <Row className="max-sm:flex-col">
             <Col>
               <Label>Equipe</Label>
               <b className="text-neutral-500 text-xl">{formValues.team}</b>

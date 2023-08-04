@@ -172,17 +172,18 @@ export default function UserRegister() {
       title="Cadastrar novo usuário"
       permissionPage="register-new-user"
     >
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="">
         <Row className="pb-4">
           <span className="text-xl font-semibold">Informações pessoais</span>
         </Row>
-        <Row>
+        <Row className="max-sm:flex-col">
           <Col>
-            <Row>
+            <Row className="max-sm:flex-col">
               <Col className="mr-8">
                 <Label>Nome</Label>
                 <Input
                   name="firstName"
+                  placeholder="Ex: John"
                   value={formValues.firstName}
                   onChange={handleChange}
                   onBlur={() => {
@@ -202,16 +203,18 @@ export default function UserRegister() {
                 <Label>Sobrenome</Label>
                 <Input
                   name="lastName"
+                  placeholder="Ex: Gonçalves"
                   value={formValues.lastName}
                   onChange={handleChange}
                 />
               </Col>
             </Row>
-            <Row className="mt-2">
+            <Row className="mt-2 max-sm:flex-col">
               <Col className="mr-8">
                 <Label>Email</Label>
                 <Input
                   name="email"
+                  placeholder="Ex: john@example.com"
                   value={formValues.email}
                   onChange={handleChange}
                   onBlur={() => {
@@ -231,17 +234,19 @@ export default function UserRegister() {
                 <Label>Telefone</Label>
                 <Input
                   name="phoneNumber"
+                  placeholder="Ex: (99) 99999-9999 "
                   value={formValues.phoneNumber}
                   onChange={handleChange}
                 />
               </Col>
             </Row>
 
-            <Row className="mt-2">
+            <Row className="mt-2 max-sm:flex-col">
               <Col className="mr-8">
                 <Label>CPF</Label>
                 <Input
                   name="cpf"
+                  placeholder="Ex: 000.000.000-00"
                   value={formValues.cpf}
                   onChange={handleChange}
                 />
@@ -250,6 +255,7 @@ export default function UserRegister() {
                 <Label>RG</Label>
                 <Input
                   name="rg"
+                  placeholder="Ex: MG 00.000-000"
                   value={formValues.rg}
                   onChange={handleChange}
                 />
@@ -266,9 +272,9 @@ export default function UserRegister() {
             </Row>
           </Col>
           <Col>
-            <Row className="justify-center">
+            <Row className="justify-center max-sm:flex-col">
               <Label htmlFor="photo">Foto</Label>
-              <div className="border-dashed w-[210px] h-[210px]  border rounded-full flex items-center justify-center">
+              <div className="border-dashed border-neutral-600 w-[210px] h-[210px]  border rounded-full flex items-center justify-center">
                 <label
                   htmlFor="photo"
                   className="w-full h-full cursor-pointer flex items-center justify-center"
@@ -282,7 +288,7 @@ export default function UserRegister() {
                   ) : (
                     <ImageSquare
                       size={100}
-                      className="text-neutral-200 hover:text-neutral-400"
+                      className="text-neutral-600 hover:text-neutral-400"
                       onClick={handleIconClick}
                     />
                   )}
@@ -303,20 +309,22 @@ export default function UserRegister() {
         <Row className="my-4">
           <span className="text-xl font-semibold">Informações de endereço</span>
         </Row>
-        <Row>
+        <Row className="max-sm:flex-col">
           <Col className="mr-8">
             <Label>Rua</Label>
             <Input
+              placeholder="Ex: Rua São Paulo"
               name="street"
               value={formValues.street}
               onChange={handleChange}
             />
           </Col>
           <Col>
-            <Row>
+            <Row className="max-sm:flex-col">
               <Col>
                 <Label>Número</Label>
                 <Input
+                  placeholder="Ex: 1207"
                   name="number"
                   value={formValues.number}
                   onChange={handleChange}
@@ -325,6 +333,7 @@ export default function UserRegister() {
               <Col>
                 <Label>Complemento</Label>
                 <Input
+                  placeholder="Ex: Apto. 123"
                   name="complement"
                   value={formValues.complement}
                   onChange={handleChange}
@@ -333,12 +342,13 @@ export default function UserRegister() {
             </Row>
           </Col>
         </Row>
-        <Row className="mt-2">
+        <Row className="mt-2 max-sm:flex-col">
           <Col className="mr-8">
-            <Row>
+            <Row className="max-sm:flex-col">
               <Col>
                 <Label>Bairro</Label>
                 <Input
+                  placeholder="Ex: Centro"
                   name="neighborhood"
                   value={formValues.neighborhood}
                   onChange={handleChange}
@@ -348,6 +358,7 @@ export default function UserRegister() {
                 <Label>Cidade</Label>
                 <Input
                   name="city"
+                  placeholder="Ex: São Paulo"
                   value={formValues.city}
                   onChange={handleChange}
                 />
@@ -356,6 +367,7 @@ export default function UserRegister() {
                 <Label>Estado</Label>
                 <Input
                   name="state"
+                  placeholder="Ex: São Paulo"
                   value={formValues.state}
                   onChange={handleChange}
                 />
@@ -363,11 +375,12 @@ export default function UserRegister() {
             </Row>
           </Col>
           <Col>
-            <Row>
+            <Row className="max-sm:flex-col">
               <Col>
                 <Label>País/região</Label>
                 <Input
                   name="countryRegion"
+                  placeholder="Brasil"
                   value={formValues.countryRegion}
                   onChange={handleChange}
                 />
@@ -376,6 +389,7 @@ export default function UserRegister() {
                 <Label>CEP</Label>
                 <Input
                   name="zipCode"
+                  placeholder="Ex: 12345-678"
                   value={formValues.zipCode}
                   onChange={handleChange}
                 />
@@ -388,12 +402,13 @@ export default function UserRegister() {
             Informações profissionais
           </span>
         </Row>
-        <Row className="mt-2">
+        <Row className="mt-2 max-sm:flex-col">
           <Col className="mr-8">
-            <Row>
+            <Row className="max-sm:flex-col">
               <Col>
                 <Label>Cargo</Label>
                 <Input
+                  placeholder="Ex: Gerente"
                   name="position"
                   value={formValues.position}
                   onChange={handleChange}
@@ -402,6 +417,7 @@ export default function UserRegister() {
               <Col>
                 <Label>Formação</Label>
                 <Input
+                  placeholder="Ex: Mestrado"
                   name="education"
                   value={formValues.education}
                   onChange={handleChange}
@@ -419,11 +435,12 @@ export default function UserRegister() {
             </Row>
           </Col>
           <Col>
-            <Row>
+            <Row className="max-sm:flex-col">
               <Col>
                 <Label>Salário</Label>
                 <Input
                   name="salary"
+                  placeholder="Ex: 1000"
                   value={formValues.salary}
                   onChange={handleChange}
                 />
@@ -453,13 +470,14 @@ export default function UserRegister() {
         <Row className="my-4">
           <span className="text-xl font-semibold">Informações de acesso</span>
         </Row>
-        <Row className="mt-2">
+        <Row className="mt-2 max-sm:flex-col">
           <Col>
-            <Row>
+            <Row className="max-sm:flex-col">
               <Col>
                 <Label>Username</Label>
                 <Input
                   name="username"
+                  placeholder="Ex: admin"
                   value={formValues.username}
                   onChange={handleChange}
                 />
@@ -467,6 +485,7 @@ export default function UserRegister() {
               <Col>
                 <Label>Email corporativo</Label>
                 <Input
+                  placeholder="Ex: john@empresa.com"
                   name="corporateEmail"
                   value={formValues.corporateEmail}
                   onChange={handleChange}
@@ -487,9 +506,9 @@ export default function UserRegister() {
         <Row className="my-4">
           <span className="text-xl font-semibold">Informações de usuário</span>
         </Row>
-        <Row className="mt-2">
+        <Row className="mt-2 max-sm:flex-col">
           <Col>
-            <Row>
+            <Row className="max-sm:flex-col">
               <Col>
                 <Label>Equipe</Label>
                 <Select

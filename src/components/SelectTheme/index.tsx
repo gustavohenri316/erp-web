@@ -89,7 +89,7 @@ export function SelectTheme() {
         onClick={handleOpenTheme}
       >
         {theme === "light" ? (
-          <Sun size={32} className="text-neutral-200" weight="fill" />
+          <Sun size={32} className="text-neutral-400" weight="fill" />
         ) : theme === "dark" ? (
           <Moon size={32} className="" weight="fill" />
         ) : (
@@ -99,7 +99,7 @@ export function SelectTheme() {
       {openTheme && (
         <div
           ref={ref}
-          className="absolute z-50 top-full right-0 mt-2 bg-neutral-100 dark:bg-neutral-100 rounded-lg shadow-lg p-2 "
+          className="absolute z-50 top-full right-0 mt-2 dark:bg-neutral-700 bg-neutral-400  rounded-lg shadow-lg p-2 "
         >
           {options?.map((option, index) => {
             return (

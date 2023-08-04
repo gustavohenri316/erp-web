@@ -6,7 +6,7 @@ export function Button({
   ...rest
 }: ButtonProps) {
   let buttonClasses =
-    "p-2 px-4 border rounded-md hover:brightness-90  disabled:cursor-not-allowed disabled:brightness-80 flex items-center justify-center gap-4 ";
+    "p-2 px-4 border rounded-md hover:brightness-90 max-sm:w-full disabled:cursor-not-allowed disabled:brightness-80 flex items-center justify-center gap-4 ";
 
   if (variant) {
     const validVariants: ButtonProps["variant"][] = [

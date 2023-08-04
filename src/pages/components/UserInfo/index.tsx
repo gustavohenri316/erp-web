@@ -1,9 +1,10 @@
-import { destroyCookie } from "nookies";
-import { SignOut } from "phosphor-react";
 import { useContext, useState, useRef, useEffect } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 
-export default function UserInfo() {
+interface UserInfoProps {
+  openMenu: boolean;
+}
+export default function UserInfo({ openMenu = true }: UserInfoProps) {
   const { user } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
 
@@ -25,31 +26,19 @@ export default function UserInfo() {
     };
   }, []);
 
-  function sigOut() {
-    destroyCookie(null, "Dashboard.UserToken");
-    destroyCookie(null, "Dashboard.UserToken-permissions");
-    window.location.href = "/";
-  }
-
   return (
-    <div className="relative " ref={userRef}>
+    <div
+      className="flex items-center justify-center flex-col text-white text-center"
+      ref={userRef}
+    >
       <img
         onClick={handleOpen}
         src={user?.photo}
-        className="w-10 h-10 rounded-full object-cover cursor-pointer"
+        className="w-14 h-14 rounded-full object-cover cursor-pointer"
         alt="user"
       />
-      {open && (
-        <div className="flex flex-col bg-neutral-100 mt-4 border-neutral-800 border rounded-md absolute right-0  z-50 min-w-[200px] min-h-[40px]">
-          <span
-            onClick={sigOut}
-            className="w-full p-2 text-neutral-900 cursor-pointer hover:bg-gray-200 rounded-md flex items-center gap-4"
-          >
-            <SignOut size={32} weight="thin" />
-            Sair
-          </span>
-        </div>
-      )}
+
+      {openMenu && <span>{user?.name}</span>}
     </div>
   );
 }
