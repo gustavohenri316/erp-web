@@ -15,7 +15,7 @@ export default function SettingsPermissions() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState("1");
 
-  const pageSize = 13;
+  const pageSize = 11;
   const totalItems = permissions?.totalItems;
   const firstPageIndex = (Number(page) - 1) * pageSize + 1;
   const lastPageIndex = Number(page) - 1 + (totalItems - 1);
