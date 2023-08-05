@@ -1,7 +1,6 @@
 import {
   Users,
   Wrench,
-  CirclesFour,
   House,
   PaperPlaneTilt,
   ToggleRight,

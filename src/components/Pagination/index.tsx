@@ -29,7 +29,7 @@ export function Pagination({
             aria-label="Pagination"
           >
             <button
-              className={`relative inline-flex items-center rounded-l-md dark:border-neutral-900 px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 dark:ring-neutral-900 dark:ring-neutral-900 ${
+              className={`relative inline-flex items-center rounded-l-md dark:border-neutral-900 px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 dark:ring-neutral-900 d ${
                 currentPage === 1
                   ? "opacity-50 cursor-not-allowed"
                   : "hover:bg-gray-50"
