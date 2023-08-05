@@ -154,7 +154,7 @@ export default function NotificationsView() {
         permission="delete-notifications"
         onLoading={setPermissionDeleteNotifications}
       />
-      <Row className="h-16 my-4">
+      <Row className=" my-4">
         <Search />
         <PermissionGate permission="create-notifications">
           <Button

@@ -39,7 +39,7 @@ const PermissionGate = ({
     if (isPage) {
       return (
         <div className="w-full h-full flex items-center justify-center">
-          <Spinner />
+          <Spinner size={24} />
         </div>
       );
     }

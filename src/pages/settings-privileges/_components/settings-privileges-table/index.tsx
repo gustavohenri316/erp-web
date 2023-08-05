@@ -42,8 +42,8 @@ export function SettingsPrivilegesTable({
   return (
     <div className="w-full flex-1">
       <div className="relative overflow-x-auto  w-full">
-        <table className="w-full  text-left bg-neutral-50 dark:text-neutral-100 dark:bg-neutral-800 rounded-md shadow my-4">
-          <thead className="border-b dark:border-neutral-900">
+        <table className="w-full  text-left bg-neutral-200 dark:text-neutral-100 dark:bg-neutral-800 rounded-md shadow my-4">
+          <thead className="border-b border-neutral-300 dark:border-neutral-900">
             <tr>
               <th className="py-4 px-4 text-center whitespace-nowrap">Nome</th>
               <th className="py-4 px-4 text-center whitespace-nowrap">Chave</th>
@@ -59,7 +59,7 @@ export function SettingsPrivilegesTable({
                 return (
                   <tr
                     key={item._id}
-                    className="border-b hover:bg-neutral-400 dark:hover:bg-neutral-900 dark:border-neutral-900 dark:text-neutral-100"
+                    className="border-b border-neutral-300 hover:bg-neutral-400 dark:hover:bg-neutral-900 dark:border-neutral-900 dark:text-neutral-100"
                   >
                     <td className="py-4 px-4 text-center whitespace-nowrap">
                       {item.name}

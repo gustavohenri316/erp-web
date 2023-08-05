@@ -30,7 +30,7 @@ export function Template(props: TemplateProps) {
   return (
     <Fragment>
       <div className="w-full h-full flex flex-col text-neutral-800 dark:text-neutral-100">
-        <div className="py-4 px-6 justify-between flex items-center border-b dark:border-neutral-900">
+        <div className="py-4 px-6 justify-between flex items-center ">
           <span className="text-xl  flex gap-2 items-center justify">
             {isBack && (
               <ArrowLeft
@@ -46,7 +46,7 @@ export function Template(props: TemplateProps) {
           </div>
         </div>
         <div className="h-full flex-1 p-4 dark:bg-neutral-800  w-full overflow-auto ">
-          <div className="bg-neutral-100 dark:bg-neutral-800 p-3 flex-1 w-full h-full rounded-md">
+          <div className=" dark:bg-neutral-800 p-3 flex-1 w-full h-full rounded-md">
             <PermissionGate isPage permission={permissionPage}>
               {children}
             </PermissionGate>

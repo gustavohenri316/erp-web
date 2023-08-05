@@ -6,6 +6,10 @@ import {
   PaperPlaneTilt,
   ToggleRight,
   Crown,
+  CurrencyDollarSimple,
+  Storefront,
+  QrCode,
+  Files,
 } from "phosphor-react";
 
 export const routers = [
@@ -19,7 +23,25 @@ export const routers = [
     name: "Produtos",
     path: "/products-view",
     permission: "view-products",
-    icon: <CirclesFour size={32} weight="thin" />,
+    icon: <QrCode size={32} weight="thin" />,
+  },
+  {
+    name: "Clientes",
+    path: "/customers-view",
+    permission: "view-products",
+    icon: <Storefront size={32} weight="thin" />,
+  },
+  {
+    name: "Pagamentos",
+    path: "/payments-view",
+    permission: "view-products",
+    icon: <CurrencyDollarSimple size={32} weight="thin" />,
+  },
+  {
+    name: "Notas Fiscais",
+    path: "/invoices-view",
+    permission: "view-products",
+    icon: <Files size={32} weight="thin" />,
   },
   {
     name: "Usuários",
