@@ -37,8 +37,8 @@ export function SettingsPermissionsTable({
   };
 
   return (
-    <div className="w-full flex-1">
-      <div className="relative overflow-x-auto  w-full">
+    <div className="w-full h-full">
+      <div className="relative overflow-auto  w-full">
         <table className="w-full  text-left bg-neutral-200 dark:text-neutral-100 dark:bg-neutral-800 rounded-md shadow my-4">
           <thead className="border-b border-neutral-300 dark:border-neutral-900">
             <tr>

@@ -46,7 +46,7 @@ export function Template(props: TemplateProps) {
           </div>
         </div>
         <div className="h-full flex-1 p-4 dark:bg-neutral-800  w-full overflow-auto ">
-          <div className=" dark:bg-neutral-800 p-3 flex-1 w-full h-full rounded-md">
+          <div className="dark:bg-neutral-800 p-3 flex-1 w-full h-full rounded-md">
             <PermissionGate isPage permission={permissionPage}>
               {children}
             </PermissionGate>
