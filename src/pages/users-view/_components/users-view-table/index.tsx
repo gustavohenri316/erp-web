@@ -10,16 +10,8 @@ import { deleteUser } from "../../users-view.service";
 import { UsersViewModalDelete } from "../users-view-modal-delete";
 import { Table } from "../../../../components/Table";
 
-interface UserTableProps {
-  users: User | undefined;
-  handleLoading: (value: boolean) => void;
-}
 export function UserTable({ users, handleLoading }: UserTableProps) {
-  const [isEditPermission, setIsEditPermission] = useState(false);
-  const [isDeletePermission, setIsDeletePermission] = useState(false);
   const router = useNavigate();
-  const [isViewPermission, setIsViewPermission] = useState(false);
-  const [isViewActionsPermission, setIsViewActionsPermission] = useState(false);
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 

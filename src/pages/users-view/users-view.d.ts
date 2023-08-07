@@ -2,7 +2,7 @@ interface User {
   currentPage: number;
   pageSize: number;
   totalItems: number;
-  users: UsersProps[]
+  users: UsersProps[];
 }
 
 interface UserProps {
@@ -13,7 +13,7 @@ interface UserProps {
   phoneNumber: string;
   cpf: string;
   rg: string;
-  birthDate: string; 
+  birthDate: string;
   street: string;
   number: string;
   complement: string;
@@ -25,8 +25,8 @@ interface UserProps {
   position: string;
   education: string;
   photo: string;
-  startDate: string; 
-  salary: string; 
+  startDate: string;
+  salary: string;
   employmentType: string;
   username: string;
   corporateEmail: string;
@@ -43,6 +43,11 @@ interface Privilege {
   description: string;
   key: string;
   permissions: string[];
-  createdAt: string; 
+  createdAt: string;
   __v: number;
+}
+
+interface UserTableProps {
+  users: User | undefined;
+  handleLoading: (value: boolean) => void;
 }

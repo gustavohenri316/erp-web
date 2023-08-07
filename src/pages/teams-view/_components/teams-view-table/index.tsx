@@ -1,4 +1,4 @@
-import { PencilSimple, Trash } from "phosphor-react";
+import { PencilSimple } from "phosphor-react";
 import { ButtonIcon } from "../../../../components/ButtonIcon";
 import { Table } from "../../../../components/Table";
 import { deleteTeams } from "../../teams-view.service";
