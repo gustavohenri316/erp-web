@@ -14,8 +14,9 @@ export default function UsersView() {
   const router = useNavigate();
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState("1");
+  const [search, setSearch] = useState("");
 
-  const pageSize = 13;
+  const pageSize = 11;
   const totalItems = users?.totalItems || 0;
   const firstPageIndex = (Number(page) - 1) * pageSize + 1;
   const lastPageIndex = Number(page) - 1 + (totalItems - 1);
@@ -32,6 +33,7 @@ export default function UsersView() {
         const response = await getUsers({
           currentPage: page as string,
           pageSize: pageSize,
+          search,
         });
 
         setUsers(response);
@@ -40,7 +42,11 @@ export default function UsersView() {
       }
     }
     fetchUsers();
-  }, [loading]);
+  }, [loading, search, page]);
+
+  function handleSearch(value: string) {
+    setSearch(value);
+  }
 
   function handleLoading(value: boolean) {
     setLoading(value);
@@ -50,12 +56,15 @@ export default function UsersView() {
     <Template
       documentTitle="Usuários"
       title="Visualizar Usuários"
-      permissionPage="view-users"
+      permissionPage="AX5BSOD5G8CT1Y5I8XGVWYIFLXK6WW"
     >
       <div className="w-full">
         <Row className="max-sm:flex-col">
-          <Search placeholder="Faça uma busca pela descrição" />
-          <PermissionGate permission="register-new-user">
+          <Search
+            placeholder="Faça uma busca pela descrição"
+            handleSearch={handleSearch}
+          />
+          <PermissionGate permission="KP4VZ8X328C0D5WF83AL1L7X6ZA86B">
             <Button variant="success" onClick={() => router("/user-register")}>
               Cadastrar usuário
             </Button>

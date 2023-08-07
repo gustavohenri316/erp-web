@@ -49,7 +49,7 @@ export default function SettingsPermissions() {
     <Template
       title="Permissões do sistema"
       documentTitle="Permissões do Sistema"
-      permissionPage="view-permissions"
+      permissionPage="IMJ7ZO07T9QI57X9FB3Y1K3UHZYKQF"
     >
       <Row>
         <Search handleSearch={handleSearch} />

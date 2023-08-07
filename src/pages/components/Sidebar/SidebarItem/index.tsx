@@ -65,24 +65,22 @@ export function SidebarItem({ item, open, openItems, onToggleOpen }: any) {
       {item.isOpen && openItems && (
         <div className="p-1 bg-green-600 dark:hover:bg-green-800 dark:bg-green-950 rounded-md mt-1 text-neutral-100">
           {item.open.map((subItem: any) => (
-            <button
-              key={subItem.name}
-              title={subItem.name}
-              onClick={() => router(subItem.path)}
-              className={`w-full flex mt-1 text-start gap-4 rounded-md p-2  text-neutral-100 hover:bg-green-500 dark:hover:bg-green-950 transition
-                ${!open ? " justify-center" : "justify-between items-center"}
-                ${
-                  pathname === subItem.path
-                    ? "bg-green-500 dark:bg-green-800"
-                    : ""
-                }
-                `}
-            >
-              <div className="flex items-center gap-4">
-                {subItem.icon}
-                {open && <span>{subItem.name}</span>}
-              </div>
-            </button>
+            <PermissionGate permission={subItem.permission}>
+              <button
+                key={subItem.name}
+                title={subItem.name}
+                onClick={() => router(subItem.path)}
+                className={`w-full flex mt-1 text-start gap-4 rounded-md p-2  text-neutral-100 hover:bg-green-500 dark:hover:bg-green-950 transition
+            ${!open ? " justify-center" : "justify-between items-center"}
+            ${pathname === subItem.path ? "bg-green-500 dark:bg-green-800" : ""}
+                  `}
+              >
+                <div className="flex items-center gap-4">
+                  {subItem.icon}
+                  {open && <span>{subItem.name}</span>}
+                </div>
+              </button>
+            </PermissionGate>
           ))}
         </div>
       )}

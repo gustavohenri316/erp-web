@@ -86,7 +86,7 @@ export default function SettingsPermissionRegister() {
     <Template
       documentTitle="Cadastrar nova permissão"
       title="Cadastrar nova permissão"
-      permissionPage="create_pemirmission_router"
+      permissionPage="KWYDSE79H14EC98JOH6F4HK34ZKYQD"
     >
       <Row className="py-4">
         <Col>

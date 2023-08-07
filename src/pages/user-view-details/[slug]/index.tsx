@@ -85,7 +85,7 @@ export default function UserViewDetails() {
     <Template
       documentTitle="Editar | Usuário"
       title="Editar Usuário"
-      permissionPage="view-users-details"
+      permissionPage="WVV09CLGCYPJH1DMV0W0Y66VHG3TCS"
     >
       <Row className="pb-4">
         <span className="text-2xl my-4 font-semibold">

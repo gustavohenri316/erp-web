@@ -5,7 +5,7 @@ export default function HomePage() {
     <Template
       documentTitle="Inicio"
       title="Inicio"
-      permissionPage="view-page-home"
+      permissionPage="D9M76N89KR028H66IX4BA7DKS8E2K6"
     >
       ola
     </Template>

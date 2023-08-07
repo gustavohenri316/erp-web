@@ -8,6 +8,7 @@ import { Skeleton } from "../../../../components/Skeleton";
 import { AuthContext } from "../../../../context/AuthContext";
 import { deleteUser } from "../../users-view.service";
 import { UsersViewModalDelete } from "../users-view-modal-delete";
+import { Table } from "../../../../components/Table";
 
 interface UserTableProps {
   users: User | undefined;
@@ -38,115 +39,93 @@ export function UserTable({ users, handleLoading }: UserTableProps) {
 
   return (
     <>
-      <PermissionGate
-        permission="view-actions-table-user"
-        onLoading={setIsViewActionsPermission}
-      />
-      <PermissionGate
-        permission="view-users-details"
-        onLoading={setIsViewPermission}
-      />
-      <PermissionGate permission="edit-users" onLoading={setIsEditPermission} />
-      <PermissionGate
-        permission="delete-user"
-        onLoading={setIsDeletePermission}
-      />
-      <div className="w-full flex-1">
-        <div className="relative overflow-x-auto  w-full">
-          <table className="w-full  text-left bg-neutral-200 dark:text-neutral-100 dark:bg-neutral-800 rounded-md shadow my-4">
-            <thead className="border-b border-neutral-300 dark:border-neutral-900">
-              <tr>
-                <th className="py-4 px-4 text-start">
-                  <Skeleton loading={Boolean(!user)}>Imagem</Skeleton>
-                </th>
-                <th className="py-4 px-4 text-start">
-                  <Skeleton loading={Boolean(!user)}>Nome</Skeleton>
-                </th>
-                <th className="py-4 px-4 text-start">
-                  <Skeleton loading={Boolean(!user)}>Sobrenome</Skeleton>
-                </th>
-                <th className="py-4 px-4 text-start">
-                  <Skeleton loading={Boolean(!user)}>Email</Skeleton>
-                </th>
-                <th className="py-4 px-4 text-start">
-                  <Skeleton loading={Boolean(!user)}>Telefone</Skeleton>
-                </th>
-                <th className="py-4 px-4 text-start">
-                  <Skeleton loading={Boolean(!user)}>Equipe</Skeleton>
-                </th>
-                <th className="py-4 px-4 text-start">
-                  <Skeleton loading={Boolean(!user)}>Privilégios</Skeleton>
-                </th>
-                {isViewActionsPermission && (
-                  <th className="px-4 text-end">
-                    <Skeleton loading={Boolean(!user)}>Ações</Skeleton>
-                  </th>
-                )}
-              </tr>
-            </thead>
-            <tbody>
-              {users?.users.map((item: UserProps) => {
-                return (
-                  <tr
-                    className="border-b border-neutral-300 hover:bg-neutral-400 dark:hover:bg-neutral-900 dark:border-neutral-900 dark:text-neutral-100"
-                    key={item._id}
-                  >
-                    <td className="py-2 px-4">
-                      <div>
-                        <img
-                          src={item.photo}
-                          alt=""
-                          className="w-16 h-16 rounded-full object-cover"
+      <Table.Root>
+        <Table.Thead>
+          <Table.Tr isHeader>
+            <Table.Th>
+              <Skeleton loading={Boolean(!user)}>Imagem</Skeleton>
+            </Table.Th>
+            <Table.Th>
+              <Skeleton loading={Boolean(!user)}>Nome</Skeleton>
+            </Table.Th>
+            <Table.Th>
+              <Skeleton loading={Boolean(!user)}>Sobrenome</Skeleton>
+            </Table.Th>
+            <Table.Th>
+              <Skeleton loading={Boolean(!user)}>Email</Skeleton>
+            </Table.Th>
+            <Table.Th>
+              <Skeleton loading={Boolean(!user)}>Telefone</Skeleton>
+            </Table.Th>
+            <Table.Th>
+              <Skeleton loading={Boolean(!user)}>Equipe</Skeleton>
+            </Table.Th>
+            <Table.Th>
+              <Skeleton loading={Boolean(!user)}>Privilégios</Skeleton>
+            </Table.Th>
+            <PermissionGate permission="N8AGIHK940BR31TLKCM3HMHMI7WOV4">
+              <Table.Th textAlign="text-end">
+                <Skeleton loading={Boolean(!user)}>Ações</Skeleton>
+              </Table.Th>
+            </PermissionGate>
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody>
+          {users?.users?.map((item: UserProps) => {
+            return (
+              <Table.Tr key={item._id}>
+                <Table.Td>
+                  <div>
+                    <img
+                      src={item.photo}
+                      alt=""
+                      className="w-16 h-16 rounded-full object-cover"
+                    />
+                  </div>
+                </Table.Td>
+                <Table.Td>{item.firstName}</Table.Td>
+                <Table.Td>{item.lastName}</Table.Td>
+                <Table.Td>{item.email}</Table.Td>
+                <Table.Td>{item.phoneNumber}</Table.Td>
+                <Table.Td>{item.team}</Table.Td>
+                <Table.Td>{item.privileges?.[0]?.name}</Table.Td>
+                <PermissionGate permission="N8AGIHK940BR31TLKCM3HMHMI7WOV4">
+                  <Table.Td>
+                    <div className="flex gap-1 justify-end">
+                      <PermissionGate permission="WVV09CLGCYPJH1DMV0W0Y66VHG3TCS">
+                        <ButtonIcon
+                          variant="secondary"
+                          size="sm"
+                          onClick={() =>
+                            router(`/user-view-details/${item._id}`)
+                          }
+                        >
+                          <Eye size={22} />
+                        </ButtonIcon>
+                      </PermissionGate>
+                      <PermissionGate permission="4LBA5ATT2E4XFJE3DQTTCQE1X2EV4Q">
+                        <ButtonIcon variant="primary" size="sm">
+                          <PencilSimple
+                            size={22}
+                            onClick={() => router(`/user-update/${item._id}`)}
+                          />
+                        </ButtonIcon>
+                      </PermissionGate>
+                      <PermissionGate permission="PIMYNO3AAO50BW1W6RH6E8LKGNXBH8">
+                        <UsersViewModalDelete
+                          handleDelete={() => fetchDeleteUser(item._id)}
+                          loading={loading}
+                          name={item.firstName}
                         />
-                      </div>
-                    </td>
-                    <td className="py-2 px-4">{item.firstName}</td>
-                    <td className="py-2 px-4">{item.lastName}</td>
-                    <td className="py-2 px-4">{item.email}</td>
-                    <td className="py-2 px-4">{item.phoneNumber}</td>
-                    <td className="py-2 px-4">{item.team}</td>
-                    <td className="py-2 px-4">{item.privileges?.[0]?.name}</td>
-                    {isViewActionsPermission && (
-                      <td className="py-2 px-4  text-end">
-                        <div className="flex gap-1 justify-end">
-                          {isViewPermission && (
-                            <ButtonIcon
-                              variant="secondary"
-                              size="sm"
-                              onClick={() =>
-                                router(`/user-view-details/${item._id}`)
-                              }
-                            >
-                              <Eye size={22} />
-                            </ButtonIcon>
-                          )}
-                          {isEditPermission && (
-                            <ButtonIcon variant="primary" size="sm">
-                              <PencilSimple
-                                size={22}
-                                onClick={() =>
-                                  router(`/user-update/${item._id}`)
-                                }
-                              />
-                            </ButtonIcon>
-                          )}
-                          {isDeletePermission && (
-                            <UsersViewModalDelete
-                              handleDelete={() => fetchDeleteUser(item._id)}
-                              loading={loading}
-                              name={item.firstName}
-                            />
-                          )}
-                        </div>
-                      </td>
-                    )}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </div>
+                      </PermissionGate>
+                    </div>
+                  </Table.Td>
+                </PermissionGate>
+              </Table.Tr>
+            );
+          })}
+        </Table.Tbody>
+      </Table.Root>
     </>
   );
 }

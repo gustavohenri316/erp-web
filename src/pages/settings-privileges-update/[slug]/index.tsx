@@ -140,6 +140,7 @@ export default function SettingsPrivilegesUpdate() {
     <Template
       title="Atualizar Privilégios"
       documentTitle="Atualizar Privilégios"
+      permissionPage="RK9OXI61J1DS0VXSNAE3XYBHYFXJDJ"
     >
       <Row className="flex-col ">
         <Row className="my-4">

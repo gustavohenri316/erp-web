@@ -1,9 +1,5 @@
-import { useEffect, useState } from "react";
-import { parseCookies } from "nookies";
-import { Spinner } from "../Spinner";
 import { LockKey } from "phosphor-react";
 import useGetUserPermissions from "../../hooks/useGetUserPermissions";
-import { getPermissionsUser } from "../../service/user.service";
 
 const PermissionGate = ({
   children,
@@ -12,40 +8,8 @@ const PermissionGate = ({
   onLoading,
 }: PermissionGateProps) => {
   const userPermissions = useGetUserPermissions();
-  const { "Dashboard.UserToken": Token } = parseCookies();
-  const [key, setKey] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
 
-  async function fetchPermission() {
-    try {
-      const response: any = await getPermissionsUser({
-        id: Token,
-        name: permission,
-      });
-      setKey(response);
-    } catch (error) {
-      console.error("Error fetching permission:", error);
-      setKey(null);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    fetchPermission();
-  }, [Token, permission]);
-
-  if (loading) {
-    if (isPage) {
-      return (
-        <div className="w-full h-full flex items-center justify-center">
-          <Spinner size={24} />
-        </div>
-      );
-    }
-  }
-
-  if (userPermissions?.includes(key as string)) {
+  if (userPermissions?.includes(permission as string)) {
     onLoading && onLoading(true);
     return children;
   }

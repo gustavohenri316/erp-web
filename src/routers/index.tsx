@@ -30,6 +30,10 @@ const UserUpdate = lazy(() => import("../pages/user-update/[slug]"));
 const UserViewDetails = lazy(() => import("../pages/user-view-details/[slug]"));
 const Users = lazy(() => import("../pages/users-view"));
 const SignIn = lazy(() => import("../pages/signIn"));
+const Customers = lazy(() => import("../pages/customers-view"));
+const CustomersRegister = lazy(() => import("../pages/customers-register"));
+const Teams = lazy(() => import("../pages/teams-view"));
+const TeamsRegister = lazy(() => import("../pages/teams-register"));
 
 export function Routers() {
   const { "Dashboard.UserToken": Token } = parseCookies();
@@ -90,6 +94,10 @@ export function Routers() {
           <Route path="/user-update/:id" element={<UserUpdate />} />
           <Route path="/user-view-details/:id" element={<UserViewDetails />} />
           <Route path="/users-view" element={<Users />} />
+          <Route path="/customers-view" element={<Customers />} />
+          <Route path="/customers-register" element={<CustomersRegister />} />
+          <Route path="/teams-view" element={<Teams />} />
+          <Route path="/teams-register" element={<TeamsRegister />} />
         </Route>
       </Routes>
     </Suspense>

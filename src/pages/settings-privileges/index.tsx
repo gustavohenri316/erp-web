@@ -34,6 +34,7 @@ export default function SettingsPrivileges() {
     <Template
       title="Privilégios do sistema"
       documentTitle="Privilégios do sistema"
+      permissionPage="WO544HAB6KEH2PY94JSV9UCGA6PO7I"
     >
       <Row>
         <Search />

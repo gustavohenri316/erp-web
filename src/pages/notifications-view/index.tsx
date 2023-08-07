@@ -8,7 +8,6 @@ import { useAuth } from "../../context/AuthContext";
 import { Template } from "../components/Template";
 import { NotificationsComponent } from "./_components/notification-component";
 import { getAllNotifications } from "./notifications-view.service";
-import { Search } from "../../components/Search";
 import PermissionGate from "../../components/PermissionGate";
 
 export default function NotificationsView() {
@@ -148,15 +147,14 @@ export default function NotificationsView() {
     <Template
       title="Notificações"
       documentTitle="Notificações"
-      permissionPage="view-notifications"
+      permissionPage="BYSEHZACU1K40NWP0GA3483JGY945N"
     >
       <PermissionGate
-        permission="delete-notifications"
+        permission="BIVQ83X08B05GGOOMPOGC07NM8JP3V"
         onLoading={setPermissionDeleteNotifications}
       />
-      <Row className=" my-4">
-        <Search />
-        <PermissionGate permission="create-notifications">
+      <Row className="justify-end my-4">
+        <PermissionGate permission="RL69P4TW0MZCIA8L8WEHDK8FCGRQZB">
           <Button
             variant="success"
             onClick={() => router("/notifications-register")}

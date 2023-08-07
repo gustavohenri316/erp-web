@@ -3,7 +3,7 @@ import { Template } from "../components/Template";
 export default function ProductsView() {
   return (
     <Template
-      permissionPage="view-products"
+      permissionPage="1YCCT7V2ER4MGL4L7W41E6GZQ8R6WE"
       documentTitle="Visualizar Produtos"
       title="Visualizar Produtos"
     >

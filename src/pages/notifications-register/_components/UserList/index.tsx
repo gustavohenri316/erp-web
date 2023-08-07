@@ -32,7 +32,7 @@ const UsersList: React.FC<UsersListProps> = ({
           }
           className="w-full flex justify-between"
         >
-          <PermissionGate permission="create-global-notifications">
+          <PermissionGate permission="LV7M3B98PAQLSO03ZNC8EYYEIUFWZH">
             <h3 className="text-lg font-bold">Todos os usuários do sistema</h3>
             {isAllUsersSelected && (
               <X

@@ -115,6 +115,7 @@ export default function SettingsPrivilegesRegister() {
     <Template
       title="Cadastrar novo privilegio"
       documentTitle="Cadastro de Privilegio"
+      permissionPage="XDXW1DUQKO4YPB6T3HKH6CT9LIDE1I"
     >
       <Row className="flex-col">
         <Row>

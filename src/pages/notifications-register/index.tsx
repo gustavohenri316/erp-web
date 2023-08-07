@@ -92,7 +92,7 @@ function NotificationsRegister() {
       documentTitle=""
       title="Enviar Notificações"
       isBack
-      permissionPage="create-notifications"
+      permissionPage="RL69P4TW0MZCIA8L8WEHDK8FCGRQZB"
     >
       <Row className="my-4 text-md">
         <Col>
