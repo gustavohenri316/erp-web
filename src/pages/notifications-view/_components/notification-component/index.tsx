@@ -1,37 +1,33 @@
 import { parseCookies } from "nookies";
 import { Eye, EyeSlash, X } from "phosphor-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ButtonIcon } from "../../../../components/ButtonIcon";
 import { useAuth } from "../../../../context/AuthContext";
 import DateDisplay from "../../../../utils/format-date-notifications";
-import { findUser } from "../../../users-view/users-view.service";
 
 import {
   markAsReadNotifications,
   deleteNotifications,
 } from "../../notifications-view.service";
-import { defaultAvatarUrl } from "../../../../assets/data";
 import { Spinner } from "../../../../components/Spinner";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 
 export function NotificationsComponent({
   _id,
   createdAt,
   isGlobal,
-  sentBy,
   isRead,
   message,
   handleLoading,
+  sentByInfo,
   permissionDeleteNotifications,
+  onDeleteNotification,
   title,
 }: NotificationsProps) {
   const { user, findNotifications } = useAuth();
-  const [userSentBy, setUserSentBy] = useState<UserProps>();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [localIsRead, setLocalIsRead] = useState(isRead);
-  const router = useNavigate();
 
   const { "Dashboard.UserToken": Token } = parseCookies();
 
@@ -43,16 +39,15 @@ export function NotificationsComponent({
   }
 
   const handleOpen = async () => {
-    await fetchMarkAsReadNotifications();
-    setLocalIsRead(true);
+    if (!localIsRead) {
+      await fetchMarkAsReadNotifications();
+      setLocalIsRead(true);
+      findNotifications(Token);
+    }
 
     setOpen(!open);
   };
 
-  async function fetchFindUserReceivedBy() {
-    const response = await findUser({ id: sentBy });
-    setUserSentBy(response);
-  }
   async function fetchDeleteNotifications() {
     try {
       handleLoading(true);
@@ -62,25 +57,15 @@ export function NotificationsComponent({
         userId: user?.id as string,
       });
       toast.success(response.message);
+      onDeleteNotification(_id);
+      findNotifications(Token);
     } catch (err) {
       console.error(err);
     } finally {
       setLoading(false);
       handleLoading(false);
-
-      router("/notifications-view");
     }
   }
-
-  useEffect(() => {
-    if (_id) {
-      fetchFindUserReceivedBy();
-    }
-  }, [_id]);
-
-  useEffect(() => {
-    findNotifications(Token);
-  }, [localIsRead]);
 
   return (
     <div className="flex flex-col w-full">
@@ -88,13 +73,13 @@ export function NotificationsComponent({
         <div className="flex items-start gap-4  text-start flex-col justify-start   dark:bg-neutral-700 rounded-l-md px-2 py-2 text-black dark:text-neutral-100">
           <div className="flex items-center justify-start gap-4  dark:bg-neutral-700 w-[180px] ">
             <img
-              src={userSentBy?.photo || defaultAvatarUrl}
+              src={sentByInfo?.photo}
               alt=""
               className="w-10 h-10 rounded-full object-cover"
             />
             <div>
-              <h3 className="text-sm font-bold">{userSentBy?.firstName}</h3>
-              <span className="text-sm">{userSentBy?.team}</span>
+              <h3 className="text-sm font-bold">{sentByInfo?.firstName}</h3>
+              <span className="text-sm">{sentByInfo?.team}</span>
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@ type GetUsersServicesProps = {
 export async function getUsers({
   currentPage = "1",
   pageSize = 10,
-  search,
+  search = "",
 }: GetUsersServicesProps) {
   const response = await axios.get(
     `${baseURL}/user?page=${currentPage}&pageSize=${pageSize}&search=${search}`

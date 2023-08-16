@@ -9,7 +9,15 @@ interface NotificationsProps {
   sentBy: string;
   handleLoading: (value: boolean) => void;
   timestamp: string;
+  sentByInfo: {
+    email: string;
+    firstName: string;
+    lastName: string;
+    photo: string;
+    team: string;
+  };
   permissionDeleteNotifications: boolean;
+  onDeleteNotification: (deletedId: string) => void;
 }
 
 type INotification = {

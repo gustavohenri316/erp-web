@@ -73,6 +73,7 @@ export default function NotificationsView() {
     if (!loadingDirect && hasMoreDirect) {
       setLoadingDirect(true);
       setPageDirect((prevPage) => prevPage + 1);
+      fetchListAllNotifications();
     }
   }
 
@@ -80,6 +81,7 @@ export default function NotificationsView() {
     if (!loadingGlobal && hasMoreGlobal) {
       setLoadingGlobal(true);
       setPageGlobal((prevPage) => prevPage + 1);
+      fetchListAllNotifications();
     }
   }
 
@@ -185,6 +187,7 @@ export default function NotificationsView() {
                 (item: NotificationsProps) => (
                   <Row key={item._id} className="my-2">
                     <NotificationsComponent
+                      sentByInfo={item.sentByInfo}
                       permissionDeleteNotifications={
                         permissionDeleteNotifications
                       }
@@ -198,6 +201,19 @@ export default function NotificationsView() {
                       receivedBy={item.receivedBy}
                       title={item.title}
                       timestamp={item.timestamp}
+                      onDeleteNotification={(deletedId) => {
+                        setNotifications((prevNotifications) => ({
+                          directNotifications:
+                            prevNotifications.directNotifications.filter(
+                              (notification) => notification._id !== deletedId
+                            ),
+
+                          globalNotifications:
+                            prevNotifications.globalNotifications.filter(
+                              (notification) => notification._id !== deletedId
+                            ),
+                        }));
+                      }}
                     />
                   </Row>
                 )
@@ -235,6 +251,7 @@ export default function NotificationsView() {
                 (item: NotificationsProps) => (
                   <Row key={item._id} className="my-2">
                     <NotificationsComponent
+                      sentByInfo={item.sentByInfo}
                       permissionDeleteNotifications={
                         permissionDeleteNotifications
                       }
@@ -248,6 +265,18 @@ export default function NotificationsView() {
                       receivedBy={item.receivedBy}
                       title={item.title}
                       timestamp={item.timestamp}
+                      onDeleteNotification={(deletedId) => {
+                        setNotifications((prevNotifications) => ({
+                          directNotifications:
+                            prevNotifications.directNotifications.filter(
+                              (notification) => notification._id !== deletedId
+                            ),
+                          globalNotifications:
+                            prevNotifications.globalNotifications.filter(
+                              (notification) => notification._id !== deletedId
+                            ),
+                        }));
+                      }}
                     />
                   </Row>
                 )
