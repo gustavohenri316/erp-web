@@ -4,7 +4,7 @@ import { Row } from "../../components/Row";
 import { Label } from "../../components/Label";
 import { Col } from "../../components/Col";
 import { Button } from "../../components/Button";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { getPollsById } from "../polls-view/polls-view.service";
 import { createNewFeedback, deleteFeedback } from "./feedbacks.service";
 import { Spinner } from "../../components/Spinner";
@@ -43,6 +43,7 @@ export default function Feedbacks() {
   const [loading, setLoading] = useState(false);
   const [loadingList, setLoadingList] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
+  const navigate = useNavigate();
 
   const open = () => setOpenFeedback(true);
   const close = () => setOpenFeedback(false);
@@ -67,6 +68,7 @@ export default function Feedbacks() {
       setData(response);
     } catch (err) {
       console.error(err);
+      navigate("/not-found");
     }
   }
 

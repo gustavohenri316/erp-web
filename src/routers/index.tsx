@@ -37,6 +37,7 @@ const TeamsRegister = lazy(() => import("../pages/teams-register"));
 const Polls = lazy(() => import("../pages/polls-view"));
 const PollsRegister = lazy(() => import("../pages/polls-register"));
 const Feedbacks = lazy(() => import("../pages/feedbacks"));
+const NotFound = lazy(() => import("../pages/not-found"));
 
 export function Routers() {
   const { "Dashboard.UserToken": Token } = parseCookies();
@@ -56,6 +57,7 @@ export function Routers() {
           <Route path="/forgot/step-two/:id" element={<ForgotStep2 />} />
           <Route path="/forgot/step-tree/:id" element={<ForgotStep3 />} />
           <Route path="/feedbacks-view" element={<Feedbacks />} />
+          <Route path="/not-found" element={<NotFound />} />
           <Route path="*" element={<SignIn />} />
         </Routes>
       </Suspense>
@@ -106,6 +108,7 @@ export function Routers() {
           <Route path="/polls-register" element={<PollsRegister />} />
         </Route>
         <Route path="/feedbacks-view" element={<Feedbacks />} />
+        <Route path="/not-found" element={<NotFound />} />
       </Routes>
     </Suspense>
   );
