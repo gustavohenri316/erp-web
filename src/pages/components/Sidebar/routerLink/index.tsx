@@ -10,6 +10,7 @@ import {
   QrCode,
   Files,
   UsersFour,
+  ChartLineUp,
 } from "phosphor-react";
 
 export const routers = [
@@ -36,6 +37,12 @@ export const routers = [
     path: "/payments-view",
     permission: "1YCCT7V2ER4MGL4L7W41E6GZQ8R6WE",
     icon: <CurrencyDollarSimple size={32} weight="thin" />,
+  },
+  {
+    name: "Enquetes",
+    path: "/polls-view",
+    permission: "49HW3N8E4IQNM9QE1J0J4O1KWVDUWF",
+    icon: <ChartLineUp size={32} weight="thin" />,
   },
   {
     name: "Notas Fiscais",

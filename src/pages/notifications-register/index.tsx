@@ -15,7 +15,7 @@ import SelectedUsersList from "./_components/SelectedUserList";
 import UsersList from "./_components/UserList";
 import { useNavigate } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
-import NotificationsEditor from "./_components/NotificationsEditor";
+import { EditorMessages } from "../../components/EditorMessages";
 
 function NotificationsRegister() {
   const { user } = useAuth();
@@ -135,7 +135,7 @@ function NotificationsRegister() {
       <Row className="my-4">
         <Col>
           <Label>Mensagem</Label>
-          <NotificationsEditor value={message} onChange={setMessage} />
+          <EditorMessages value={message} onChange={setMessage} />
         </Col>
       </Row>
       <Row className="mt-4 justify-end">

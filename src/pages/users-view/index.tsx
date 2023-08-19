@@ -64,7 +64,7 @@ export default function UsersView() {
             placeholder="Faça uma busca pela descrição"
             handleSearch={handleSearch}
           />
-          <PermissionGate permission="KP4VZ8X328C0D5WF83AL1L7X6ZA86B">
+          <PermissionGate permission="VOP7HCJL8DHRMIT7SE9H7OZVX044L8">
             <Button variant="success" onClick={() => router("/user-register")}>
               Cadastrar usuário
             </Button>

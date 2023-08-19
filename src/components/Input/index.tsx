@@ -1,7 +1,7 @@
 import { forwardRef, useState } from "react";
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  function InputComponent({ required = false, loading, ...rest }, ref) {
+  function InputComponent({ required = false, loading, error, ...rest }, ref) {
     const [isTouchedAndEmpty] = useState<boolean>(false);
 
     let inputClasses =
@@ -14,6 +14,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="flex-1">
         <input {...rest} ref={ref} className={inputClasses} />
+        {error && <p className="text-red-500">{error}</p>}
       </div>
     );
   }

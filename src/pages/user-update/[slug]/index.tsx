@@ -215,7 +215,11 @@ export default function UserUpdate() {
     fetchGetPrivileges();
   }, []);
   return (
-    <Template documentTitle="Editar | Usuário" title="Editar Usuário">
+    <Template
+      documentTitle="Editar | Usuário"
+      title="Editar Usuário"
+      permissionPage="4LBA5ATT2E4XFJE3DQTTCQE1X2EV4Q"
+    >
       <form onSubmit={handleSubmit}>
         <Row className="pb-4">
           <span className="text-xl font-semibold">Informações pessoais</span>

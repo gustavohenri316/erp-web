@@ -2,12 +2,12 @@ import React, { useRef } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-interface NotificationsEditorProps {
+interface EditorMessagesProps {
   value: string;
   onChange: (content: string) => void;
 }
 
-const NotificationsEditor: React.FC<NotificationsEditorProps> = ({
+export const EditorMessages: React.FC<EditorMessagesProps> = ({
   value,
   onChange,
 }) => {
@@ -58,13 +58,13 @@ const NotificationsEditor: React.FC<NotificationsEditorProps> = ({
   ];
 
   return (
-    <div className="border-0">
+    <div className="border-0 w-full">
       <ReactQuill
         ref={(ref) => (quillRef.current = ref)}
         theme="snow"
         value={value}
         style={{
-          height: "40vh",
+          height: "30vh",
           marginBottom: "50px",
           border: "none",
         }}
@@ -76,5 +76,3 @@ const NotificationsEditor: React.FC<NotificationsEditorProps> = ({
     </div>
   );
 };
-
-export default NotificationsEditor;

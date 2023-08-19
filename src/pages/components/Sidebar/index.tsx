@@ -44,7 +44,7 @@ export default function Sidebar() {
             className="cursor-pointer hover:text-neutral-200 text-neutral-100 "
           />
         </div>
-        <div className="w-full items-center justify-center flex py-8">
+        <div className="w-full items-center justify-center flex py-4">
           <UserInfo openMenu={open} />
         </div>
         <div
@@ -54,7 +54,7 @@ export default function Sidebar() {
               : "max-sm:hidden"
           } flex-1`}
         >
-          <div className={`w-full mt-16 max-sm:mt-0 ${open ? "" : ""} `}>
+          <div className={`w-full mt-4 max-sm:mt-0 ${open ? "" : ""} `}>
             <div className="space-y-1  max-sm:bg-green-600 dark:max-sm:bg-green-950 ">
               {routers.map((item, index) => (
                 <SidebarItem

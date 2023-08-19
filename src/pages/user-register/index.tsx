@@ -170,7 +170,7 @@ export default function UserRegister() {
     <Template
       documentTitle="Cadastrar | Usuário"
       title="Cadastrar novo usuário"
-      permissionPage="KP4VZ8X328C0D5WF83AL1L7X6ZA86B"
+      permissionPage="VOP7HCJL8DHRMIT7SE9H7OZVX044L8"
     >
       <form onSubmit={handleSubmit} className="">
         <Row className="pb-4">

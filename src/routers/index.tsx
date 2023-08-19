@@ -34,6 +34,9 @@ const Customers = lazy(() => import("../pages/customers-view"));
 const CustomersRegister = lazy(() => import("../pages/customers-register"));
 const Teams = lazy(() => import("../pages/teams-view"));
 const TeamsRegister = lazy(() => import("../pages/teams-register"));
+const Polls = lazy(() => import("../pages/polls-view"));
+const PollsRegister = lazy(() => import("../pages/polls-register"));
+const Feedbacks = lazy(() => import("../pages/feedbacks"));
 
 export function Routers() {
   const { "Dashboard.UserToken": Token } = parseCookies();
@@ -52,6 +55,7 @@ export function Routers() {
           <Route path="/forgot/step-one/:id" element={<ForgotStep1 />} />
           <Route path="/forgot/step-two/:id" element={<ForgotStep2 />} />
           <Route path="/forgot/step-tree/:id" element={<ForgotStep3 />} />
+          <Route path="/feedbacks-view" element={<Feedbacks />} />
           <Route path="*" element={<SignIn />} />
         </Routes>
       </Suspense>
@@ -98,7 +102,10 @@ export function Routers() {
           <Route path="/customers-register" element={<CustomersRegister />} />
           <Route path="/teams-view" element={<Teams />} />
           <Route path="/teams-register" element={<TeamsRegister />} />
+          <Route path="/polls-view" element={<Polls />} />
+          <Route path="/polls-register" element={<PollsRegister />} />
         </Route>
+        <Route path="/feedbacks-view" element={<Feedbacks />} />
       </Routes>
     </Suspense>
   );
