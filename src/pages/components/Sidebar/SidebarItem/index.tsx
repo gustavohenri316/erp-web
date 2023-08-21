@@ -1,5 +1,4 @@
 import { CaretDown, CaretUp } from "phosphor-react";
-
 import PermissionGate from "../../../../components/PermissionGate";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../context/AuthContext";
@@ -10,25 +9,28 @@ export function SidebarItem({ item, open, openItems, onToggleOpen }: any) {
   const pathname = window.location.pathname;
 
   const handleClick = () => {
-    if (item.isOpen) {
-      onToggleOpen();
-    } else {
+    if (!item.isOpen) {
       router(item.path);
+    } else {
+      onToggleOpen();
     }
   };
+
+  const isCurrentPath = pathname === item.path;
+  const shouldShowNotifications =
+    item.name === "Notificações" && Number(countNotifications) > 0;
 
   return (
     <PermissionGate permission={item.permission}>
       <button
         title={item.name}
         onClick={handleClick}
-        className={`w-full flex mt-1  gap-4 rounded-md p-2 text-neutral-100 invisible-hover hover:bg-green-500 dark:hover:bg-green-800 transition
-       
-       ${pathname === item.path ? "bg-green-500 dark:bg-green-800" : ""}
+        className={`w-full flex mt-1 gap-4 rounded-md p-1 text-neutral-100 invisible-hover hover:bg-green-500 dark:hover:bg-green-800 transition
+        ${isCurrentPath ? "bg-green-500 dark:bg-green-900" : ""}
         ${
-          !open
-            ? " justify-center text-center"
-            : "justify-between items-center text-start"
+          open
+            ? "justify-between items-center text-start"
+            : "justify-center text-center"
         }
         `}
       >
@@ -37,19 +39,16 @@ export function SidebarItem({ item, open, openItems, onToggleOpen }: any) {
             open ? "justify-between" : "justify-center"
           } w-full`}
         >
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             {item.icon}
             {open && <span>{item.name}</span>}
           </div>
-
           <div>
-            {countNotifications &&
-              Number(countNotifications) > 0 &&
-              item.name === "Notificações" && (
-                <span className="text-sm text-end rounded-full bg-green-800 dark:bg-green-950 w-6 h-6 justify-center flex items-center text-neutral-100">
-                  {countNotifications}
-                </span>
-              )}
+            {shouldShowNotifications && (
+              <span className="text-sm text-end rounded-full bg-green-900 dark:bg-green-950 w-6 h-6 justify-center flex items-center text-neutral-100">
+                {countNotifications}
+              </span>
+            )}
           </div>
         </div>
         {item.isOpen && open && (
@@ -63,17 +62,20 @@ export function SidebarItem({ item, open, openItems, onToggleOpen }: any) {
         )}
       </button>
       {item.isOpen && openItems && (
-        <div className="p-1 bg-green-600 dark:hover:bg-green-800 dark:bg-green-950 rounded-md mt-1 text-neutral-100">
+        <div className="p-1 bg-green-700 dark:bg-green-900 rounded-md mt-1 text-neutral-100">
           {item.open.map((subItem: any) => (
-            <PermissionGate permission={subItem.permission}>
+            <PermissionGate key={subItem.name} permission={subItem.permission}>
               <button
-                key={subItem.name}
                 title={subItem.name}
                 onClick={() => router(subItem.path)}
-                className={`w-full flex mt-1 text-start gap-4 rounded-md p-2  text-neutral-100 hover:bg-green-500 dark:hover:bg-green-950 transition
-            ${!open ? " justify-center" : "justify-between items-center"}
-            ${pathname === subItem.path ? "bg-green-500 dark:bg-green-800" : ""}
-                  `}
+                className={`w-full flex mt-1 text-start gap-4 rounded-md p-1 text-neutral-100 hover:bg-green-500 dark:hover:bg-green-950 transition
+                ${!open ? "justify-center" : "justify-between items-center"}
+                ${
+                  pathname === subItem.path
+                    ? "bg-green-500 dark:bg-green-950"
+                    : ""
+                }
+                `}
               >
                 <div className="flex items-center gap-4">
                   {subItem.icon}

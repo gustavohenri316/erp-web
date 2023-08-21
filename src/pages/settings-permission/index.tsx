@@ -13,7 +13,7 @@ export default function SettingsPermissions() {
   const [permissions, setPermissions] = useState<any>();
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [page, setPage] = useState("1");
+  const [page, setPage] = useState(1);
 
   const pageSize = 8;
   const totalItems = permissions?.totalItems;
@@ -43,7 +43,7 @@ export default function SettingsPermissions() {
   }, [loading, search, page]);
 
   function onPageChange(pageNumber: number) {
-    setPage(String(pageNumber));
+    setPage(pageNumber);
   }
   return (
     <Template

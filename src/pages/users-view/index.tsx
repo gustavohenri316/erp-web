@@ -10,28 +10,29 @@ import { Search } from "../../components/Search";
 import { UserTable } from "./_components/users-view-table";
 
 export default function UsersView() {
-  const [users, setUsers] = useState<User>();
   const router = useNavigate();
+
+  const [users, setUsers] = useState<User>();
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState("1");
+  const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
 
   const pageSize = 11;
   const totalItems = users?.totalItems || 0;
-  const firstPageIndex = (Number(page) - 1) * pageSize + 1;
-  const lastPageIndex = Number(page) - 1 + (totalItems - 1);
+  const firstPageIndex = (page - 1) * pageSize + 1;
+  const lastPageIndex = Math.min(page * pageSize, totalItems);
 
   const isNotViewPagination = pageSize >= totalItems;
 
   function onPageChange(pageNumber: number) {
-    setPage(String(pageNumber));
+    setPage(pageNumber);
   }
 
   useEffect(() => {
     async function fetchUsers() {
       try {
         const response = await getUsers({
-          currentPage: page as string,
+          currentPage: page,
           pageSize: pageSize,
           search,
         });
@@ -42,7 +43,7 @@ export default function UsersView() {
       }
     }
     fetchUsers();
-  }, [loading, search, page]);
+  }, [search, page, loading]);
 
   function handleSearch(value: string) {
     setSearch(value);

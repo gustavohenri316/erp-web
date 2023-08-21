@@ -42,7 +42,6 @@ export default function UserRegister() {
     username: "",
     corporateEmail: "",
     password: "",
-    team: "",
   });
 
   const [formErrors, setFormErrors] = useState<FormErrors>({
@@ -137,7 +136,6 @@ export default function UserRegister() {
       username: formValues.username,
       corporateEmail: formValues.corporateEmail,
       password: formValues.password,
-      team: formValues.team,
     };
 
     try {
@@ -510,22 +508,6 @@ export default function UserRegister() {
           <Col>
             <Row className="max-sm:flex-col">
               <Col>
-                <Label>Equipe</Label>
-                <Select
-                  name="team"
-                  value={formValues.team}
-                  onChange={handleChange}
-                >
-                  <option value="GoBlack">GoBlack</option>
-                  <option value="GoTech">GoTech</option>
-                  <option value="GoAdmin">GoAdmin</option>
-                  <option value="GoInput">GoInput</option>
-                  <option value="GoGreen">GoGreen</option>
-                  <option value="GoBusiness">GoBusiness</option>
-                  <option value="GoMarket">GoMarket</option>
-                </Select>
-              </Col>
-              <Col>
                 <Label>Privilégios</Label>
                 <Select
                   name="selectedPrivilege"
@@ -543,7 +525,7 @@ export default function UserRegister() {
             </Row>
           </Col>
         </Row>
-        <Row className="justify-end mt-24">
+        <Row className="justify-end py-8">
           <Button variant="outline-secondary" onClick={() => router(-1)}>
             Cancelar
           </Button>

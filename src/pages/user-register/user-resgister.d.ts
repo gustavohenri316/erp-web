@@ -23,7 +23,6 @@ interface UserFormValues {
   username: string;
   corporateEmail: string;
   password: string;
-  team: string;
 }
 
 interface FormErrors {

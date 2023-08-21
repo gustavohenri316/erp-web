@@ -7,7 +7,6 @@ import { useAuth } from "../../context/AuthContext";
 import { Template } from "../components/Template";
 import { EditorMessages } from "../../components/EditorMessages";
 import { Button } from "../../components/Button";
-import { Select } from "../../components/Select";
 import { createPolls } from "./polls-register.service";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -17,8 +16,7 @@ export default function PollsRegister() {
   const { user } = useAuth();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [feedbackType, setFeedbackType] = useState("");
-  const [scaleType, setScaleType] = useState("");
+
   const [loading, setLoading] = useState(false);
   const router = useNavigate();
 
@@ -28,8 +26,8 @@ export default function PollsRegister() {
       createdByName: user?.name,
       createdByEmail: user?.email,
       createdByAvatar: user?.photo,
-      feedbackType: feedbackType,
-      scaleType: scaleType,
+      feedbackType: "scaleWithMessage",
+      scaleType: "stars",
       description: description,
       feedbacks: [],
     };
@@ -74,42 +72,6 @@ export default function PollsRegister() {
         <Col>
           <Label>Descrição</Label>
           <EditorMessages value={description} onChange={setDescription} />
-        </Col>
-      </Row>
-      <Row className="mt-4">
-        <Col>
-          <Label>Tipo de feedback</Label>
-          <Select
-            value={feedbackType}
-            onChange={(e) => setFeedbackType(e.target.value)}
-          >
-            <option value="" disabled>
-              Selecione o Tipo de Feedback
-            </option>
-            <option value="scale">Escala de 1 a 5</option>
-            <option value="scaleWithMessage">
-              Escala de 1 a 5 com Mensagem
-            </option>
-            <option value="message">Apenas Mensagem</option>
-          </Select>
-        </Col>
-        <Col>
-          <Label>Tipo de escala</Label>
-          <Select
-            value={scaleType}
-            disabled={
-              feedbackType !== "scale" && feedbackType !== "scaleWithMessage"
-            }
-            onChange={(e) => setScaleType(e.target.value)}
-          >
-            <option value="" disabled>
-              Selecione o Tipo de Escala
-            </option>
-            <option value="heart">Coração</option>
-            <option value="stars">Estrelas</option>
-            <option value="balls">Bolas</option>
-            <option value="plants">Plantas</option>
-          </Select>
         </Col>
       </Row>
 

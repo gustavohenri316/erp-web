@@ -12,15 +12,17 @@ export default function TeamsView() {
   const router = useNavigate();
   const [teams, setTeams] = useState<TeamListServiceProps>();
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState("1");
-  const pageSize = "15";
+  const [page, setPage] = useState(1);
+
+  const pageSize = 8;
   const totalItems = teams?.total || 0;
-  const firstPageIndex = (Number(page) - 1) * Number(pageSize) + 1;
-  const lastPageIndex = Number(page) - 1 + (totalItems - 1);
-  const isNotViewPagination = Number(pageSize) >= totalItems;
+  const firstPageIndex = (page - 1) * pageSize + 1;
+  const lastPageIndex = Math.min(page * pageSize, totalItems);
+
+  const isNotViewPagination = pageSize >= totalItems;
 
   function onPageChange(pageNumber: number) {
-    setPage(String(pageNumber));
+    setPage(pageNumber);
   }
 
   async function fetchGetTeams() {
@@ -40,7 +42,11 @@ export default function TeamsView() {
     setLoading(value);
   }
   return (
-    <Template documentTitle="Equipes" title="Equipes">
+    <Template
+      documentTitle="Equipes"
+      title="Equipes"
+      permissionPage="S8IVPVBG70XGZ5SJUSUN7XDT0TCR38"
+    >
       <Row>
         <Search />
         <Button variant="success" onClick={() => router("/teams-register")}>

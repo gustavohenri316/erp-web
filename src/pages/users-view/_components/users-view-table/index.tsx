@@ -47,12 +47,6 @@ export function UserTable({ users, handleLoading }: UserTableProps) {
               <Skeleton loading={Boolean(!user)}>Email</Skeleton>
             </Table.Th>
             <Table.Th>
-              <Skeleton loading={Boolean(!user)}>Telefone</Skeleton>
-            </Table.Th>
-            <Table.Th>
-              <Skeleton loading={Boolean(!user)}>Equipe</Skeleton>
-            </Table.Th>
-            <Table.Th>
               <Skeleton loading={Boolean(!user)}>Privilégios</Skeleton>
             </Table.Th>
             <PermissionGate permission="N8AGIHK940BR31TLKCM3HMHMI7WOV4">
@@ -71,15 +65,13 @@ export function UserTable({ users, handleLoading }: UserTableProps) {
                     <img
                       src={item.photo}
                       alt=""
-                      className="w-16 h-16 rounded-full object-cover"
+                      className="w-14 h-14 rounded-full object-cover"
                     />
                   </div>
                 </Table.Td>
                 <Table.Td>{item.firstName}</Table.Td>
                 <Table.Td>{item.lastName}</Table.Td>
                 <Table.Td>{item.email}</Table.Td>
-                <Table.Td>{item.phoneNumber}</Table.Td>
-                <Table.Td>{item.team}</Table.Td>
                 <Table.Td>{item.privileges?.[0]?.name}</Table.Td>
                 <PermissionGate permission="N8AGIHK940BR31TLKCM3HMHMI7WOV4">
                   <Table.Td>

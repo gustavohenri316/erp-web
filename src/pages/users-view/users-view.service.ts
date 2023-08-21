@@ -2,12 +2,12 @@ import axios from "axios";
 import { baseURL } from "../../assets/data";
 
 type GetUsersServicesProps = {
-  currentPage?: string;
+  currentPage?: number;
   pageSize?: number;
   search?: string;
 };
 export async function getUsers({
-  currentPage = "1",
+  currentPage = 1,
   pageSize = 10,
   search = "",
 }: GetUsersServicesProps) {

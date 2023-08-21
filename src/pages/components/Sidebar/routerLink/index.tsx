@@ -1,3 +1,4 @@
+import { parseCookies } from "nookies";
 import {
   Users,
   Wrench,
@@ -5,13 +6,14 @@ import {
   PaperPlaneTilt,
   ToggleRight,
   Crown,
-  CurrencyDollarSimple,
   Storefront,
   QrCode,
-  Files,
   UsersFour,
   ChartLineUp,
+  User,
 } from "phosphor-react";
+
+const { "Dashboard.UserToken": Token } = parseCookies();
 
 export const routers = [
   {
@@ -32,24 +34,14 @@ export const routers = [
     permission: "1YCCT7V2ER4MGL4L7W41E6GZQ8R6WE",
     icon: <Storefront size={32} weight="thin" />,
   },
-  {
-    name: "Pagamentos",
-    path: "/payments-view",
-    permission: "1YCCT7V2ER4MGL4L7W41E6GZQ8R6WE",
-    icon: <CurrencyDollarSimple size={32} weight="thin" />,
-  },
+
   {
     name: "Enquetes",
     path: "/polls-view",
     permission: "49HW3N8E4IQNM9QE1J0J4O1KWVDUWF",
     icon: <ChartLineUp size={32} weight="thin" />,
   },
-  {
-    name: "Notas Fiscais",
-    path: "/invoices-view",
-    permission: "1YCCT7V2ER4MGL4L7W41E6GZQ8R6WE",
-    icon: <Files size={32} weight="thin" />,
-  },
+
   {
     name: "Usuários",
     path: "/users-view",
@@ -88,5 +80,11 @@ export const routers = [
     path: "/notifications-view",
     permission: "BYSEHZACU1K40NWP0GA3483JGY945N",
     icon: <PaperPlaneTilt size={32} weight="thin" />,
+  },
+  {
+    name: "Perfil",
+    path: `/profile/${Token}`,
+    permission: "A8PB8LX6VF1R476N7QYY2AGSPFMZ5E",
+    icon: <User size={32} weight="thin" />,
   },
 ];

@@ -27,7 +27,7 @@ export default function TeamsRegister() {
     async function fetchUsers() {
       try {
         const response = await getUsers({
-          currentPage: "1",
+          currentPage: 1,
           pageSize: 999999,
           search,
         });
@@ -94,7 +94,11 @@ export default function TeamsRegister() {
   };
 
   return (
-    <Template title="Cadastrar nova equipe" documentTitle="Cadastrar equipes">
+    <Template
+      title="Cadastrar nova equipe"
+      documentTitle="Cadastrar equipes"
+      permissionPage="624RL3QL0UIDMX2NDA8I7AMYN2DWWO"
+    >
       <Row>
         <Col>
           <Row className="py-4">

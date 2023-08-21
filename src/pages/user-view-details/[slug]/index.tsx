@@ -34,7 +34,6 @@ export default function UserViewDetails() {
     username: "",
     corporateEmail: "",
     password: "",
-    team: "",
   });
 
   const [image, setImage] = useState("");
@@ -68,7 +67,6 @@ export default function UserViewDetails() {
         username: data.username,
         corporateEmail: data.corporateEmail,
         password: "",
-        team: data.team,
       });
       setSelectedPrivilege(data.privileges[0].name);
       setImage(data.photo || null);
@@ -278,10 +276,6 @@ export default function UserViewDetails() {
       <Row className="my-4 max-sm:flex-col">
         <Col>
           <Row className="max-sm:flex-col">
-            <Col>
-              <Label>Equipe</Label>
-              <b className="text-neutral-500 text-xl">{formValues.team}</b>
-            </Col>
             <Col>
               <Label>Privilégios</Label>
               <b className="text-neutral-500 text-xl">{selectedPrivilege}</b>

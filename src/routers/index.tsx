@@ -38,6 +38,7 @@ const Polls = lazy(() => import("../pages/polls-view"));
 const PollsRegister = lazy(() => import("../pages/polls-register"));
 const Feedbacks = lazy(() => import("../pages/feedbacks"));
 const NotFound = lazy(() => import("../pages/not-found"));
+const ProfileUpdate = lazy(() => import("../pages/profile-update/[slug]"));
 
 export function Routers() {
   const { "Dashboard.UserToken": Token } = parseCookies();
@@ -106,6 +107,7 @@ export function Routers() {
           <Route path="/teams-register" element={<TeamsRegister />} />
           <Route path="/polls-view" element={<Polls />} />
           <Route path="/polls-register" element={<PollsRegister />} />
+          <Route path="/profile/:id" element={<ProfileUpdate />} />
         </Route>
         <Route path="/feedbacks-view" element={<Feedbacks />} />
         <Route path="/not-found" element={<NotFound />} />

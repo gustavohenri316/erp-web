@@ -13,9 +13,10 @@ import { Select } from "../../../components/Select";
 import { Template } from "../../components/Template";
 import { getPrivileges } from "../../settings-privileges/settings-privileges.service";
 import { findUser } from "../../users-view/users-view.service";
-import { updateUser } from "../user-update.service";
+import { updateUser } from "../profile-update.service";
+import PermissionGate from "../../../components/PermissionGate";
 
-export default function UserUpdate() {
+export default function ProfileUpdate() {
   const { id } = useParams();
   const router = useNavigate();
   const [selectedPrivilege, setSelectedPrivilege] = useState<string>("");
@@ -213,9 +214,9 @@ export default function UserUpdate() {
   }, []);
   return (
     <Template
-      documentTitle="Editar | Usuário"
+      documentTitle="Editar | Perfil"
       title="Editar Usuário"
-      permissionPage="4LBA5ATT2E4XFJE3DQTTCQE1X2EV4Q"
+      permissionPage="A8PB8LX6VF1R476N7QYY2AGSPFMZ5E"
     >
       <form onSubmit={handleSubmit}>
         <Row className="pb-4">
@@ -345,156 +346,162 @@ export default function UserUpdate() {
             </Row>
           </Col>
         </Row>
-        <Row className="my-4 max-sm:flex-col">
-          <span className="text-xl font-semibold">Informações de endereço</span>
-        </Row>
-        <Row className="max-sm:flex-col">
-          <Col className="mr-8">
-            <Label>Rua</Label>
-            <Input
-              name="street"
-              value={formValues.street}
-              onChange={handleChange}
-            />
-          </Col>
-          <Col>
-            <Row className="max-sm:flex-col">
-              <Col>
-                <Label>Número</Label>
-                <Input
-                  name="number"
-                  value={formValues.number}
-                  onChange={handleChange}
-                />
-              </Col>
-              <Col>
-                <Label>Complemento</Label>
-                <Input
-                  name="complement"
-                  value={formValues.complement}
-                  onChange={handleChange}
-                />
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-        <Row className="mt-2 max-sm:flex-col">
-          <Col className="mr-8">
-            <Row className="max-sm:flex-col">
-              <Col>
-                <Label>Bairro</Label>
-                <Input
-                  name="neighborhood"
-                  value={formValues.neighborhood}
-                  onChange={handleChange}
-                />
-              </Col>
-              <Col>
-                <Label>Cidade</Label>
-                <Input
-                  name="city"
-                  value={formValues.city}
-                  onChange={handleChange}
-                />
-              </Col>
-              <Col>
-                <Label>Estado</Label>
-                <Input
-                  name="state"
-                  value={formValues.state}
-                  onChange={handleChange}
-                />
-              </Col>
-            </Row>
-          </Col>
-          <Col>
-            <Row className="max-sm:flex-col">
-              <Col>
-                <Label>País/região</Label>
-                <Input
-                  name="countryRegion"
-                  value={formValues.countryRegion}
-                  onChange={handleChange}
-                />
-              </Col>
-              <Col>
-                <Label>CEP</Label>
-                <Input
-                  name="zipCode"
-                  value={formValues.zipCode}
-                  onChange={handleChange}
-                />
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-        <Row className="my-4 max-sm:flex-col">
-          <span className="text-xl font-semibold">
-            Informações profissionais
-          </span>
-        </Row>
-        <Row className="mt-2 max-sm:flex-col">
-          <Col className="mr-8">
-            <Row className="max-sm:flex-col">
-              <Col>
-                <Label>Cargo</Label>
-                <Input
-                  name="position"
-                  value={formValues.position}
-                  onChange={handleChange}
-                />
-              </Col>
-              <Col>
-                <Label>Formação</Label>
-                <Input
-                  name="education"
-                  value={formValues.education}
-                  onChange={handleChange}
-                />
-              </Col>
-              <Col>
-                <Label>Data de início</Label>
-                <Input
-                  name="startDate"
-                  type="date"
-                  value={formValues.startDate}
-                  onChange={handleChange}
-                />
-              </Col>
-            </Row>
-          </Col>
-          <Col>
-            <Row className="max-sm:flex-col">
-              <Col>
-                <Label>Salário</Label>
-                <Input
-                  name="salary"
-                  value={formValues.salary}
-                  onChange={handleChange}
-                />
-              </Col>
-              <Col>
-                <Label>Tipo de contratação</Label>
-                <Select
-                  name="employmentType"
-                  value={formValues.employmentType}
-                  onChange={handleChange}
-                >
-                  <option value="">Selecione o tipo de contratação</option>
-                  <option value="CLT">CLT</option>
-                  <option value="PJ">PJ</option>
-                  <option value="Estágio">Estágio</option>
-                  <option value="Freelance">Freelance</option>
-                  <option value="Temporário">Temporário</option>
-                  <option value="Aprendiz">Aprendiz</option>
-                  <option value="Autônomo">Autônomo</option>
-                  <option value="Tempo Determinado">Tempo Determinado</option>
-                  <option value="Meio Período">Meio Período</option>
-                </Select>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+        <PermissionGate permission="9ZVFK3GS3AM2IZQJOXZ4DWUCYOATQ3">
+          <Row className="my-4 max-sm:flex-col">
+            <span className="text-xl font-semibold">
+              Informações de endereço
+            </span>
+          </Row>
+          <Row className="max-sm:flex-col">
+            <Col className="mr-8">
+              <Label>Rua</Label>
+              <Input
+                name="street"
+                value={formValues.street}
+                onChange={handleChange}
+              />
+            </Col>
+            <Col>
+              <Row className="max-sm:flex-col">
+                <Col>
+                  <Label>Número</Label>
+                  <Input
+                    name="number"
+                    value={formValues.number}
+                    onChange={handleChange}
+                  />
+                </Col>
+                <Col>
+                  <Label>Complemento</Label>
+                  <Input
+                    name="complement"
+                    value={formValues.complement}
+                    onChange={handleChange}
+                  />
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          <Row className="mt-2 max-sm:flex-col">
+            <Col className="mr-8">
+              <Row className="max-sm:flex-col">
+                <Col>
+                  <Label>Bairro</Label>
+                  <Input
+                    name="neighborhood"
+                    value={formValues.neighborhood}
+                    onChange={handleChange}
+                  />
+                </Col>
+                <Col>
+                  <Label>Cidade</Label>
+                  <Input
+                    name="city"
+                    value={formValues.city}
+                    onChange={handleChange}
+                  />
+                </Col>
+                <Col>
+                  <Label>Estado</Label>
+                  <Input
+                    name="state"
+                    value={formValues.state}
+                    onChange={handleChange}
+                  />
+                </Col>
+              </Row>
+            </Col>
+            <Col>
+              <Row className="max-sm:flex-col">
+                <Col>
+                  <Label>País/região</Label>
+                  <Input
+                    name="countryRegion"
+                    value={formValues.countryRegion}
+                    onChange={handleChange}
+                  />
+                </Col>
+                <Col>
+                  <Label>CEP</Label>
+                  <Input
+                    name="zipCode"
+                    value={formValues.zipCode}
+                    onChange={handleChange}
+                  />
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </PermissionGate>
+        <PermissionGate permission="RANEI55YQQ1C7WPJUM5PJP9LPU6JP7">
+          <Row className="my-4 max-sm:flex-col">
+            <span className="text-xl font-semibold">
+              Informações profissionais
+            </span>
+          </Row>
+          <Row className="mt-2 max-sm:flex-col">
+            <Col className="mr-8">
+              <Row className="max-sm:flex-col">
+                <Col>
+                  <Label>Cargo</Label>
+                  <Input
+                    name="position"
+                    value={formValues.position}
+                    onChange={handleChange}
+                  />
+                </Col>
+                <Col>
+                  <Label>Formação</Label>
+                  <Input
+                    name="education"
+                    value={formValues.education}
+                    onChange={handleChange}
+                  />
+                </Col>
+                <Col>
+                  <Label>Data de início</Label>
+                  <Input
+                    name="startDate"
+                    type="date"
+                    value={formValues.startDate}
+                    onChange={handleChange}
+                  />
+                </Col>
+              </Row>
+            </Col>
+            <Col>
+              <Row className="max-sm:flex-col">
+                <Col>
+                  <Label>Salário</Label>
+                  <Input
+                    name="salary"
+                    value={formValues.salary}
+                    onChange={handleChange}
+                  />
+                </Col>
+                <Col>
+                  <Label>Tipo de contratação</Label>
+                  <Select
+                    name="employmentType"
+                    value={formValues.employmentType}
+                    onChange={handleChange}
+                  >
+                    <option value="">Selecione o tipo de contratação</option>
+                    <option value="CLT">CLT</option>
+                    <option value="PJ">PJ</option>
+                    <option value="Estágio">Estágio</option>
+                    <option value="Freelance">Freelance</option>
+                    <option value="Temporário">Temporário</option>
+                    <option value="Aprendiz">Aprendiz</option>
+                    <option value="Autônomo">Autônomo</option>
+                    <option value="Tempo Determinado">Tempo Determinado</option>
+                    <option value="Meio Período">Meio Período</option>
+                  </Select>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </PermissionGate>
         <Row className="my-4 max-sm:flex-col">
           <span className="text-xl font-semibold">Informações de acesso</span>
         </Row>
@@ -509,14 +516,7 @@ export default function UserUpdate() {
                   onChange={handleChange}
                 />
               </Col>
-              <Col>
-                <Label>Email corporativo</Label>
-                <Input
-                  name="corporateEmail"
-                  value={formValues.corporateEmail}
-                  onChange={handleChange}
-                />
-              </Col>
+
               <Col>
                 <Label>Senha</Label>
                 <Input
@@ -529,30 +529,34 @@ export default function UserUpdate() {
             </Row>
           </Col>
         </Row>
-        <Row className="my-4 max-sm:flex-col">
-          <span className="text-xl font-semibold">Informações de usuário</span>
-        </Row>
-        <Row className="mt-2 max-sm:flex-col">
-          <Col>
-            <Row className="max-sm:flex-col">
-              <Col>
-                <Label>Privilégios</Label>
-                <Select
-                  name="selectedPrivilege"
-                  value={selectedPrivilege}
-                  onChange={handleSelectChange}
-                >
-                  <option value="">Selecione uma opção</option>
-                  {privileges?.map((item) => (
-                    <option key={item._id} value={item._id}>
-                      {item.name}
-                    </option>
-                  ))}
-                </Select>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+        <PermissionGate permission="CQUFBR7HV8703RQJCVAX9SZ2YGA6HW">
+          <Row className="my-4 max-sm:flex-col">
+            <span className="text-xl font-semibold">
+              Informações de usuário
+            </span>
+          </Row>
+          <Row className="mt-2 max-sm:flex-col">
+            <Col>
+              <Row className="max-sm:flex-col">
+                <Col>
+                  <Label>Privilégios</Label>
+                  <Select
+                    name="selectedPrivilege"
+                    value={selectedPrivilege}
+                    onChange={handleSelectChange}
+                  >
+                    <option value="">Selecione uma opção</option>
+                    {privileges?.map((item) => (
+                      <option key={item._id} value={item._id}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </Select>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </PermissionGate>
         <Row className="justify-end mt-24">
           <Button
             variant="outline-secondary"

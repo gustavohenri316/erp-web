@@ -18,7 +18,7 @@ interface MediaCalculatorProps {
   media: number;
 }
 
-const MediaCalculator: React.FC<MediaCalculatorProps> = ({ media }) => {
+export const MediaCalculator: React.FC<MediaCalculatorProps> = ({ media }) => {
   const generateStarIcons = (filledStars: number): React.ReactNode[] => {
     const starIcons = [];
     for (let i = 0; i < 5; i++) {

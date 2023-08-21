@@ -5,6 +5,7 @@ import { deleteTeams } from "../../teams-view.service";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import { TeamsViewModalDelete } from "../teams-view-modal-delete";
+import PermissionGate from "../../../../components/PermissionGate";
 
 export function TeamsViewTable({
   data,
@@ -48,15 +49,19 @@ export function TeamsViewTable({
                 </Table.Td>
                 <Table.Td py={4} textAlign="text-end">
                   <div className="flex gap-1 justify-end">
-                    <ButtonIcon variant="primary" size="sm">
-                      <PencilSimple size={22} />
-                    </ButtonIcon>
+                    <PermissionGate permission="6IGWD0VDD68NR0JDODJ6HEXEC9TDUA">
+                      <ButtonIcon variant="primary" size="sm">
+                        <PencilSimple size={22} />
+                      </ButtonIcon>
+                    </PermissionGate>
 
-                    <TeamsViewModalDelete
-                      handleDelete={() => handleDeleteTeams(team._id)}
-                      loading={loading}
-                      name={team.name}
-                    />
+                    <PermissionGate permission="XZGAWZA5XYS1338LA907DBJFWSZTMP">
+                      <TeamsViewModalDelete
+                        handleDelete={() => handleDeleteTeams(team._id)}
+                        loading={loading}
+                        name={team.name}
+                      />
+                    </PermissionGate>
                   </div>
                 </Table.Td>
               </Table.Tr>

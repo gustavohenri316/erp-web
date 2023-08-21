@@ -4,14 +4,13 @@ type DeletePermissionsService = {
 
 type SearchPermissionService = {
   search: string;
-  page: string;
+  page: number;
   pageSize: number;
 };
 
 type FindPermissionByNameService = {
   search: string;
 };
-
 
 interface SettingsPermissionModalDeleteProps {
   name: string;

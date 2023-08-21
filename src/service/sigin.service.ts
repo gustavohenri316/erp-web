@@ -7,7 +7,7 @@ type SigInProps = {
 };
 export async function sigInRequest({ email, password }: SigInProps) {
   const payload = {
-    email: email,
+    identifier: email,
     password: password,
   };
 
