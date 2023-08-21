@@ -76,7 +76,9 @@ export default function PollsRegister() {
       </Row>
 
       <Row className="mt-4 justify-end">
-        <Button variant="outline-secondary">Cancelar</Button>
+        <Button variant="outline-secondary" onClick={() => router(-1)}>
+          Cancelar
+        </Button>
         <Button variant="success" onClick={handleSubmit} disabled={loading}>
           {loading ? <Spinner /> : "Confirmar"}
         </Button>
