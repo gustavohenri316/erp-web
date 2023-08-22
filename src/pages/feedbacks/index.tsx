@@ -36,11 +36,15 @@ export default function Feedbacks() {
   const [loading, setLoading] = useState(false);
   const [loadingList, setLoadingList] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
+  const [openAddComments, setOpenAddComments] = useState(false);
 
   const open = () => setOpenFeedback(true);
   const close = () => setOpenFeedback(false);
   const openAllFeedbacks = () => setOpenFeedbacks(true);
   const closeAllFeedbacks = () => setOpenFeedbacks(false);
+  const openComments = () => setOpenAddComments(true);
+  const closeComments = () => setOpenAddComments(false);
+  const isLogin = Token ? true : false;
 
   const handleStarHover = (index: number) => {
     if (clickedIndex === null) {
@@ -54,7 +58,7 @@ export default function Feedbacks() {
 
   async function fetchGetPollsById() {
     try {
-      const response = await getPollsById(id as string);
+      const response = await getPollsById(id as string, isLogin);
       setData(response);
     } catch (err) {
       console.error(err);
@@ -67,7 +71,7 @@ export default function Feedbacks() {
   }, [loadingList]);
 
   async function handleSubmit() {
-    if (!name || !email || !feedbackMessage || clickedIndex === null) {
+    if (!name || !email || clickedIndex === null) {
       toast.error("Preencha todos os campos e selecione uma avaliação.");
       return;
     }
@@ -106,26 +110,32 @@ export default function Feedbacks() {
     }
   }
 
+  const isFeedbackVerify =
+    data &&
+    data?.feedbacks.length > 0 &&
+    data?.feedbacks.some((feedback) => feedback.feedbackMessage.trim() !== "");
+
   return (
-    <div className="bg-green-800 w-screen h-screen py-8  text-neutral-800 overflow-auto">
-      <div className="container  bg-green-900 rounded-md mx-auto p-8 overflow-auto text-neutral-400">
+    <div className="bg-white w-screen h-screen py-8  overflow-auto">
+      <div className="container  bg-neutral-300 rounded-md mx-auto p-8 overflow-auto ">
         <UserPolls data={data} />
         <div className="flex gap-8 mt-4">
           {!openFeedback && (
-            <span
-              className="underline cursor-pointer text-neutral-300"
-              onClick={open}
-            >
+            <span className="underline cursor-pointer " onClick={open}>
               Enviar feedback
             </span>
           )}
-          {!openFeedback && data && data?.feedbacks?.length > 0 && (
-            <span
-              className="underline cursor-pointer text-neutral-800"
-              onClick={openAllFeedbacks}
-            >
-              Ver feedbacks
-            </span>
+          {(data?.isFeedbackPublic || isLogin) && isFeedbackVerify && (
+            <div>
+              {!openFeedback && data && data?.feedbacks?.length > 0 && (
+                <span
+                  className="underline cursor-pointer"
+                  onClick={openAllFeedbacks}
+                >
+                  Ver feedbacks
+                </span>
+              )}
+            </div>
           )}
         </div>
         {openFeedback && (
@@ -175,15 +185,28 @@ export default function Feedbacks() {
               </Col>
             </Row>
             <Row>
-              <Col>
-                <div className="bg-neutral-300 text-neutral-800">
-                  <EditorMessages
-                    onChange={setFeedbackMessage}
-                    value={feedbackMessage}
-                  />
-                </div>
-              </Col>
+              <span
+                className="italic underline text-sm cursor-pointer hover:font-semibold"
+                onClick={openAddComments ? closeComments : openComments}
+              >
+                {openAddComments
+                  ? "Fechar caixa de cometários"
+                  : "Adicionar comentário"}
+              </span>
             </Row>
+
+            {openAddComments && (
+              <Row>
+                <Col>
+                  <div className="bg-neutral-300">
+                    <EditorMessages
+                      onChange={setFeedbackMessage}
+                      value={feedbackMessage}
+                    />
+                  </div>
+                </Col>
+              </Row>
+            )}
             <Row className="justify-end mt-2">
               <Button variant="danger" onClick={close}>
                 Cancelar
@@ -196,14 +219,16 @@ export default function Feedbacks() {
                 {loading ? <Spinner /> : "Enviar feedback"}
               </Button>
             </Row>
-            <Row>
-              <span
-                className="underline cursor-pointer text-neutral-300"
-                onClick={openFeedbacks ? closeAllFeedbacks : openAllFeedbacks}
-              >
-                {openFeedbacks ? "Fechar feedbacks" : "Ver feedback"}
-              </span>
-            </Row>
+            {(data?.isFeedbackPublic || isLogin) && isFeedbackVerify ? (
+              <Row>
+                <span
+                  className="underline cursor-pointer "
+                  onClick={openFeedbacks ? closeAllFeedbacks : openAllFeedbacks}
+                >
+                  {openFeedbacks ? "Fechar feedbacks" : "Ver feedback"}
+                </span>
+              </Row>
+            ) : null}
           </div>
         )}
         {openFeedbacks && (

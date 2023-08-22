@@ -10,13 +10,16 @@ export function UserPolls({ data }: IUserPolls) {
           alt=""
         />
         <div className="flex flex-col py-2">
-          <span className="text-xl">
-            <b>{data?.title}</b>
+          <span className="text-lg">
+            <b>{data?.createdByName}</b>
           </span>
           <span className="text-sm">
             {formatDate(data?.createdAt as string)}
           </span>
         </div>
+      </div>
+      <div>
+        <span className="text-2xl">{data?.title}</span>
       </div>
       <div
         className="mt-2 "

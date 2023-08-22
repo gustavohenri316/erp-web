@@ -47,6 +47,7 @@ export const MediaCalculator: React.FC<MediaCalculatorProps> = ({ media }) => {
 
 export function PollsTable({ data, handleLoading }: IPollsTable) {
   const [loading, setLoading] = useState(false);
+
   async function fetchDeletePolls(id: string) {
     try {
       setLoading(true);
@@ -54,13 +55,14 @@ export function PollsTable({ data, handleLoading }: IPollsTable) {
       await deletePolls(id);
       toast.success("Enquete deletada com sucesso!");
     } catch (error) {
-      toast.success("Error ao deletar enquete!");
+      toast.success("Erro ao deletar enquete!");
       console.error(error);
     } finally {
       handleLoading(false);
       setLoading(false);
     }
   }
+
   return (
     <>
       <Table.Root>
@@ -70,19 +72,26 @@ export function PollsTable({ data, handleLoading }: IPollsTable) {
               <Skeleton loading={false}>Criador</Skeleton>
             </Table.Th>
             <Table.Th>
-              <Skeleton loading={false}>Titulo</Skeleton>
+              <Skeleton loading={false}>Título</Skeleton>
             </Table.Th>
             <Table.Th>
               <Skeleton loading={false}>
                 <div className="flex items-center justify-center">
-                  Qtd de feedbacks
+                  Qtd. de feedbacks
                 </div>
               </Skeleton>
             </Table.Th>
             <Table.Th>
               <Skeleton loading={false}>
                 <div className="flex items-center justify-center">
-                  Media avaliação
+                  Qtd. de comentários
+                </div>
+              </Skeleton>
+            </Table.Th>
+            <Table.Th>
+              <Skeleton loading={false}>
+                <div className="flex items-center justify-center">
+                  Média de avaliação
                 </div>
               </Skeleton>
             </Table.Th>
@@ -114,6 +123,13 @@ export function PollsTable({ data, handleLoading }: IPollsTable) {
                   <Table.Td>{item.title}</Table.Td>
                   <Table.Td textAlign="text-center">
                     {item.feedbacks.length}
+                  </Table.Td>
+                  <Table.Td textAlign="text-center">
+                    {
+                      item.feedbacks.filter(
+                        (feedback) => feedback.feedbackMessage.trim() !== ""
+                      ).length
+                    }
                   </Table.Td>
                   <Table.Td>
                     <div className="flex items-center justify-center gap-2">

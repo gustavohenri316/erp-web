@@ -17,8 +17,7 @@ interface IPollsProps {
   createdByName: string;
   createdByEmail: string;
   createdByAvatar: string;
-  feedbackType: string;
-  scaleType: string | null;
+  isFeedbackPublic: boolean;
   createdAt: string;
   description: string;
   feedbacks: IFeedback[];

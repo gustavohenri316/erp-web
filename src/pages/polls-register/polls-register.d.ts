@@ -3,8 +3,7 @@ type IPayloadPolls = {
   createdByName: string | undefined;
   createdByEmail: string | undefined;
   createdByAvatar: string | undefined;
-  feedbackType: string;
-  scaleType: string;
+  isFeedbackPublic: boolean;
   description: string;
   feedbacks: [];
 };

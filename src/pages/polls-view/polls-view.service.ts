@@ -6,8 +6,10 @@ export async function getPolls() {
   return response.data;
 }
 
-export async function getPollsById(id: string) {
-  const response = await axios.get(`${baseURL}/polls/${id}`);
+export async function getPollsById(id: string, isPrivate: boolean = false) {
+  const response = await axios.get(
+    `${baseURL}/polls/${id}?isPrivate=${isPrivate}`
+  );
   return response.data;
 }
 
