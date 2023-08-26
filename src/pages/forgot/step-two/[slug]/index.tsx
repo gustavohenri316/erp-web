@@ -66,12 +66,12 @@ export default function ForgotStep2() {
   };
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center bg-green-600 dark:bg-green-950">
+    <div className="w-screen h-screen flex items-center justify-center bg-green-600 ">
       <div className="bg-neutral-100 border rounded-md flex flex-col justify-center pt-8 px-8 pb-4">
         <div className="flex flex-col gap-4 mb-8 items-center justify-center">
           <img src="/ICONE.png" alt="" className="w-[100px] h-[100px]" />
-          <div className="border  p-2 rounded-md bg-neutral-200 w-96 text-center">
-            <span>
+          <div className="border  p-2 rounded-md bg-neutral-200 w-96 overflow-auto text-center">
+            <span className="w-full overflow-auto">
               Digite o código enviado no seu e-mail: <b>{email}</b>
             </span>
           </div>
@@ -95,7 +95,7 @@ export default function ForgotStep2() {
           </div>
           <button
             disabled={loading}
-            className="p-3 border bg-green-600 dark:bg-green-950 rounded-md text-neutral-100 w-96 disabled:cursor-not-allowed disabled:opacity-80"
+            className="p-3 border bg-green-600  hover:bg-green-800 rounded-md text-neutral-100 w-96 disabled:cursor-not-allowed disabled:opacity-80"
             onClick={handleSendCode}
           >
             {loading ? <Spinner /> : "CONFIRMAR "}
@@ -109,7 +109,7 @@ export default function ForgotStep2() {
           </span>
           <span
             onClick={() => router(-1)}
-            className="text-center underline text-gray-800 cursor-pointer"
+            className="text-center underline text-green-800 cursor-pointer"
           >
             Voltar
           </span>

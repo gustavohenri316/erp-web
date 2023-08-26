@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { parseCookies } from "nookies";
 
@@ -15,9 +15,12 @@ import { Spinner } from "../../components/Spinner";
 import { EditorMessages } from "../../components/EditorMessages";
 import { FeedbacksUsersView } from "./_components/feedbacks-users-view";
 import { UserPolls } from "./_components/user-polls";
+import { AuthContext } from "../../context/AuthContext";
+import { SwitchTheme } from "../../components/SwitchTheme";
 
 export default function Feedbacks() {
   const { "Dashboard.UserToken": Token } = parseCookies();
+  const { user } = useContext(AuthContext);
 
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
@@ -58,7 +61,11 @@ export default function Feedbacks() {
 
   async function fetchGetPollsById() {
     try {
-      const response = await getPollsById(id as string, isLogin);
+      const response = await getPollsById(
+        id as string,
+        isLogin,
+        user?.id as string
+      );
       setData(response);
     } catch (err) {
       console.error(err);
@@ -67,8 +74,10 @@ export default function Feedbacks() {
   }
 
   useEffect(() => {
-    fetchGetPollsById();
-  }, [loadingList]);
+    if (user) {
+      fetchGetPollsById();
+    }
+  }, [user, loadingList]);
 
   async function handleSubmit() {
     if (!name || !email || clickedIndex === null) {
@@ -87,6 +96,7 @@ export default function Feedbacks() {
       setLoading(true);
       setLoadingList(true);
       await createNewFeedback(id as string, payload);
+      toast.success("Obrigado pelo seu feedback!");
     } catch (err) {
       console.error(err);
     } finally {
@@ -99,7 +109,7 @@ export default function Feedbacks() {
     try {
       setLoadingList(true);
       setLoadingDelete(true);
-      await deleteFeedback(id as string, idFeedback);
+      await deleteFeedback(id as string, idFeedback, user?.id as string);
       toast.success("Feedback deletado com sucesso!");
     } catch (error) {
       console.error(error);
@@ -116,8 +126,10 @@ export default function Feedbacks() {
     data?.feedbacks.some((feedback) => feedback.feedbackMessage.trim() !== "");
 
   return (
-    <div className="bg-white w-screen h-screen py-8  overflow-auto">
-      <div className="container  bg-neutral-300 rounded-md mx-auto p-8 overflow-auto ">
+    <div className="bg-white w-screen h-screen py-8 dark:bg-neutral-800 overflow-auto">
+      <div className="container  bg-neutral-300 dark:bg-neutral-700 rounded-md mx-auto p-8 overflow-auto ">
+        <SwitchTheme fixed />
+
         <UserPolls data={data} />
         <div className="flex gap-8 mt-4">
           {!openFeedback && (
@@ -168,7 +180,7 @@ export default function Feedbacks() {
               <Col>
                 <Label>Nome</Label>
                 <input
-                  className="p-2 rounded-md bg-neutral-200 text-neutral-900 placeholder:text-neutral-900"
+                  className="p-2 rounded-md bg-neutral-200 dark:bg-neutral-500 text-neutral-900 placeholder:text-neutral-900"
                   value={name}
                   placeholder="Digite seu nome"
                   onChange={(e) => setName(e.target.value)}
@@ -177,7 +189,7 @@ export default function Feedbacks() {
               <Col>
                 <Label>Email</Label>
                 <input
-                  className="p-2 rounded-md bg-neutral-200 text-neutral-900 placeholder:text-neutral-900"
+                  className="p-2 rounded-md bg-neutral-200 text-neutral-900 dark:bg-neutral-500 placeholder:text-neutral-900"
                   value={email}
                   placeholder="Digite seu email"
                   onChange={(e) => setEmail(e.target.value)}
@@ -198,7 +210,7 @@ export default function Feedbacks() {
             {openAddComments && (
               <Row>
                 <Col>
-                  <div className="bg-neutral-300">
+                  <div className="bg-neutral-300 dark:bg-neutral-500">
                     <EditorMessages
                       onChange={setFeedbackMessage}
                       value={feedbackMessage}

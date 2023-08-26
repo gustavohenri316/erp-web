@@ -1,19 +1,31 @@
 import axios from "axios";
 import { baseURL } from "../../assets/data";
 
-export async function getPolls() {
-  const response = await axios.get(`${baseURL}/polls`);
-  return response.data;
+interface IGetPolls {
+  page: number;
+  pageSize: number;
+  search: string;
+  userId: string;
 }
-
-export async function getPollsById(id: string, isPrivate: boolean = false) {
+export async function getPolls({ search, page, pageSize, userId }: IGetPolls) {
   const response = await axios.get(
-    `${baseURL}/polls/${id}?isPrivate=${isPrivate}`
+    `${baseURL}/polls/${userId}?page=${page}&pageSize=${pageSize}&filter=${search}`
   );
   return response.data;
 }
 
-export async function deletePolls(id: string) {
-  const response = await axios.delete(`${baseURL}/polls/${id}`);
+export async function getPollsById(
+  id: string,
+  isPrivate: boolean = false,
+  userId: string
+) {
+  const response = await axios.get(
+    `${baseURL}/polls/${userId}/${id}?isPrivate=${isPrivate}`
+  );
+  return response.data;
+}
+
+export async function deletePolls(userId: string, id: string) {
+  const response = await axios.delete(`${baseURL}/polls/${userId}/${id}`);
   return response.data;
 }

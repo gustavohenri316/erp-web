@@ -9,9 +9,13 @@ export async function createNewFeedback(id: string, payload: any) {
   return response.data;
 }
 
-export async function deleteFeedback(idPolls: string, idFeedback: string) {
+export async function deleteFeedback(
+  idPolls: string,
+  idFeedback: string,
+  userId: string
+) {
   const response = await axios.delete(
-    `${baseURL}/polls/${idPolls}/feedbacks/${idFeedback}`
+    `${baseURL}/polls/${userId}/${idPolls}/feedbacks/${idFeedback}`
   );
   return response.data;
 }

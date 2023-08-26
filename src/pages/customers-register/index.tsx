@@ -71,7 +71,11 @@ export default function CustomersRegister() {
   };
 
   return (
-    <Template title="Cadastrar Cliente" documentTitle="Cadastrar Cliente">
+    <Template
+      title="Cadastrar Cliente"
+      documentTitle="Cadastrar Cliente"
+      permissionPage="QCZZXPSK3JHROTQCKY48FQT7FEACGN"
+    >
       <form onSubmit={handleFormSubmit}>
         <Row className="py-2">
           <Col>

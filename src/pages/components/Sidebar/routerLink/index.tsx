@@ -59,7 +59,7 @@ export const routers = [
         name: "Privilégios",
         path: "/settings-privileges",
         icon: <Crown size={32} weight="thin" />,
-        permission: "",
+        permission: "WO544HAB6KEH2PY94JSV9UCGA6PO7I",
       },
       {
         name: "Permissões",
@@ -76,15 +76,15 @@ export const routers = [
     ],
   },
   {
-    name: "Notificações",
-    path: "/notifications-view",
-    permission: "BYSEHZACU1K40NWP0GA3483JGY945N",
-    icon: <PaperPlaneTilt size={32} weight="thin" />,
-  },
-  {
     name: "Perfil",
     path: `/profile/${Token}`,
     permission: "A8PB8LX6VF1R476N7QYY2AGSPFMZ5E",
     icon: <User size={32} weight="thin" />,
+  },
+  {
+    name: "Notificações",
+    path: "/notifications-view",
+    permission: "BYSEHZACU1K40NWP0GA3483JGY945N",
+    icon: <PaperPlaneTilt size={32} weight="thin" />,
   },
 ];

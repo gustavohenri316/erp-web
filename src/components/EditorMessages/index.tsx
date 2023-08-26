@@ -58,7 +58,7 @@ export const EditorMessages: React.FC<EditorMessagesProps> = ({
   ];
 
   return (
-    <div className="bg-white w-full h-72 mb-12 border-0">
+    <div className="bg-white w-full h-72 mb-12 border-none dark:bg-neutral-500">
       <ReactQuill
         ref={(ref) => (quillRef.current = ref)}
         theme="snow"
@@ -66,7 +66,7 @@ export const EditorMessages: React.FC<EditorMessagesProps> = ({
         style={{
           height: "100%",
           background: "transparent",
-          border: "0px solid #000",
+
           marginBottom: "1rem",
         }}
         onChange={handleChange}

@@ -6,8 +6,9 @@ import { Skeleton } from "../../../../components/Skeleton";
 import { Table } from "../../../../components/Table";
 import { PollsModalDelete } from "../polls-view-modal-delete";
 import { deletePolls } from "../../polls-view.service";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
+import { AuthContext } from "../../../../context/AuthContext";
 
 interface IPollsTable {
   data: IPolls | undefined;
@@ -47,12 +48,15 @@ export const MediaCalculator: React.FC<MediaCalculatorProps> = ({ media }) => {
 
 export function PollsTable({ data, handleLoading }: IPollsTable) {
   const [loading, setLoading] = useState(false);
+  const { user } = useContext(AuthContext);
 
   async function fetchDeletePolls(id: string) {
     try {
       setLoading(true);
       handleLoading(true);
-      await deletePolls(id);
+      if (user) {
+        await deletePolls(user?.id, id);
+      }
       toast.success("Enquete deletada com sucesso!");
     } catch (error) {
       toast.success("Erro ao deletar enquete!");

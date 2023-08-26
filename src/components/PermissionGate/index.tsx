@@ -1,5 +1,6 @@
 import { LockKey } from "phosphor-react";
-import useGetUserPermissions from "../../hooks/useGetUserPermissions";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const PermissionGate = ({
   children,
@@ -7,9 +8,9 @@ const PermissionGate = ({
   isPage = false,
   onLoading,
 }: PermissionGateProps) => {
-  const userPermissions = useGetUserPermissions();
+  const { user } = useContext(AuthContext);
 
-  if (userPermissions?.includes(permission as string)) {
+  if (user?.permissions?.includes(permission as string)) {
     onLoading && onLoading(true);
     return children;
   }

@@ -65,7 +65,7 @@ export default function SignIn() {
   }
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center bg-green-600 dark:bg-green-950">
+    <div className="w-screen h-screen flex items-center justify-center bg-green-600 ">
       <div className="bg-neutral-100 border rounded-md flex flex-col justify-center pt-8 px-8 pb-4">
         <div className="flex flex-col gap-4 mb-8 items-center justify-center">
           <img src="/ICONE.png" alt="" className="w-[100px] h-[100px]" />
@@ -86,7 +86,7 @@ export default function SignIn() {
           />
           <button
             disabled={loading}
-            className="p-3 border bg-green-600 dark:bg-green-950 hover:bg-gray-900 rounded-md text-neutral-100 w-96 disabled:cursor-not-allowed disabled:opacity-80"
+            className="p-3 border bg-green-600  hover:bg-green-800 rounded-md text-neutral-100 w-96 disabled:cursor-not-allowed disabled:opacity-80"
             onClick={handleSigIn}
           >
             {loading ? <Spinner /> : "Entrar "}

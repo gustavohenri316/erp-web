@@ -9,6 +9,10 @@ interface IFeedback {
 
 interface IPolls {
   polls: IPollsProps[];
+  currentPage: number;
+  pageSize: number;
+  totalCount: number;
+  totalPages: number;
 }
 
 interface IPollsProps {

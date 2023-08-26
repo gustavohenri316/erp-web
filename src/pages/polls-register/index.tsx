@@ -39,8 +39,10 @@ export default function PollsRegister() {
 
     try {
       setLoading(true);
-      const response = await createPolls(payload);
-      toast.success(response.message);
+      if (user) {
+        const response = await createPolls(user?.id, payload);
+        toast.success(response.message);
+      }
     } catch (err) {
       console.error(err);
       toast.error("Erro ao criar nova enquete!");

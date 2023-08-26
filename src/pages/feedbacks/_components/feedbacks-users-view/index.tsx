@@ -25,9 +25,12 @@ export function FeedbacksUsersView({
 
           if (item.feedbackMessage.trim() !== "") {
             return (
-              <div key={item._id} className="bg-white rounded-md mt-2 p-2 ">
+              <div
+                key={item._id}
+                className="bg-white rounded-md dark:bg-neutral-500 mt-2 p-2 "
+              >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-gray-500 flex items-center justify-center text-xl">
+                  <div className="w-10 h-10 rounded-full bg-gray-500 dark:bg-neutral-100 flex items-center justify-center text-xl">
                     {firstLetter}
                   </div>
                   <div className="flex flex-col">

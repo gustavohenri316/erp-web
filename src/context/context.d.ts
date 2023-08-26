@@ -2,6 +2,7 @@ export interface UserProfile {
   name: string;
   email: string;
   photo: string;
+  permissions: Array<string>;
   id: string;
 }
 
@@ -12,10 +13,8 @@ export interface AuthContextType {
   isAuthenticated: boolean;
   signIn: ({ email, password }: SignInType) => Promise<void>;
   findNotifications: (id: string) => Promise<void>;
-  gePrivileges: (id: string) => Promise<void>;
   user: UserProfile | null;
   countNotifications: string;
-  userPrivilege: Array<string>;
 }
 
 export interface SignInType {
