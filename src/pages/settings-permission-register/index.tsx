@@ -13,7 +13,7 @@ import { Template } from "../components/Template";
 import { createPermission } from "./settings-permission-register.service";
 
 export default function SettingsPermissionRegister() {
-  const { user, gePrivileges } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const router = useNavigate();
 
   const [randomHash, setRandomHash] = useState("");
@@ -48,7 +48,7 @@ export default function SettingsPermissionRegister() {
       console.error(err);
     } finally {
       setLoading(false);
-      gePrivileges(user?.id as string);
+
       router(-1);
     }
   }

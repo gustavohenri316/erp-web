@@ -20,7 +20,7 @@ type Permission = {
 };
 
 export default function SettingsPrivilegesRegister() {
-  const { user, gePrivileges } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const router = useNavigate();
   const [randomHash, setRandomHash] = useState("");
   const [permissions, setPermissions] = useState<Permission[]>([]);
@@ -82,7 +82,7 @@ export default function SettingsPrivilegesRegister() {
       toast.error("Erro ao cadastrar");
     } finally {
       setLoading(false);
-      gePrivileges(user?.id as string);
+
       router(-1);
     }
   }
