@@ -88,13 +88,11 @@ export default function SettingsPrivilegesRegister() {
   }
 
   const handleSubmit = () => {
-    // Validar campos obrigatórios
     if (!formState.name || !formState.key || !formState.describe) {
       toast.error("Por favor, preencha todos os campos obrigatórios.");
       return;
     }
 
-    // Verificar se há permissões associadas
     if (selectedItems.length === 0) {
       toast.error("Por favor, adicione pelo menos uma permissão.");
       return;
