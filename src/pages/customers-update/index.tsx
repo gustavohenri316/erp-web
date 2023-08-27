@@ -8,15 +8,19 @@ import { applyCNPJMask } from "../../utils/cnpjMask";
 import { Button } from "../../components/Button";
 import { Check, ImageSquare, Plus } from "phosphor-react";
 import { handleCloudinaryUpload } from "../../components/CloudinaryUpload";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Select } from "../../components/Select";
-import { createCustomers } from "./customers-register.service";
+import {
+  findCustomersById,
+  updateCustomers,
+} from "../customers-update/customers-update.service";
 import { toast } from "react-hot-toast";
 import { getUsers } from "../users-view/users-view.service";
 import { ButtonIcon } from "../../components/ButtonIcon";
 import { Spinner } from "../../components/Spinner";
 
 export default function CustomersRegister() {
+  const { id } = useParams();
   const router = useNavigate();
   const [document, setDocument] = useState("");
   const [companyName, setCompanyName] = useState("");
@@ -31,6 +35,32 @@ export default function CustomersRegister() {
   const [loading, setLoading] = useState(false);
   const [loadingCreated, setLoadingCreated] = useState(false);
 
+  async function fetchFindCustomersById() {
+    try {
+      const response: ICustomersResponse = await findCustomersById(
+        id as string
+      );
+      setCompanyName(response.corporateReason);
+      setTradeName(response.fantasyName);
+      setDocument(response.document);
+      setAffiliation(response.bond);
+      setImage(response.avatar_url);
+      setSearchResponsible(response.responsibleName);
+      setAffiliation(response.bond);
+      setRepresentative(response.responsible);
+      setSelectedUser({
+        _id: response.responsible,
+        name: response.responsibleName,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  console.log(image);
+  useEffect(() => {
+    fetchFindCustomersById();
+  }, [id]);
+
   const [errors, setErrors] = useState<Errors>({
     companyName: false,
     tradeName: false,
@@ -42,11 +72,11 @@ export default function CustomersRegister() {
   async function fetchCreateCustomer(payload: ICreateCustomers) {
     try {
       setLoadingCreated(true);
-      await createCustomers(payload);
-      toast.success("Cliente cadastrado com sucesso!");
+      await updateCustomers(id as string, payload);
+      toast.success("Cliente atualizado com sucesso!");
     } catch (error) {
       console.log(error);
-      toast.error("Erro ao cadastrar cliente!");
+      toast.error("Erro ao atualizar cliente!");
     } finally {
       setLoadingCreated(false);
       router(-1);
@@ -142,9 +172,9 @@ export default function CustomersRegister() {
 
   return (
     <Template
-      title="Cadastrar Cliente"
-      documentTitle="Cadastrar Cliente"
-      permissionPage="QCZZXPSK3JHROTQCKY48FQT7FEACGN"
+      title="Atualizar Cliente"
+      documentTitle="Atualizar Cliente"
+      permissionPage="HUAZ0H9C8A7KIC23PSR2XP7MSJ0NWI"
     >
       <form onSubmit={handleFormSubmit}>
         <Row className="py-2">
@@ -198,7 +228,10 @@ export default function CustomersRegister() {
             <Row className={`py-2 ${errors.affiliation ? "has-error" : ""}`}>
               <Col>
                 <Label>Vinculo</Label>
-                <Select onChange={(e) => setAffiliation(e.target.value)}>
+                <Select
+                  onChange={(e) => setAffiliation(e.target.value)}
+                  value={affiliation}
+                >
                   <option value="">Selecione</option>
                   <option value="Fornecedor">Fornecedor</option>
                   <option value="Comprador">Comprador</option>

@@ -31,6 +31,7 @@ const UserViewDetails = lazy(() => import("../pages/user-view-details/[slug]"));
 const Users = lazy(() => import("../pages/users-view"));
 const SignIn = lazy(() => import("../pages/signIn"));
 const Customers = lazy(() => import("../pages/customers-view"));
+const CustomersUpdate = lazy(() => import("../pages/customers-update"));
 const CustomersRegister = lazy(() => import("../pages/customers-register"));
 const Teams = lazy(() => import("../pages/teams-view"));
 const TeamsRegister = lazy(() => import("../pages/teams-register"));
@@ -103,14 +104,15 @@ export function Routers() {
           <Route path="/users-view" element={<Users />} />
           <Route path="/customers-view" element={<Customers />} />
           <Route path="/customers-register" element={<CustomersRegister />} />
+          <Route path="/customers-update/:id" element={<CustomersUpdate />} />
           <Route path="/teams-view" element={<Teams />} />
           <Route path="/teams-register" element={<TeamsRegister />} />
           <Route path="/polls-view" element={<Polls />} />
           <Route path="/polls-register" element={<PollsRegister />} />
           <Route path="/profile/:id" element={<ProfileUpdate />} />
+          <Route path="/feedbacks-view" element={<Feedbacks />} />
         </Route>
-        <Route path="/feedbacks-view" element={<Feedbacks />} />
-        <Route path="/not-found" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
   );

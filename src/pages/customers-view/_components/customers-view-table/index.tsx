@@ -68,7 +68,7 @@ export function CustomersViewTable({
             <PermissionGate permission="ELNMH80J19LV1W19XUGQOOS6JM430F">
               <Table.Td>
                 <div className="flex gap-1 justify-end">
-                  <PermissionGate permission="GW7V0I3ZP6TCJFTJF3NXWLUITVYW7Z">
+                  <PermissionGate permission="HUAZ0H9C8A7KIC23PSR2XP7MSJ0NWI">
                     <ButtonIcon variant="primary" size="sm">
                       <PencilSimple
                         size={22}
