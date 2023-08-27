@@ -4,6 +4,7 @@ export const ButtonIcon: React.FC<ButtonIconProps> = ({
   size,
   variant,
   children,
+  title,
   disabled,
   onClick,
 }) => {
@@ -37,7 +38,9 @@ export const ButtonIcon: React.FC<ButtonIconProps> = ({
 
   return (
     <button
+      title={title}
       disabled={disabled}
+      type="button"
       className={`border rounded focus:outline-none focus:ring ${getVariantClasses()} ${getSizeClasses()}`}
       onClick={onClick}
     >

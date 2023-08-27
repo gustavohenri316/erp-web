@@ -17,6 +17,7 @@ import { FeedbacksUsersView } from "./_components/feedbacks-users-view";
 import { UserPolls } from "./_components/user-polls";
 import { AuthContext } from "../../context/AuthContext";
 import { SwitchTheme } from "../../components/SwitchTheme";
+import { Skeleton } from "../../components/Skeleton";
 
 export default function Feedbacks() {
   const { "Dashboard.UserToken": Token } = parseCookies();
@@ -40,6 +41,7 @@ export default function Feedbacks() {
   const [loadingList, setLoadingList] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
   const [openAddComments, setOpenAddComments] = useState(false);
+  const [loadingSkeleton, setLoadingSkeleton] = useState(true);
 
   const open = () => setOpenFeedback(true);
   const close = () => setOpenFeedback(false);
@@ -47,6 +49,7 @@ export default function Feedbacks() {
   const closeAllFeedbacks = () => setOpenFeedbacks(false);
   const openComments = () => setOpenAddComments(true);
   const closeComments = () => setOpenAddComments(false);
+
   const isLogin = Token ? true : false;
 
   const handleStarHover = (index: number) => {
@@ -61,6 +64,7 @@ export default function Feedbacks() {
 
   async function fetchGetPollsById() {
     try {
+      setLoadingSkeleton(true);
       const response = await getPollsById(
         id as string,
         isLogin,
@@ -70,6 +74,8 @@ export default function Feedbacks() {
     } catch (err) {
       console.error(err);
       navigate("/not-found");
+    } finally {
+      setLoadingSkeleton(false);
     }
   }
 
@@ -127,14 +133,14 @@ export default function Feedbacks() {
 
   return (
     <div className="bg-white w-screen h-screen py-8 dark:bg-neutral-800 overflow-auto">
-      <div className="container  bg-neutral-300 dark:bg-neutral-700 rounded-md mx-auto p-8 overflow-auto ">
+      <div className="container  bg-neutral-100 dark:bg-neutral-700 rounded-md mx-auto p-8 overflow-auto ">
         <SwitchTheme fixed />
 
-        <UserPolls data={data} />
+        <UserPolls data={data} loading={loadingSkeleton} />
         <div className="flex gap-8 mt-4">
           {!openFeedback && (
             <span className="underline cursor-pointer " onClick={open}>
-              Enviar feedback
+              <Skeleton loading={loadingSkeleton}>Enviar feedback</Skeleton>
             </span>
           )}
           {(data?.isFeedbackPublic || isLogin) && isFeedbackVerify && (
@@ -144,7 +150,7 @@ export default function Feedbacks() {
                   className="underline cursor-pointer"
                   onClick={openAllFeedbacks}
                 >
-                  Ver feedbacks
+                  <Skeleton loading={loadingSkeleton}>Ver feedbacks</Skeleton>
                 </span>
               )}
             </div>
@@ -178,7 +184,10 @@ export default function Feedbacks() {
             </div>
             <Row>
               <Col>
-                <Label>Nome</Label>
+                <Label>
+                  <Skeleton loading={loadingSkeleton}>Nome</Skeleton>
+                </Label>
+
                 <input
                   className="p-2 rounded-md bg-neutral-200 dark:bg-neutral-500 text-neutral-900 placeholder:text-neutral-900"
                   value={name}
@@ -187,7 +196,9 @@ export default function Feedbacks() {
                 />
               </Col>
               <Col>
-                <Label>Email</Label>
+                <Label>
+                  <Skeleton loading={loadingSkeleton}>Email</Skeleton>
+                </Label>
                 <input
                   className="p-2 rounded-md bg-neutral-200 text-neutral-900 dark:bg-neutral-500 placeholder:text-neutral-900"
                   value={email}
@@ -210,7 +221,7 @@ export default function Feedbacks() {
             {openAddComments && (
               <Row>
                 <Col>
-                  <div className="bg-neutral-300 dark:bg-neutral-500">
+                  <div className="bg-neutral-100 dark:bg-neutral-500">
                     <EditorMessages
                       onChange={setFeedbackMessage}
                       value={feedbackMessage}

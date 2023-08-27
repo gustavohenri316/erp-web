@@ -38,7 +38,7 @@ export default function UserInfo({ openMenu = true }: UserInfoProps) {
         alt="user"
       />
 
-      {openMenu && <span>{user?.name}</span>}
+      {openMenu && <span className="mt-2">{user?.name}</span>}
     </div>
   );
 }

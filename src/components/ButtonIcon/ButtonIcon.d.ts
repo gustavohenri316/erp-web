@@ -7,4 +7,5 @@ interface ButtonIconProps {
   children: ReactNode;
   onClick?: () => void;
   disabled?: boolean;
+  title?: string;
 }

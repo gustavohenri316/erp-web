@@ -7,4 +7,5 @@ interface IFeedbacksUsersView {
 
 interface IUserPolls {
   data: IPollsProps | undefined;
+  loading: boolean;
 }

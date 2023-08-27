@@ -1,4 +1,4 @@
-import { useState, FormEvent, useRef } from "react";
+import { useState, FormEvent, useRef, useEffect } from "react";
 import { Col } from "../../components/Col";
 import { Input } from "../../components/Input";
 import { Label } from "../../components/Label";
@@ -6,10 +6,15 @@ import { Row } from "../../components/Row";
 import { Template } from "../components/Template";
 import { applyCNPJMask } from "../../utils/cnpjMask";
 import { Button } from "../../components/Button";
-import { ImageSquare } from "phosphor-react";
+import { Check, ImageSquare, Plus } from "phosphor-react";
 import { handleCloudinaryUpload } from "../../components/CloudinaryUpload";
 import { useNavigate } from "react-router-dom";
 import { Select } from "../../components/Select";
+import { createCustomers } from "./customers-register.service";
+import { toast } from "react-hot-toast";
+import { getUsers } from "../users-view/users-view.service";
+import { ButtonIcon } from "../../components/ButtonIcon";
+import { Spinner } from "../../components/Spinner";
 
 export default function CustomersRegister() {
   const router = useNavigate();
@@ -20,7 +25,11 @@ export default function CustomersRegister() {
   const [representative, setRepresentative] = useState("");
   const [image, setImage] = useState("");
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
-  console.log(image);
+  const [searchResponsible, setSearchResponsible] = useState("");
+  const [responsibleProfile, setResponsibleProfile] = useState<User>();
+  const [selectedUser, setSelectedUser] = useState<any | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [loadingCreated, setLoadingCreated] = useState(false);
 
   const [errors, setErrors] = useState<Errors>({
     companyName: false,
@@ -29,6 +38,20 @@ export default function CustomersRegister() {
     affiliation: false,
     representative: false,
   });
+
+  async function fetchCreateCustomer(payload: ICreateCustomers) {
+    try {
+      setLoadingCreated(true);
+      await createCustomers(payload);
+      toast.success("Cliente cadastrado com sucesso!");
+    } catch (error) {
+      console.log(error);
+      toast.error("Erro ao cadastrar cliente!");
+    } finally {
+      setLoadingCreated(false);
+      router(-1);
+    }
+  }
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,6 +63,7 @@ export default function CustomersRegister() {
       !affiliation ||
       !representative
     ) {
+      toast.error("Campos obrigatórios não preenchidos");
       setErrors({
         companyName: !companyName,
         tradeName: !tradeName,
@@ -49,6 +73,17 @@ export default function CustomersRegister() {
       });
       return;
     }
+
+    const payload: ICreateCustomers = {
+      corporateReason: companyName,
+      fantasyName: tradeName,
+      responsible: representative,
+      document,
+      bond: affiliation,
+      avatar_url: image,
+    };
+
+    fetchCreateCustomer(payload);
   };
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -69,6 +104,41 @@ export default function CustomersRegister() {
       reader.readAsDataURL(file);
     }
   };
+
+  async function fetchGetResponsible() {
+    try {
+      const response = await getUsers({
+        currentPage: 1,
+        pageSize: 999,
+        search: searchResponsible,
+      });
+      setResponsibleProfile(response);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  useEffect(() => {
+    if (searchResponsible) {
+      fetchGetResponsible();
+    }
+  }, [searchResponsible]);
+
+  const delay = (amount: number) =>
+    new Promise((resolve) => setTimeout(resolve, amount));
+
+  async function handleSelectedResponsible(id: string, name: string) {
+    try {
+      setLoading(true);
+      await delay(100);
+      setRepresentative(id);
+      setSearchResponsible(name);
+      setSelectedUser({ _id: id, name });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <Template
@@ -148,8 +218,8 @@ export default function CustomersRegister() {
               <Col>
                 <Label>Representante</Label>
                 <Input
-                  value={representative}
-                  onChange={(e) => setRepresentative(e.target.value)}
+                  value={searchResponsible}
+                  onChange={(e) => setSearchResponsible(e.target.value)}
                 />
                 {errors.representative && (
                   <span className="text-red-500">
@@ -157,6 +227,54 @@ export default function CustomersRegister() {
                   </span>
                 )}
               </Col>
+            </Row>
+            <Row>
+              <div className="flex-col max-h-[200px] overflow-auto flex gap-2 w-full">
+                {responsibleProfile &&
+                  responsibleProfile.users.map((user) => {
+                    const isSelected = selectedUser?._id === user._id;
+                    return (
+                      <div
+                        className={`border rounded-md w-full p-2 px-4 flex items-center gap-2 justify-between ${
+                          isSelected ? "bg-blue-100" : ""
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <img
+                            src={user.photo}
+                            alt=""
+                            className="w-14 h-14 rounded-full"
+                          />
+                          <div className="flex flex-col">
+                            <span>
+                              {user.firstName} {user.lastName}
+                            </span>
+                            <span className="text-sm">{user.email}</span>
+                          </div>
+                        </div>
+                        <div>
+                          <ButtonIcon
+                            size="sm"
+                            variant={isSelected ? "success" : "primary"}
+                            title="Selecionar"
+                            onClick={() => {
+                              const name = `${user.firstName} ${user.lastName}`;
+                              handleSelectedResponsible(user._id, name);
+                            }}
+                          >
+                            {loading && isSelected ? (
+                              <Spinner size={14} />
+                            ) : isSelected ? (
+                              <Check />
+                            ) : (
+                              <Plus />
+                            )}
+                          </ButtonIcon>
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
             </Row>
           </Col>
           <Col>
@@ -198,8 +316,8 @@ export default function CustomersRegister() {
           <Button variant="outline-secondary" onClick={() => router(-1)}>
             Cancelar
           </Button>
-          <Button variant="success" type="submit">
-            Cadastrar
+          <Button variant="success" type="submit" disabled={loadingCreated}>
+            {loadingCreated ? <Spinner /> : "Cadastrar"}
           </Button>
         </Row>
       </form>
