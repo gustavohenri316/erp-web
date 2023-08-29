@@ -218,7 +218,7 @@ export default function ProfileUpdate() {
       title="Editar Usuário"
       permissionPage="A8PB8LX6VF1R476N7QYY2AGSPFMZ5E"
     >
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="my-4">
         <Row className="pb-4">
           <span className="text-xl font-semibold">Informações pessoais</span>
         </Row>
@@ -557,7 +557,7 @@ export default function ProfileUpdate() {
             </Col>
           </Row>
         </PermissionGate>
-        <Row className="justify-end mt-24">
+        <Row className="justify-end py-10">
           <Button
             variant="outline-secondary"
             type="button"
@@ -566,7 +566,7 @@ export default function ProfileUpdate() {
             Cancelar
           </Button>
           <Button type="submit" variant="success" disabled={loading}>
-            {loading ? <Spinner /> : "Cadastrar"}
+            {loading ? <Spinner /> : "Salvar"}
           </Button>
         </Row>
       </form>

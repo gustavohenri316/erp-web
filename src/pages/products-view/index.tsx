@@ -1,3 +1,5 @@
+import { Row } from "../../components/Row";
+import { Search } from "../../components/Search";
 import { Template } from "../components/Template";
 
 export default function ProductsView() {
@@ -7,7 +9,9 @@ export default function ProductsView() {
       documentTitle="Visualizar Produtos"
       title="Visualizar Produtos"
     >
-      <h1>Products</h1>
+      <Row>
+        <Search />
+      </Row>
     </Template>
   );
 }

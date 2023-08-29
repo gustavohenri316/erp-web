@@ -281,7 +281,7 @@ export default function CustomersRegister() {
           <Col>
             <Row className="justify-center max-sm:flex-col flex-1">
               <Label htmlFor="photo">Foto</Label>
-              <div className="border-dashed border-neutral-600 flex-1 max-w-[450px] border rounded-full flex items-center justify-center">
+              <div className="border-dashed border-neutral-600 flex-1 max-w-[450px]  max-h-[450px] border rounded-full flex items-center justify-center">
                 <label
                   htmlFor="photo"
                   className="w-full h-full cursor-pointer flex items-center justify-center"
