@@ -110,8 +110,8 @@ export function Routers() {
           <Route path="/polls-view" element={<Polls />} />
           <Route path="/polls-register" element={<PollsRegister />} />
           <Route path="/profile/:id" element={<ProfileUpdate />} />
-          <Route path="/feedbacks-view" element={<Feedbacks />} />
         </Route>
+        <Route path="/feedbacks-view" element={<Feedbacks />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
