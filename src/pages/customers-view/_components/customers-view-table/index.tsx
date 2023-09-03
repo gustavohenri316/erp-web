@@ -60,7 +60,20 @@ export function CustomersViewTable({
                 className="w-10 h-10 rounded-full"
               />
             </Table.Td>
-            <Table.Td>{customer.bond}</Table.Td>
+            <Table.Td>
+              <div className="flex items-center gap-2">
+                {customer.isSupplier && (
+                  <div className="border-green-600 border px-2 rounded-md bg-green-600 text-white">
+                    F
+                  </div>
+                )}
+                {customer.isBuyer && (
+                  <div className="border-blue-600 border px-2 rounded-md bg-blue-600 text-white">
+                    C
+                  </div>
+                )}
+              </div>
+            </Table.Td>
             <Table.Td>{customer.corporateReason}</Table.Td>
             <Table.Td>{customer.fantasyName}</Table.Td>
             <Table.Td>{customer.document}</Table.Td>

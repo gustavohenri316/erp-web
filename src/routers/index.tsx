@@ -4,7 +4,9 @@ import { lazy, Suspense } from "react";
 import { Spinner } from "../components/Spinner";
 import { parseCookies } from "nookies";
 
-const Lazy = (routerLink: string) => lazy(() => import(routerLink));
+const Lazy = (routerLink: string) =>
+  // @vite-ignore
+  lazy(() => import(routerLink));
 
 const LayoutDashboard = Lazy("../layout");
 const ForgotStep1 = Lazy("../pages/forgot/step-one/[slug]");
