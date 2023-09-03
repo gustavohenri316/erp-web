@@ -79,7 +79,8 @@ export default function CustomersRegister() {
       fantasyName: tradeName,
       responsible: representative,
       document,
-      bond: affiliation,
+      isBuyer: affiliation !== "1" ? true : false,
+      isSupplier: affiliation !== "2" ? true : false,
       avatar_url: image,
     };
 
@@ -198,13 +199,16 @@ export default function CustomersRegister() {
             <Row className={`py-2 ${errors.affiliation ? "has-error" : ""}`}>
               <Col>
                 <Label>Vinculo</Label>
-                <Select onChange={(e) => setAffiliation(e.target.value)}>
-                  <option value="">Selecione</option>
-                  <option value="Fornecedor">Fornecedor</option>
-                  <option value="Comprador">Comprador</option>
-                  <option value="Fornecedor/Comprador">
-                    Fornecedor/Comprador
+                <Select
+                  onChange={(e) => setAffiliation(e.target.value)}
+                  defaultValue={affiliation}
+                >
+                  <option value="" selected disabled>
+                    Selecione
                   </option>
+                  <option value="1">Fornecedor</option>
+                  <option value="2">Comprador</option>
+                  <option value="3">Fornecedor/Comprador</option>
                 </Select>
 
                 {errors.affiliation && (

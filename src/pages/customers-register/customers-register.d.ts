@@ -9,7 +9,8 @@ interface ICreateCustomers {
   corporateReason: string;
   fantasyName: string;
   document: string;
-  bond: string;
+  isSupplier: boolean;
+  isBuyer: boolean;
   avatar_url: string;
   responsible: string;
 }

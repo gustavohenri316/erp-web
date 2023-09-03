@@ -26,19 +26,22 @@ export default function UserInfo({ openMenu = true }: UserInfoProps) {
     };
   }, []);
 
-  return (
-    <div
-      className="flex items-center justify-center flex-col text-white text-center"
-      ref={userRef}
-    >
-      <img
-        onClick={handleOpen}
-        src={user?.photo}
-        className="w-14 h-14 rounded-full object-cover cursor-pointer"
-        alt="user"
-      />
+  if (user) {
+    return (
+      <div
+        className="flex items-center justify-center flex-col text-white text-center"
+        ref={userRef}
+      >
+        <img
+          onClick={handleOpen}
+          src={user?.photo}
+          className="w-14 h-14 rounded-full object-cover cursor-pointer"
+          alt="user"
+        />
 
-      {openMenu && <span className="mt-2">{user?.name}</span>}
-    </div>
-  );
+        {openMenu && <span className="mt-2">{user?.name}</span>}
+      </div>
+    );
+  }
+  return null;
 }

@@ -15,7 +15,7 @@ const PermissionGate = ({
     return children;
   }
 
-  if (isPage) {
+  if (isPage && user) {
     return (
       <div className="w-full h-full flex items-center justify-center flex-col text-neutral-600">
         <LockKey size={200} weight="thin" className="text-neutral-300" />

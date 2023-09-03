@@ -2,7 +2,8 @@ interface ICustomersResponse {
   _id: string;
   corporateReason: string;
   document: string;
-  bond: string;
+  isBuyer: boolean;
+  isSupplier: boolean;
   fantasyName: string;
   avatar_url: string;
   responsible: string;

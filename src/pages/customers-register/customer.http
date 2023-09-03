@@ -1,0 +1,7 @@
+@baseUrl =  http://localhost:3333/api
+
+
+### @name create_customers
+
+POST {{baseUrl}}/customers
+Content-Type: application/json

@@ -43,11 +43,16 @@ export default function CustomersRegister() {
       setCompanyName(response.corporateReason);
       setTradeName(response.fantasyName);
       setDocument(response.document);
-      setAffiliation(response.bond);
+      const affiliation =
+        response.isBuyer && response.isSupplier
+          ? "3"
+          : response.isBuyer && !response.isSupplier
+          ? "2"
+          : "1";
+      setAffiliation(affiliation);
       setImage(response.avatar_url);
       setPhotoPreview(response.avatar_url);
       setSearchResponsible(response.responsibleName);
-      setAffiliation(response.bond);
       setRepresentative(response.responsible);
       setSelectedUser({
         _id: response.responsible,
@@ -57,7 +62,6 @@ export default function CustomersRegister() {
       console.error(error);
     }
   }
-  console.log(image);
   useEffect(() => {
     fetchFindCustomersById();
   }, [id]);
@@ -110,7 +114,8 @@ export default function CustomersRegister() {
       fantasyName: tradeName,
       responsible: representative,
       document,
-      bond: affiliation,
+      isBuyer: affiliation !== "1" ? true : false,
+      isSupplier: affiliation !== "2" ? true : false,
       avatar_url: image,
     };
 
@@ -233,12 +238,12 @@ export default function CustomersRegister() {
                   onChange={(e) => setAffiliation(e.target.value)}
                   value={affiliation}
                 >
-                  <option value="">Selecione</option>
-                  <option value="Fornecedor">Fornecedor</option>
-                  <option value="Comprador">Comprador</option>
-                  <option value="Fornecedor/Comprador">
-                    Fornecedor/Comprador
+                  <option value="" selected disabled>
+                    Selecione
                   </option>
+                  <option value="1">Fornecedor</option>
+                  <option value="2">Comprador</option>
+                  <option value="3">Fornecedor/Comprador</option>
                 </Select>
 
                 {errors.affiliation && (

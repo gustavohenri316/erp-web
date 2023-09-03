@@ -4,5 +4,5 @@ interface ThProps {
 }
 
 export function Th({ children, textAlign = "text-start" }: ThProps) {
-  return <th className={`py-4 px-4  ${textAlign}`}>{children}</th>;
+  return <th className={`py-4 px-4 uppercase  ${textAlign}`}>{children}</th>;
 }

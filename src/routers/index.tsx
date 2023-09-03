@@ -4,42 +4,37 @@ import { lazy, Suspense } from "react";
 import { Spinner } from "../components/Spinner";
 import { parseCookies } from "nookies";
 
-const LayoutDashboard = lazy(() => import("../layout"));
-const ForgotStep1 = lazy(() => import("../pages/forgot/step-one/[slug]"));
-const ForgotStep2 = lazy(() => import("../pages/forgot/step-two/[slug]"));
-const ForgotStep3 = lazy(() => import("../pages/forgot/step-tree/[slug]"));
-const HomePage = lazy(() => import("../pages/home"));
-const NotificationsRegister = lazy(
-  () => import("../pages/notifications-register")
-);
-const NotificationsView = lazy(() => import("../pages/notifications-view"));
-const ProductsView = lazy(() => import("../pages/products-view"));
-const Permissions = lazy(() => import("../pages/settings-permission"));
-const PermissionRegister = lazy(
-  () => import("../pages/settings-permission-register")
-);
-const Privileges = lazy(() => import("../pages/settings-privileges"));
-const PrivilegesRegister = lazy(
-  () => import("../pages/settings-privileges-register")
-);
-const PrivilegesUpdate = lazy(
-  () => import("../pages/settings-privileges-update/[slug]")
-);
-const UserRegister = lazy(() => import("../pages/user-register"));
-const UserUpdate = lazy(() => import("../pages/user-update/[slug]"));
-const UserViewDetails = lazy(() => import("../pages/user-view-details/[slug]"));
-const Users = lazy(() => import("../pages/users-view"));
-const SignIn = lazy(() => import("../pages/signIn"));
-const Customers = lazy(() => import("../pages/customers-view"));
-const CustomersUpdate = lazy(() => import("../pages/customers-update"));
-const CustomersRegister = lazy(() => import("../pages/customers-register"));
-const Teams = lazy(() => import("../pages/teams-view"));
-const TeamsRegister = lazy(() => import("../pages/teams-register"));
-const Polls = lazy(() => import("../pages/polls-view"));
-const PollsRegister = lazy(() => import("../pages/polls-register"));
-const Feedbacks = lazy(() => import("../pages/feedbacks"));
-const NotFound = lazy(() => import("../pages/not-found"));
-const ProfileUpdate = lazy(() => import("../pages/profile-update/[slug]"));
+const Lazy = (routerLink: string) => lazy(() => import(routerLink));
+
+const LayoutDashboard = Lazy("../layout");
+const ForgotStep1 = Lazy("../pages/forgot/step-one/[slug]");
+const ForgotStep2 = Lazy("../pages/forgot/step-two/[slug]");
+const ForgotStep3 = Lazy("../pages/forgot/step-tree/[slug]");
+const HomePage = Lazy("../pages/home");
+const NotificationsRegister = Lazy("../pages/notifications-register");
+const NotificationsView = Lazy("../pages/notifications-view");
+const ProductsView = Lazy("../pages/products-view");
+const ProductsRegister = Lazy("../pages/products-register");
+const Permissions = Lazy("../pages/settings-permission");
+const PermissionRegister = Lazy("../pages/settings-permission-register");
+const Privileges = Lazy("../pages/settings-privileges");
+const PrivilegesRegister = Lazy("../pages/settings-privileges-register");
+const PrivilegesUpdate = Lazy("../pages/settings-privileges-update/[slug]");
+const UserRegister = Lazy("../pages/user-register");
+const UserUpdate = Lazy("../pages/user-update/[slug]");
+const UserViewDetails = Lazy("../pages/user-view-details/[slug]");
+const Users = Lazy("../pages/users-view");
+const SignIn = Lazy("../pages/signIn");
+const Customers = Lazy("../pages/customers-view");
+const CustomersUpdate = Lazy("../pages/customers-update");
+const CustomersRegister = Lazy("../pages/customers-register");
+const Teams = Lazy("../pages/teams-view");
+const TeamsRegister = Lazy("../pages/teams-register");
+const Polls = Lazy("../pages/polls-view");
+const PollsRegister = Lazy("../pages/polls-register");
+const Feedbacks = Lazy("../pages/feedbacks");
+const NotFound = Lazy("../pages/not-found");
+const ProfileUpdate = Lazy("../pages/profile-update/[slug]");
 
 export function Routers() {
   const { "Dashboard.UserToken": Token } = parseCookies();
@@ -69,7 +64,7 @@ export function Routers() {
   return (
     <Suspense
       fallback={
-        <div className="w-screen h-screen flex items-center justify-center bg-green-600">
+        <div className="w-screen h-screen flex items-center justify-center bg-green-600 dark:bg-green-900">
           <Spinner />
         </div>
       }
@@ -83,7 +78,6 @@ export function Routers() {
             element={<NotificationsRegister />}
           />
           <Route path="/notifications-view" element={<NotificationsView />} />
-          <Route path="/products-view" element={<ProductsView />} />
           <Route path="/settings-permission" element={<Permissions />} />
           <Route
             path="/settings-permission-register"
@@ -110,6 +104,8 @@ export function Routers() {
           <Route path="/polls-view" element={<Polls />} />
           <Route path="/polls-register" element={<PollsRegister />} />
           <Route path="/profile/:id" element={<ProfileUpdate />} />
+          <Route path="/products-view" element={<ProductsView />} />
+          <Route path="/products-register" element={<ProductsRegister />} />
         </Route>
         <Route path="/feedbacks-view" element={<Feedbacks />} />
         <Route path="*" element={<NotFound />} />
