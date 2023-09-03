@@ -9,7 +9,7 @@ export function Search({ handleSearch, placeholder }: SearchProps) {
   }, [value]);
 
   return (
-    <div className="flex-1 shadow rounded-md">
+    <div className="flex-1  rounded-md">
       <div className="border border-1 dark:border-neutral-900 bg-white dark:bg-neutral-700 rounded-md w-full flex items-center ">
         <input
           className="w-full bg-white dark:bg-neutral-700 py-2 outline-none px-2 text-base rounded-md dark:text-neutral-100 dark:placeholder:text-neutral-100"

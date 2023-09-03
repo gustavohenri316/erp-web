@@ -1,7 +1,8 @@
+import { ButtonIcon } from "../../../../components";
 import { Table } from "../../../../components/Table";
 
 interface IProductsViewTable {
-  products: IProductsViewResponse[] | null;
+  products: IProductsViewResponse | null;
 }
 
 export function ProductsViewTable({ products }: IProductsViewTable) {
@@ -14,7 +15,7 @@ export function ProductsViewTable({ products }: IProductsViewTable) {
           <Table.Th>Descrição/EAN/Fabricante</Table.Th>
           <Table.Th>Fornecedor</Table.Th>
           <Table.Th>QTD.</Table.Th>
-          <Table.Th>Un. Recolocação</Table.Th>
+          <Table.Th>Tipo de embalagem</Table.Th>
           <Table.Th>Fator de conversão</Table.Th>
           <Table.Th>Preço Fornecedor</Table.Th>
           <Table.Th>PVD</Table.Th>
@@ -23,10 +24,16 @@ export function ProductsViewTable({ products }: IProductsViewTable) {
       </Table.Thead>
       <Table.Tbody>
         {products &&
-          products.map((product) => {
+          products?.data.map((product: IProductsViewItemsResponse) => {
             return (
               <Table.Tr key={product._id}>
-                <Table.Td>{product.image}</Table.Td>
+                <Table.Td>
+                  <img
+                    src={product.image}
+                    className="w-14 h-14 rounded-full"
+                    alt=""
+                  />
+                </Table.Td>
                 <Table.Td>{product.code}</Table.Td>
                 <Table.Td>
                   <div className="flex flex-col">
@@ -45,6 +52,13 @@ export function ProductsViewTable({ products }: IProductsViewTable) {
                 <Table.Td>{product.conversionFactor}</Table.Td>
                 <Table.Td>{product.infoPrice.retailPrice}</Table.Td>
                 <Table.Td>{product.infoPrice.posPrice}</Table.Td>
+                <Table.Td>
+                  <div>
+                    <ButtonIcon size="sm" variant="danger">
+                      oi
+                    </ButtonIcon>
+                  </div>
+                </Table.Td>
               </Table.Tr>
             );
           })}

@@ -5,28 +5,28 @@ interface IFormStateRegisterProducts {
   ean: string;
   supplier: string;
   manufacturer: string;
-  quantity: number;
+  quantity: string;
   replacementUnit: string;
-  conversionFactor: number;
+  conversionFactor: string;
   infoPrice: {
-    wholesalePrice: number;
-    retailPrice: number;
-    posPrice: number;
+    wholesalePrice: string;
+    retailPrice: string;
+    posPrice: string;
   };
   infoProduct: {
     weightUnit: string;
-    netWeight: number;
-    grossWeight: number;
-    shelfLife: number;
-    height: number;
-    width: number;
-    depth: number;
-    volume: number;
-    length: number;
+    netWeight: string;
+    grossWeight: string;
+    shelfLife: string;
+    height: string;
+    width: string;
+    depth: string;
+    volume: string;
+    length: string;
   };
   infoLogistics: {
-    layersPerPallet: number;
-    rowsPerPallet: number;
-    packagingQuantityPerPallet: number;
+    layersPerPallet: string;
+    rowsPerPallet: string;
+    packagingQuantityPerPallet: string;
   };
 }

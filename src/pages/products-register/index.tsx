@@ -1,3 +1,4 @@
+import React from "react";
 import { useRef, useState } from "react";
 import {
   Button,
@@ -19,29 +20,29 @@ const data = {
   ean: "",
   supplier: "",
   manufacturer: "",
-  quantity: 0,
+  quantity: "",
   replacementUnit: "",
-  conversionFactor: 0,
+  conversionFactor: "",
   infoPrice: {
-    wholesalePrice: 0,
-    retailPrice: 0,
-    posPrice: 0,
+    wholesalePrice: "",
+    retailPrice: "",
+    posPrice: "",
   },
   infoProduct: {
     weightUnit: "",
-    netWeight: 0,
-    grossWeight: 0,
-    shelfLife: 0,
-    height: 0,
-    width: 0,
-    depth: 0,
-    volume: 0,
-    length: 0,
+    netWeight: "",
+    grossWeight: "",
+    shelfLife: "",
+    height: "",
+    width: "",
+    depth: "",
+    volume: "",
+    length: "",
   },
   infoLogistics: {
-    layersPerPallet: 0,
-    rowsPerPallet: 0,
-    packagingQuantityPerPallet: 0,
+    layersPerPallet: "",
+    rowsPerPallet: "",
+    packagingQuantityPerPallet: "",
   },
 };
 export default function ProductsRegister() {
@@ -165,7 +166,6 @@ export default function ProductsRegister() {
                   value={formState.code}
                   onChange={(e) => {
                     handleInputChange("code", e.target.value);
-                    setPhotoPreview(e.target.value);
                   }}
                 />
               </Col>

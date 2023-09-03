@@ -42,7 +42,7 @@ export function Button({
       break;
     case "secondary":
       buttonClasses +=
-        "bg-green-600 dark:bg-green-950 text-neutral-100 dark:border-green-950 dark:border-green-950";
+        "bg-gray-600 dark:bg-gray-950 text-neutral-100 dark:border-gray-950 dark:border-gray-950";
       break;
     case "danger":
       buttonClasses +=
