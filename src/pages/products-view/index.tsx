@@ -10,10 +10,15 @@ import { getCustomers } from "../customers-view/customers-view.service";
 export default function ProductsView() {
   const [products, setProducts] = useState<IProductsViewResponse | null>(null);
   const [customers, setCustomers] = useState<ICustomersResponse[]>([]);
+  const [loading, setLoading] = useState(false);
   const router = useNavigate();
   const [search, setSearch] = useState("");
   const [supplier, setSupplier] = useState("");
   const [page, setPage] = useState(1);
+
+  function handleUpdate(value: boolean) {
+    setLoading(value);
+  }
 
   const pageSize = 11;
   const totalItems = products?.totalItems || 0;
@@ -38,7 +43,7 @@ export default function ProductsView() {
 
   useEffect(() => {
     fetchGetProducts();
-  }, [search, supplier]);
+  }, [search, supplier, loading]);
 
   async function fetchGetCustomers() {
     try {
@@ -82,7 +87,7 @@ export default function ProductsView() {
         </div>
       </Row>
       <Row>
-        <ProductsViewTable products={products} />
+        <ProductsViewTable products={products} handleUpdate={handleUpdate} />
       </Row>
       <Row className="justify-end">
         {!isNotViewPagination && (

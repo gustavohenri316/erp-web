@@ -80,7 +80,7 @@ export default function CustomersRegister() {
       await updateCustomers(id as string, payload);
       toast.success("Cliente atualizado com sucesso!");
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error("Erro ao atualizar cliente!");
     } finally {
       setLoadingCreated(false);
@@ -150,7 +150,7 @@ export default function CustomersRegister() {
       });
       setResponsibleProfile(response);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
   useEffect(() => {
@@ -170,7 +170,7 @@ export default function CustomersRegister() {
       setSearchResponsible(name);
       setSelectedUser({ _id: id, name });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     } finally {
       setLoading(false);
     }

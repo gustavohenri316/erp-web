@@ -1,11 +1,35 @@
-import { ButtonIcon } from "../../../../components";
+import { toast } from "react-hot-toast";
+
 import { Table } from "../../../../components/Table";
+import { deleteProducts } from "../../products-view.service";
+import { ProductsViewModalDelete } from "../products-view-modal-delete";
+import { useState } from "react";
 
 interface IProductsViewTable {
   products: IProductsViewResponse | null;
+  handleUpdate: (value: boolean) => void;
 }
 
-export function ProductsViewTable({ products }: IProductsViewTable) {
+export function ProductsViewTable({
+  products,
+  handleUpdate,
+}: IProductsViewTable) {
+  const [loading, setLoading] = useState(false);
+  async function fetchDeleteProduct(id: string) {
+    try {
+      setLoading(true);
+      handleUpdate(true);
+      await deleteProducts(id);
+      toast.success("Product deleted successfully");
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
+      handleUpdate(false);
+    }
+  }
+
   return (
     <Table.Root>
       <Table.Thead>
@@ -54,9 +78,11 @@ export function ProductsViewTable({ products }: IProductsViewTable) {
                 <Table.Td>{product.infoPrice.posPrice}</Table.Td>
                 <Table.Td>
                   <div>
-                    <ButtonIcon size="sm" variant="danger">
-                      oi
-                    </ButtonIcon>
+                    <ProductsViewModalDelete
+                      handleDelete={() => fetchDeleteProduct(product._id)}
+                      loading={loading}
+                      name={product.ean}
+                    />
                   </div>
                 </Table.Td>
               </Table.Tr>

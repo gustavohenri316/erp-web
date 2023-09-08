@@ -18,7 +18,7 @@ export default function CustomersView() {
       const response = await getCustomers();
       setCustomers(response);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 

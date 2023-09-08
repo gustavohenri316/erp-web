@@ -13,3 +13,8 @@ export async function getProducts(params: IGetProductsParams) {
   );
   return response.data;
 }
+
+export async function deleteProducts(id: string) {
+  const response = await axios.delete(`${baseURL}/products/${id}`);
+  return response.data;
+}

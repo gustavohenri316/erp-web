@@ -45,7 +45,6 @@ export default function CustomersRegister() {
       await createCustomers(payload);
       toast.success("Cliente cadastrado com sucesso!");
     } catch (error) {
-      console.log(error);
       toast.error("Erro ao cadastrar cliente!");
     } finally {
       setLoadingCreated(false);
@@ -115,7 +114,7 @@ export default function CustomersRegister() {
       });
       setResponsibleProfile(response);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
   useEffect(() => {
@@ -135,7 +134,7 @@ export default function CustomersRegister() {
       setSearchResponsible(name);
       setSelectedUser({ _id: id, name });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     } finally {
       setLoading(false);
     }
