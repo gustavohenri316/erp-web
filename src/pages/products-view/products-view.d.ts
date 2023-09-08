@@ -1,11 +1,4 @@
-type IProductsViewResponse = {
-  currentPage: number;
-  totalItems: number;
-  itemsPerPage: number;
-  data: IProductsViewItemsResponse[];
-};
-
-type IProductsViewItemsResponse = {
+interface IProductsViewResponse {
   _id: string;
   image: string;
   description: string;
@@ -14,30 +7,31 @@ type IProductsViewItemsResponse = {
   supplier: {
     corporateReason: string;
     _id: string;
+    e;
   };
   manufacturer: string;
-  quantity: string;
+  quantity: number;
   replacementUnit: string;
-  conversionFactor: string;
+  conversionFactor: number;
   infoPrice: {
-    wholesalePrice: string;
-    retailPrice: string;
-    posPrice: string;
+    wholesalePrice: number;
+    retailPrice: number;
+    posPrice: number;
   };
   infoProduct: {
     weightUnit: string;
-    netWeight: string;
-    grossWeight: string;
-    shelfLife: string;
-    height: string;
-    width: string;
-    depth: string;
-    volume: string;
-    length: string;
+    netWeight: number;
+    grossWeight: number;
+    shelfLife: number;
+    height: number;
+    width: number;
+    depth: number;
+    volume: number;
+    length: number;
   };
   infoLogistics: {
-    layersPerPallet: string;
-    rowsPerPallet: string;
-    packagingQuantityPerPallet: string;
+    layersPerPallet: number;
+    rowsPerPallet: number;
+    packagingQuantityPerPallet: number;
   };
-};
+}
